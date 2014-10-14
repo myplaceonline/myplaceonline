@@ -1,0 +1,3 @@
+[submodule "src/myplaceonline_rails"]
+	path = src/myplaceonline_rails
+	url = git@github.com:myplaceonline/myplaceonline_rails.git

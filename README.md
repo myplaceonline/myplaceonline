@@ -1,0 +1,78 @@
+# myplaceonline
+
+## Summary
+
+myplaceonline is a virtual life coach.
+
+## License
+
+myplaceonline is licensed with the AGPL (Affero GPL) v3 license. Please share your contributions. See the [LICENSE](LICENSE) file for details.
+
+## Proposed Features
+
+* Points system helps identify strong and weak character strengths.
+* Manage online passwords and export as PDF.
+* Manage contacts, including tracking gift ideas and reminders for interactions.
+* Manage notes, shopping lists, TODO lists, and life ideas.
+* Track health, including vitals, diet changes, drugs, etc.
+* Scan and manage receipts and documents.
+* Manage website feeds and bookmarks.
+* Synchronize files.
+* Manage music.
+* Find events.
+* Manage travel.
+* Manage finance and insurance.
+* Manage exercise.
+* Manage friendships and relationships.
+* Manage hobbies.
+* Manage addresses.
+* Manage rebates.
+
+## Design Goals
+
+* Mobile/tablet first design. Single Page Application (SPA): http://docs.phonegap.com/en/3.5.0/guide_next_index.md.html
+* Choose what information is stored offline in local storage and synchronize when internet available.
+
+## Running Locally
+
+```
+# Install database (see below)
+# Get the source code
+$ git clone --recursive git@github.com:myplaceonline/myplaceonline.git
+$ cd myplaceonline/src/myplaceonline_rails/
+$ cp config/database.yml.example config/database.yml
+# Put database credentials into config/database.yml. For example:
+$ sed -i 's/#username: myplaceonline/username: user1/g' config/database.yml
+$ sed -i 's/#password:/password: letmein/g' config/database.yml
+$ sed -i 's/#host: localhost/host: localhost/g' config/database.yml
+# Initialize the database
+$ bin/rake db:setup
+# Run rails
+$ bin/rails server
+# Open browser to http://localhost:3000/
+```
+
+### Install Database (e.g. PostgreSQL)
+
+#### Fedora, CentOS, RHEL
+
+```
+$ sudo yum install postgresql postgresql-server postgresql-devel postgresql-libs
+$ sudo postgresql-setup initdb
+$ sudo systemctl enable postgresql
+$ sudo sed -ri 's/(host    all.*)ident/\1password/' /var/lib/pgsql/data/pg_hba.conf
+$ sudo systemctl start postgresql
+$ sudo gem install pg
+$ sudo -u postgres psql postgres
+# CREATE ROLE user1 WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
+```
+
+## TODO
+
+* Devise 401 on bad password causes issue with JQM: git show d0c6bf98fad611f5747ecaf20da2a6344076bddd
+
+## Theory
+
+‘Happiness’ is too worn and too weary a term to be of much scientific use, and the discipline of Positive Psychology divides it into three very different realms, each of which is measurable and, most importantly, each of which is skill-based and can be taught (Seligman, 2002). The first is hedonic: positive emotion (joy, love, contentment, pleasure etc.). A life led around having as much of this good stuff as possible, is the ‘Pleasant Life’. The second, much closer to what Thomas Jefferson and Aristotle sought, is the state of flow, and a life led around it is the ‘Engaged Life’. Flow, a major part of the Engaged Life, consists in a loss of self-consciousness, time stopping for you, being ‘one with the music’ (Csikszentmihalyi, 1990). Importantly engagement seems to be the opposite of positive emotion: when one is totally absorbed, no thoughts or feelings are present—even though one says afterwards ‘that was fun’ (Delle Fave & Massimini, 2005). And while there are shortcuts to positive emotion—you can take drugs, masturbate, watch television, or go shopping—there are no shortcuts to flow. Flow only occurs when you deploy your highest strengths and talents to meet the challenges that come your way, and it is clear that flow facilitates learning. The third realm in the framework of Positive Psychology is the one with the best intellectual provenance, the Meaningful Life. Flow and positive emotion can be found in solipsistic pursuits, but not meaning or purpose. Meaning is increased through our connections to others, future generations, or causes that transcend the self (Durkheim, 1951/1897; Erikson, 1963). From a Positive Psychology perspective, meaning consists in knowing what your highest strengths are, and then using them to belong to and serve something you believe is larger than the self (Seligman, 2002).
+
+Positive education: positive psychology and classroom interventions, Seligmana et al, Oxford Review of Education, 2009, http://www.ppc.sas.upenn.edu/positiveeducationarticle2009.pdf
