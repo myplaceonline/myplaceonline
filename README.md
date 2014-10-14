@@ -39,7 +39,14 @@ myplaceonline is licensed with the AGPL (Affero GPL) v3 license. Please share yo
 # Install database (see below)
 # Get the source code
 $ git clone --recursive git@github.com:myplaceonline/myplaceonline.git
-$ cd myplaceonline/src/myplaceonline_rails/
+$ cd myplaceonline
+$ export NAME="Name"
+$ export EMAIL="name@example.com"
+$ git config --replace-all user.name "${NAME}"
+$ git config --replace-all user.email "${EMAIL}"
+$ git submodule foreach "git config --replace-all user.name \"${NAME}\""
+$ git submodule foreach "git config --replace-all user.email \"${EMAIL}\""
+$ cd src/myplaceonline_rails/
 $ cp config/database.yml.example config/database.yml
 # Put database credentials into config/database.yml. For example:
 $ sed -i 's/#username: myplaceonline/username: user1/g' config/database.yml
