@@ -1,3 +1,6 @@
 [submodule "src/myplaceonline_rails"]
 	path = src/myplaceonline_rails
 	url = git@github.com:myplaceonline/myplaceonline_rails.git
+[submodule "src/myplaceonline_phonegap"]
+	path = src/myplaceonline_phonegap
+	url = git@github.com:myplaceonline/myplaceonline_phonegap.git
