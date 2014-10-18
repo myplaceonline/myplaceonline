@@ -46,6 +46,7 @@ $ git config --replace-all user.name "${NAME}"
 $ git config --replace-all user.email "${EMAIL}"
 $ git submodule foreach "git config --replace-all user.name \"${NAME}\""
 $ git submodule foreach "git config --replace-all user.email \"${EMAIL}\""
+$ git submodule foreach git checkout master
 $ cd src/myplaceonline_rails/
 $ cp config/database.yml.example config/database.yml
 # Put database credentials into config/database.yml. For example:
