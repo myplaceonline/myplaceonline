@@ -27,6 +27,12 @@ $ bin/rails generate controller welcome index
 #  Remove all instances of data-turbolinks-track=true
 ```
 
+## Rails
+
+```
+puts object.inspect
+```
+
 ## Ruby on Rails
 
 ```
