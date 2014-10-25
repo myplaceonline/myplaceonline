@@ -44,6 +44,40 @@ $ bin/rake db:migrate
 $ bin/rake db:reset
 $ bin/bundle show # Show gem versions
 $ bin/bundle update # Update gems
+$ bin/rails generate migration AddPointsToIdentities points:integer
+```
+
+### Create New Category Example
+
+```
+# Add to config/locales/en.yml:
+  myplaceonline:
+    category:
+      passwords: "Passwords"
+# Add to db/seeds.rb:
+passwords = Category.create(name: "passwords", link: "passwords", position: 0, parent: order)
+# Create a migration:
+$ bin/rails generate migration AddCategoryPasswords
+# Edit the new migration:
+  def change
+    passwords = Category.create(name: "passwords", link: "passwords", position: 0, parent: Category.find_by_name("order"))
+  end
+# Run migrate
+$ bin/rake db:migrate
+```
+
+### Create New Page Example
+
+```
+$ bin/rails generate controller joy index
+# Add to config/routes.rb:
+match '/joy', :to => 'joy#index', via: :get
+# Add to config/locales/en.yml
+    joy:
+      title: "Joy"
+# Edit app/views/joy/index.html.erb
+<% content_for :heading do -%><%= t('myplaceonline.joy.title') %><% end -%>
+<h1><%= t('myplaceonline.joy.title') %></h1>
 ```
 
 ## PostgreSQL
