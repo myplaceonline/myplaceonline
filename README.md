@@ -8,6 +8,10 @@ myplaceonline is a virtual life coach.
 
 myplaceonline is licensed with the AGPL (Affero GPL) v3 license. Please share your contributions. See the [LICENSE](LICENSE) file for details.
 
+## Screenshots
+
+![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
+
 ## Proposed Features
 
 * Points system helps identify strong and weak character strengths.
