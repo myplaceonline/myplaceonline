@@ -78,6 +78,7 @@ $ sudo -u postgres psql postgres
 ## TODO
 
 * Devise 401 on bad password causes issue with JQM: git show d0c6bf98fad611f5747ecaf20da2a6344076bddd
+* https://github.com/Empact/roo
 
 ## Source Code Guidelines
 
