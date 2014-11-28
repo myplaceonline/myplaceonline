@@ -95,3 +95,13 @@ $ psql -U user1 -h localhost -d myplaceonline_development
 # GRANT ALL PRIVILEGES ON DATABASE ${DB} TO ${USER};
 # DROP DATABASE ${DB};
 ```
+
+## Add submodule
+
+Example:
+
+```
+$ git submodule add git@github.com:myplaceonline/roo.git src/roo
+$ cd src/roo
+$ irb -rubygems -I lib -r roo.rb
+```

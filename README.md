@@ -6,7 +6,7 @@ myplaceonline is a virtual life coach.
 
 ## License
 
-myplaceonline is licensed with the AGPL (Affero GPL) v3 license. Please share your contributions. See the [LICENSE](LICENSE) file for details.
+myplaceonline is licensed with the [AGPL (Affero GPL) v3 license](LICENSE). Please share your contributions.
 
 ## Screenshots
 
@@ -81,8 +81,9 @@ $ sudo -u postgres psql postgres
 
 ## TODO
 
-* Devise 401 on bad password causes issue with JQM: git show d0c6bf98fad611f5747ecaf20da2a6344076bddd
-* https://github.com/Empact/roo
+* Re-encrypt on change password
+* Internationalize devise views
+* Single re-login per session to modify settings
 
 ## Source Code Guidelines
 
