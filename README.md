@@ -84,6 +84,7 @@ $ sudo -u postgres psql postgres
 * Re-encrypt on change password
 * Internationalize devise views
 * Single re-login per session to modify settings
+* Add dependent destroy on user or identity
 
 ## Source Code Guidelines
 
