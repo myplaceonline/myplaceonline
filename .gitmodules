@@ -7,3 +7,6 @@
 [submodule "src/roo"]
 	path = src/roo
 	url = git@github.com:myplaceonline/roo.git
+[submodule "src/myplaceonline_chef"]
+	path = src/myplaceonline_chef
+	url = git@github.com:myplaceonline/myplaceonline_chef.git
