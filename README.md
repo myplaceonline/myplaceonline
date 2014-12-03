@@ -2,7 +2,7 @@
 
 ## Summary
 
-myplaceonline is a virtual life coach.
+myplaceonline is a virtual life coach: [https://myplaceonline.com/](https://myplaceonline.com/)
 
 ## License
 
