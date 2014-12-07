@@ -39,6 +39,8 @@ myplaceonline is licensed with the [AGPL (Affero GPL) v3 license](LICENSE). Plea
 
 ## Running Locally
 
+### First Time
+
 ```
 # Install database (see below)
 # Get the source code
@@ -59,10 +61,15 @@ $ sed -i 's/#password:/password: letmein/g' config/database.yml
 $ sed -i 's/#host: localhost/host: localhost/g' config/database.yml
 # Initialize the database
 $ bin/rake db:setup
-# Run rails
-$ bin/rails server
-# Open browser to http://localhost:3000/
 ```
+
+### Running the site
+
+```
+$ bin/rails server
+```
+
+Open [http://localhost:3000/](http://localhost:3000/)
 
 ### Install Database (e.g. PostgreSQL)
 
