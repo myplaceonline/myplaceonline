@@ -4,7 +4,7 @@
 
 myplaceonline is a virtual life coach: [https://myplaceonline.com/](https://myplaceonline.com/)
 
-## License
+## License and Contributions
 
 myplaceonline is licensed with the [AGPL (Affero GPL) v3 license](LICENSE). Please share your contributions. Guidelines for contributing: [CONTRIBUTE.md](CONTRIBUTE.md)
 
