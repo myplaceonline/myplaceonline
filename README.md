@@ -6,7 +6,7 @@ myplaceonline is a virtual life assistant: [https://myplaceonline.com/](https://
 
 ## License and Contributions
 
-myplaceonline is licensed with the [AGPL (Affero GPL) v3 license](LICENSE). Please share your contributions. Guidelines for contributing: [CONTRIBUTE.md](CONTRIBUTE.md)
+myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LICENSE). The AGPL basically means that you may do whatever you want with the code, but if you distribute the code or serve it through a website, share the code either by forking this repository or contributing to it. Pull requests are welcome. Guidelines for contributing: [CONTRIBUTE.md](CONTRIBUTE.md)
 
 ## Screenshots
 
