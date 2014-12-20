@@ -43,7 +43,6 @@ myplaceonline is licensed with the [AGPL (Affero GPL) v3 license](LICENSE). Plea
 
 ```
 # Install database (see below)
-# Get the source code
 $ git clone --recursive git@github.com:myplaceonline/myplaceonline.git
 $ cd myplaceonline
 $ export NAME="Name"
@@ -55,10 +54,8 @@ $ git submodule foreach "git config --replace-all user.email \"${EMAIL}\""
 $ git submodule foreach git checkout master
 $ cd src/myplaceonline_rails/
 $ cp config/database.yml.example config/database.yml
-# Put database credentials into config/database.yml. For example:
-$ sed -i 's/#username: myplaceonline/username: user1/g' config/database.yml
-$ sed -i 's/#password:/password: letmein/g' config/database.yml
-$ sed -i 's/#host: localhost/host: localhost/g' config/database.yml
+# Put database credentials into config/database.yml. For example, replace 'letmein' with your password:
+$ sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
 # Initialize the database
 $ bin/rake db:setup
 ```
@@ -90,7 +87,7 @@ $ sudo -u postgres psql postgres
 
 * Internationalize devise views
 * Single re-login per session to modify settings
-* Add dependent destroy on user or identity
+* Fix protect_from_forgery (in application controller) interaction with JQueryMobile (http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
 
 ## Theory
 

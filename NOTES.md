@@ -37,6 +37,7 @@ puts object.inspect
 
 ```
 $ bin/rails server
+$ bin/rake -T
 $ bin/rake routes
 $ bin/rails generate controller ${CONTROLLER} ${ACTION}
 $ bin/rails generate model ${MODEL}
@@ -45,6 +46,7 @@ $ bin/rake db:reset
 $ bin/bundle show # Show gem versions
 $ bin/bundle update # Update gems
 $ bin/rails generate migration AddPointsToIdentities points:integer
+$ RAILS_ENV=test bin/rake db:reset test
 ```
 
 ### Create New Category Example
