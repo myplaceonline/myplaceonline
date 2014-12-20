@@ -2,7 +2,7 @@
 
 ## Summary
 
-myplaceonline is a virtual life coach: [https://myplaceonline.com/](https://myplaceonline.com/)
+myplaceonline is a virtual life assistant: [https://myplaceonline.com/](https://myplaceonline.com/)
 
 ## License and Contributions
 
