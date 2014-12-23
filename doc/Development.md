@@ -13,6 +13,11 @@
 
 * Use input placeholder and a matching label with class ui-hidden-accessible: http://view.jquerymobile.com/master/demos/forms-label-hidden-accessible/
 
+### Offline Usage
+
+* We can't use a simple cache manifest that caches all HTML pages because
+  that might cache sensitive information such as decrypted passwords.
+
 ## JavaScript Guidelines
 
 There is some sharing of JavaScript between the rails and phonegap apps. The

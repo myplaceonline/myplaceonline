@@ -44,7 +44,7 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 
 ### First Time
 
-First, [install a database and create a user](#installdb)
+First, [install a database and create a user](#installdb).
 
 Then:
 
