@@ -13,7 +13,7 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 ![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
 
 ## Current Features
-* Points system tracks life across three categories related to [Theory][happiness]: order, joy, and meaning.
+* Points system tracks life across three categories related to [happiness](#theory): order, joy, and meaning.
 * Order
   * Manage online passwords (user name, password, URL, notes, secret questions, etc.)
     * Optionally encrypt passwords for storage using [AES-256-CBC](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
@@ -97,7 +97,7 @@ $ sudo -u postgres psql postgres
 * Single re-login per session to modify settings
 * Fix protect_from_forgery (in application controller) interaction with JQueryMobile (http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
 
-## Theory
+## <a name="theory"></a>Theory
 
 > ‘Happiness’ is too worn and too weary a term to be of much scientific use, and the discipline of Positive Psychology divides it into three very different realms, each of which is measurable and, most importantly, each of which is skill-based and can be taught (Seligman, 2002). The first is hedonic: positive emotion (joy, love, contentment, pleasure etc.). A life led around having as much of this good stuff as possible, is the ‘Pleasant Life’. The second, much closer to what Thomas Jefferson and Aristotle sought, is the state of flow, and a life led around it is the ‘Engaged Life’. Flow, a major part of the Engaged Life, consists in a loss of self-consciousness, time stopping for you, being ‘one with the music’ (Csikszentmihalyi, 1990). Importantly engagement seems to be the opposite of positive emotion: when one is totally absorbed, no thoughts or feelings are present—even though one says afterwards ‘that was fun’ (Delle Fave & Massimini, 2005). And while there are shortcuts to positive emotion—you can take drugs, masturbate, watch television, or go shopping—there are no shortcuts to flow. Flow only occurs when you deploy your highest strengths and talents to meet the challenges that come your way, and it is clear that flow facilitates learning. The third realm in the framework of Positive Psychology is the one with the best intellectual provenance, the Meaningful Life. Flow and positive emotion can be found in solipsistic pursuits, but not meaning or purpose. Meaning is increased through our connections to others, future generations, or causes that transcend the self (Durkheim, 1951/1897; Erikson, 1963). From a Positive Psychology perspective, meaning consists in knowing what your highest strengths are, and then using them to belong to and serve something you believe is larger than the self (Seligman, 2002).
 
