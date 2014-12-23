@@ -15,7 +15,7 @@
 
 ### Offline Usage
 
-* We can't use a simple cache manifest that caches all HTML pages because
+* We can't use a simple [cache manifest](http://dev.w3.org/html5/pf-summary/offline.html#manifests) that caches all HTML pages because
   that might cache sensitive information such as decrypted passwords.
 
 ## JavaScript Guidelines
