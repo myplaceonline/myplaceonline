@@ -13,7 +13,7 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 ![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
 
 ## Current Features
-* Points system tracks life across three categories related to happiness: order, joy, and meaning.
+* Points system tracks life across three categories related to [Theory][happiness]: order, joy, and meaning.
 * Order
   * Manage online passwords (user name, password, URL, notes, secret questions, etc.)
     * Optionally encrypt passwords for storage using [AES-256-CBC](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
