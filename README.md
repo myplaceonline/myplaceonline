@@ -44,8 +44,11 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 
 ### First Time
 
+First, [install a database and create a user](#installdb)
+
+Then:
+
 ```
-# [Install database](#installdb)
 $ git clone --recursive git@github.com:myplaceonline/myplaceonline.git
 $ cd myplaceonline
 $ export NAME="Name"
