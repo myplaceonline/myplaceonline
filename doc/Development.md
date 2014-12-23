@@ -21,7 +21,9 @@ else should go into myplaceonline_final.js or page-specific JS files.
 When updating myplaceonline.js, update the version at the top of the file and
 update the file in both apps and do rebuilds.
 
-## Create App
+## Miscellaneous Notes
+
+### Create a Rails App
 
 ```
 # Create new rails app
@@ -46,13 +48,13 @@ $ bin/rails generate controller welcome index
 #  Remove all instances of data-turbolinks-track=true
 ```
 
-## Rails
+### Rails Tips
 
 ```
 puts object.inspect
 ```
 
-## Ruby on Rails
+### Ruby on Rails Tips
 
 ```
 $ bin/rails server
@@ -68,7 +70,7 @@ $ bin/rails generate migration AddPointsToIdentities points:integer
 $ RAILS_ENV=test bin/rake db:reset test
 ```
 
-### Create New Category Example
+#### Create New Category Example
 
 ```
 # Add to config/locales/en.yml:
@@ -87,7 +89,7 @@ $ bin/rails generate migration AddCategoryPasswords
 $ bin/rake db:migrate
 ```
 
-### Create New Page Example
+#### Create New Page Example
 
 ```
 $ bin/rails generate controller joy index
@@ -101,7 +103,7 @@ match '/joy', :to => 'joy#index', via: :get
 <h1><%= t('myplaceonline.joy.title') %></h1>
 ```
 
-## PostgreSQL
+### PostgreSQL Tips
 
 ```
 # Basic Usage
@@ -117,7 +119,9 @@ $ psql -U user1 -h localhost -d myplaceonline_development
 # DROP DATABASE ${DB};
 ```
 
-## Add submodule
+### Git Tips
+
+#### Add submodule
 
 Example:
 
@@ -126,17 +130,3 @@ $ git submodule add git@github.com:myplaceonline/roo.git src/roo
 $ cd src/roo
 $ irb -rubygems -I lib -r roo.rb
 ```
-
-
-D, [2014-12-22T20:10:52.106603 #8450] DEBUG -- :   ESC[1mESC[36mSQL (0.2ms)ESC[0m  ESC[1mINSERT INTO "passwords" ("account_number", "created_at", "encrypted_password_id", "identity_id", "is_encrypted_password", "name", "notes", "updated_at", "url", "user") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"ESC[0m  [["account_number", "Access Key ID: 0RZ4CZVS3GYYSFPCFVG2"], ["created_at", "2014-12-22 20:10:52.105529"], ["encrypted_password_id", 17], ["identity_id", 1], ["is_encrypted_password", "t"], ["name", "Amazon EC2"], ["notes", "Private Key File: pk-M2L4BE76PKA332T5MYM2JT6NU6OCY6V3.pem\nX.509 Certificate File: cert-M2L4BE76PKA332T5MYM2JT6NU6OCY6V3.pem"], ["updated_at", "2014-12-22 20:10:52.105529"], ["url", ""], ["user", "schizoidboy@gmail.com"]]
-D, [2014-12-22T20:10:52.531051 #8450] DEBUG -- :   ESC[1mESC[35m (1.0ms)ESC[0m  ROLLBACK
-I, [2014-12-22T20:10:52.533020 #8450]  INFO -- : Completed 500 Internal Server Error in 32679ms
-F, [2014-12-22T20:10:52.534751 #8450] FATAL -- : 
-ArgumentError (data must not be empty):
-  lib/myp.rb:147:in `encrypt_value'
-  lib/myp.rb:138:in `encrypt'
-  lib/myp.rb:133:in `encrypt_from_session'
-  app/controllers/passwords_controller.rb:307:in `add_secret'
-  app/controllers/passwords_controller.rb:249:in `block (2 levels) in importodf3'
-  app/controllers/passwords_controller.rb:209:in `block in importodf3'
-  app/controllers/passwords_controller.rb:207:in `importodf3'
