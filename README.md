@@ -40,17 +40,12 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 * Manage addresses.
 * Manage rebates.
 
-## Design Goals
-
-* Mobile/tablet first design. Single Page Application (SPA): http://docs.phonegap.com/en/3.5.0/guide_next_index.md.html
-* Choose what information is stored offline in local storage and synchronize when internet available.
-
 ## Running Locally
 
 ### First Time
 
 ```
-# Install database (see below)
+# [Install database](#installdb)
 $ git clone --recursive git@github.com:myplaceonline/myplaceonline.git
 $ cd myplaceonline
 $ export NAME="Name"
@@ -76,7 +71,7 @@ $ bin/rails server
 
 Open [http://localhost:3000/](http://localhost:3000/)
 
-### Install Database (e.g. PostgreSQL)
+### <a name="installdb"></a>Install Database (e.g. PostgreSQL)
 
 #### Fedora, CentOS, RHEL
 
@@ -90,12 +85,6 @@ $ sudo gem install pg
 $ sudo -u postgres psql postgres
 # CREATE ROLE user1 WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
 ```
-
-## TODO
-
-* Internationalize devise views
-* Single re-login per session to modify settings
-* Fix protect_from_forgery (in application controller) interaction with JQueryMobile (http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
 
 ## <a name="theory"></a>Theory
 

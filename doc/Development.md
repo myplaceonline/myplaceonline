@@ -4,6 +4,11 @@
 
 * Please follow these style guides: https://github.com/styleguide
 
+## Design Goals
+
+* Mobile/tablet first design. Single Page Application (SPA): http://docs.phonegap.com/en/3.5.0/guide_next_index.md.html
+* Choose what information is stored offline in local storage and synchronize when internet available.
+
 ## HTML Guidelines
 
 * Use input placeholder and a matching label with class ui-hidden-accessible: http://view.jquerymobile.com/master/demos/forms-label-hidden-accessible/
@@ -20,6 +25,12 @@ myplaceonline.js should have all code that is required offline and everything
 else should go into myplaceonline_final.js or page-specific JS files.
 When updating myplaceonline.js, update the version at the top of the file and
 update the file in both apps and do rebuilds.
+
+## TODO
+
+* Internationalize devise views
+* Single re-login per session to modify settings
+* Fix protect_from_forgery (in application controller) interaction with JQueryMobile (http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
 
 ## Miscellaneous Notes
 
