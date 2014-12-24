@@ -13,12 +13,15 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 ![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
 
 ## Current Features
+
 * Points system tracks life across three categories related to [happiness](#theory): order, joy, and meaning.
 * Order
   * Manage online passwords (user name, password, URL, notes, secret questions, etc.)
     * Optionally encrypt passwords for storage using [AES-256-CBC](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
     * Supports importing passwords from OpenOffice/LibreOffice .ods spreadsheet (supports encrypted spreadsheets).
-  * Export all data to JSON file.
+    * Generate random passwords.
+    * Use [ZeroClipboard](https://github.com/zeroclipboard/zeroclipboard) to quickly copy passwords to the clipboard.
+  * Export all data to JSON file with the option of encrypting the file (AES-256-CBC/SHA256) which can be decrypted with openssl.
   * Save exported data in offline browser storage and display some of it even without internet.
     * Supports decrypting AES-256-CBC passwords using [forge.js](https://github.com/digitalbazaar/forge).
 
