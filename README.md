@@ -43,7 +43,7 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 * Manage addresses.
 * Manage rebates.
 
-## Running Locally
+## Source Code
 
 The myplaceonline website is written in
 [Ruby on Rails](http://rubyonrails.org/) ([source](https://github.com/myplaceonline/myplaceonline_rails)).
@@ -52,7 +52,7 @@ is written in [jQuery Mobile](http://jquerymobile.com/) and
 [PhoneGap](http://phonegap.com/), and built using
 [PhoneGap Build](https://build.phonegap.com/) ([source](https://github.com/myplaceonline/myplaceonline_phonegap)).
 
-### First Time
+### Running Locally
 
 First, [install a database and create a user](#installdb).
 
