@@ -21,6 +21,7 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
     * Supports importing passwords from OpenOffice/LibreOffice .ods spreadsheet (supports encrypted spreadsheets).
     * Generate random passwords.
     * Use [ZeroClipboard](https://github.com/zeroclipboard/zeroclipboard) to quickly copy passwords to the clipboard.
+    * Password notes support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax using [kramdown](https://github.com/gettalong/kramdown).
 * General Features
   * Export all data to JSON file with the option of encrypting the file (AES-256-CBC/SHA256) which can be decrypted with openssl.
   * Save exported data in offline browser storage and display some of it even without internet.
