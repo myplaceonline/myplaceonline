@@ -1,15 +1,14 @@
 # Development
 
-## General Guidelines
+## General
 
 * Please follow these style guides: https://github.com/styleguide
 
 ## Design Goals
 
 * Mobile/tablet first design. Single Page Application (SPA): http://docs.phonegap.com/en/3.5.0/guide_next_index.md.html
-* Choose what information is stored offline in local storage and synchronize when internet available.
 
-## HTML Guidelines
+## HTML
 
 * Use input placeholder and a matching label with class ui-hidden-accessible: http://view.jquerymobile.com/master/demos/forms-label-hidden-accessible/
 
@@ -19,7 +18,7 @@
   that caches all HTML pages because that might cache sensitive information
   such as decrypted passwords.
 
-## JavaScript Guidelines
+## JavaScript
 
 There is some sharing of JavaScript between the rails and phonegap apps. The
 phonegap app loads JQuery, JQueryMobile, a phonegap index.js that does
@@ -31,6 +30,18 @@ myplaceonline.js should have all code that is required offline and everything
 else should go into myplaceonline_final.js or page-specific JS files.
 When updating myplaceonline.js, update the version at the top of the file and
 update the file in both apps and do rebuilds.
+
+## Encryption
+
+Values are encrypted using a symmetric cipher with the user's password. When
+a user changes their password, we need to update all encrypted values. To avoid
+any requirement of registering each encrypted value in each model, we simply
+use a foreign key value to the encrypted values table.
+
+When a model has a potentially encrypted value, it will have two columns:
+one is a plain text value and the other is the foreign key reference to the
+encrypted values table. We can check if a value is encrypted or not by checking
+whether or not the encrypted value reference is nil or not.
 
 ## TODO
 
