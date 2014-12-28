@@ -12,6 +12,15 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 
 ![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
 
+## Source Code
+
+The myplaceonline website is written in
+[Ruby on Rails](http://rubyonrails.org/) ([source](https://github.com/myplaceonline/myplaceonline_rails)).
+The myplaceonline phone application
+is written in [jQuery Mobile](http://jquerymobile.com/) and
+[PhoneGap](http://phonegap.com/), and built using
+[PhoneGap Build](https://build.phonegap.com/) ([source](https://github.com/myplaceonline/myplaceonline_phonegap)).
+
 ## Current Features
 
 * Points system tracks life across three categories related to [happiness](#theory): order, joy, and meaning.
@@ -44,15 +53,6 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 * Manage hobbies.
 * Manage addresses.
 * Manage rebates.
-
-## Source Code
-
-The myplaceonline website is written in
-[Ruby on Rails](http://rubyonrails.org/) ([source](https://github.com/myplaceonline/myplaceonline_rails)).
-The myplaceonline phone application
-is written in [jQuery Mobile](http://jquerymobile.com/) and
-[PhoneGap](http://phonegap.com/), and built using
-[PhoneGap Build](https://build.phonegap.com/) ([source](https://github.com/myplaceonline/myplaceonline_phonegap)).
 
 ### Running Locally
 
