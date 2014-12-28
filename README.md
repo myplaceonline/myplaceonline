@@ -16,10 +16,10 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 
 The myplaceonline website is written in
 [Ruby on Rails](http://rubyonrails.org/): https://github.com/myplaceonline/myplaceonline_rails.
-The myplaceonline phone application
+The phone application
 is written in [jQuery Mobile](http://jquerymobile.com/) and
 [PhoneGap](http://phonegap.com/), and built using
-[PhoneGap Build](https://build.phonegap.com/): https://github.com/myplaceonline/myplaceonline_phonegap.
+[PhoneGap Build](https://build.phonegap.com/): https://github.com/myplaceonline/myplaceonline_phonegap. Latest Android developer APK: https://build.phonegap.com/apps/1133885/download/android/
 
 ## Current Features
 
