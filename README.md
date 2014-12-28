@@ -16,9 +16,9 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 
 * Points system tracks life across three categories related to [happiness](#theory): order, joy, and meaning.
 * Order
-  * Manage online passwords (user name, password, URL, notes, secret questions, etc.)
+  * Manage online passwords (user name, password, URL, notes, recovery questions & answers, etc.)
     * Optionally encrypt passwords for storage in the database using [AES-256-CBC](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
-    * Supports importing passwords from OpenOffice/LibreOffice .ods spreadsheet (supports encrypted spreadsheets).
+    * Import passwords from an [OpenOffice](https://www.openoffice.org/)/[LibreOffice](https://www.libreoffice.org/) [OpenDocument](http://en.wikipedia.org/wiki/OpenDocument) .ods spreadsheet (with support for encrypted spreadsheets) using [roo](https://github.com/roo-rb/roo).
     * Generate random passwords.
     * Use [ZeroClipboard](https://github.com/zeroclipboard/zeroclipboard) to quickly copy passwords to the clipboard.
     * Password notes support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax using [kramdown](https://github.com/gettalong/kramdown).
