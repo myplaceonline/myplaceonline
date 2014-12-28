@@ -4,14 +4,6 @@
 
 myplaceonline is a virtual life assistant: [https://myplaceonline.com/](https://myplaceonline.com/)
 
-## License and Contributions
-
-myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LICENSE). The AGPL basically means that you may do whatever you want with the code, but if you distribute the code or serve it through a website, share the code either by forking this repository or contributing to it. Pull requests are welcome. Guidelines for contributing: [CONTRIBUTE.md](CONTRIBUTE.md)
-
-## Screenshots
-
-![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
-
 ## Source Code
 
 The myplaceonline website is written in
@@ -20,6 +12,14 @@ The phone application
 is written in [jQuery Mobile](http://jquerymobile.com/) and
 [PhoneGap](http://phonegap.com/), and built using
 [PhoneGap Build](https://build.phonegap.com/): https://github.com/myplaceonline/myplaceonline_phonegap. Latest Android test APK: https://build.phonegap.com/apps/1133885/download/android/
+
+## License and Contributions
+
+myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LICENSE). The AGPL basically means that you may do whatever you want with the code, but if you distribute the code or serve it through a website, share the code either by forking this repository or contributing to it. Pull requests are welcome. Guidelines for contributing: [CONTRIBUTE.md](CONTRIBUTE.md)
+
+## Screenshots
+
+![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
 
 ## Current Features
 
