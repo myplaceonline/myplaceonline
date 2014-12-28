@@ -15,7 +15,7 @@
 ### Offline Usage
 
 * We can't use a simple [cache manifest](https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache)
-  that caches all HTML pages because that might cache sensitive information
+  that caches HTML pages because that might cache sensitive information
   such as decrypted passwords.
 
 ## JavaScript
@@ -43,11 +43,24 @@ one is a plain text value and the other is the foreign key reference to the
 encrypted values table. We can check if a value is encrypted or not by checking
 whether or not the encrypted value reference is nil or not.
 
+### Why not encrypt all data?
+
+One option is to encrypt all data (or at least make that a user preference).
+One potential problem with this is simply the overhead. For example, looking
+at passwords, it's one thing to encrypt the password which will only be
+decrypted when a particular password is shown, but if even the name of the
+service the password is for is encrypted, that would need to be decrypted
+on a simple password list or search.
+
+One option to reduce the overhead of such decryption is to have a cache
+from (encrypted_data,salt)->(decrypted_data), but that might not be scalable
+if every piece of data was encrypted.
+
 ## TODO
 
 * Internationalize devise views
-* Single re-login per session to modify settings
 * Fix protect_from_forgery (in application controller) interaction with JQueryMobile (http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
+* Consider http://unlicense.org/
 
 ## Miscellaneous Notes
 
