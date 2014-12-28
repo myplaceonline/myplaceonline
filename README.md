@@ -23,7 +23,7 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
     * Use [ZeroClipboard](https://github.com/zeroclipboard/zeroclipboard) to quickly copy passwords to the clipboard.
     * Password notes support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax using [kramdown](https://github.com/gettalong/kramdown).
 * General Features
-  * Export all data to JSON file with the option of encrypting the file (AES-256-CBC/SHA256) which can be decrypted with openssl.
+  * Export all data to JSON file with the option of encrypting it in a standardized, [RFC 4880](https://tools.ietf.org/html/rfc4880) format (using AES-256/SHA512) which can be decrypted with [GnuPG](https://www.gnupg.org/) or [PGP](http://www.symantec.com/encryption/).
   * Save exported data in offline browser storage and display some of it even without internet.
     * Supports decrypting AES-256-CBC passwords using [forge.js](https://github.com/digitalbazaar/forge).
 
