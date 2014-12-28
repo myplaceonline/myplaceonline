@@ -19,7 +19,7 @@ The myplaceonline website is written in
 The phone application
 is written in [jQuery Mobile](http://jquerymobile.com/) and
 [PhoneGap](http://phonegap.com/), and built using
-[PhoneGap Build](https://build.phonegap.com/): https://github.com/myplaceonline/myplaceonline_phonegap. Latest Android developer APK: https://build.phonegap.com/apps/1133885/download/android/
+[PhoneGap Build](https://build.phonegap.com/): https://github.com/myplaceonline/myplaceonline_phonegap. Latest Android test APK: https://build.phonegap.com/apps/1133885/download/android/
 
 ## Current Features
 
