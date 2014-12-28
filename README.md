@@ -17,10 +17,6 @@ is written in [jQuery Mobile](http://jquerymobile.com/) and
 
 myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LICENSE). The AGPL basically means that you may do whatever you want with the code, but if you distribute the code or serve it through a website, share the code either by forking this repository or contributing to it. Pull requests are welcome. Guidelines for contributing: [CONTRIBUTE.md](CONTRIBUTE.md)
 
-## Screenshots
-
-![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
-
 ## Current Features
 
 * Points system tracks life across three categories related to [happiness](#theory): order, joy, and meaning.
@@ -35,6 +31,10 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
   * Export all data to a [JSON](https://en.wikipedia.org/wiki/JSON) file with the option of encrypting it in a standardized, [OpenPGP](https://tools.ietf.org/html/rfc4880) format (using AES-256/SHA512) which can be decrypted with [GnuPG](https://www.gnupg.org/) or [PGP](http://www.symantec.com/encryption/).
   * Save exported data in offline browser storage and display some of it even without internet using [Ember.js](http://emberjs.com/).
     * Supports decrypting AES-256-CBC passwords using [forge.js](https://github.com/digitalbazaar/forge).
+
+## Screenshots
+
+![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
 
 ## Planned Features
 
