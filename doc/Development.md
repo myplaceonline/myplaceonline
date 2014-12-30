@@ -118,7 +118,7 @@ $ RAILS_ENV=test bin/rake db:reset test
 # ${X} is usually plural here:
 # Create a migration:
 $ bin/rails generate migration AddCategory${X}
-# Edit the new migration (${X} is all lowercase here):
+# Edit the new migration (${X} is all lowercase here and usually plural):
   def change
     Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"))
   end
@@ -126,9 +126,9 @@ $ bin/rails generate migration AddCategory${X}
   myplaceonline:
     category:
       ${X}: "${X}"
-# Add to db/seeds.rb (${X} is all lowercase here):
+# Add to db/seeds.rb (${X} is all lowercase here and usually plural):
   ${X} = Category.create(name: "${X}", link: "${X}", position: 0, parent: ${Y})
-# ${X} is non-plural and capitlized here:
+# ${X} is non-plural and capitalized here:
 $ bin/rails generate scaffold ${X} ${COLUMNS} identity:references:index
 # Example:
 # bin/rails generate scaffold Wisdom name:string wisdom:text identity:references:index
@@ -143,7 +143,7 @@ $ bin/rake db:migrate
 # Edit app/models/identity.rb
   has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
-# Change app/controlls/${X}Controller.rb based on WisdomController.rb
+# Change app/controllers/${X}Controller.rb based on WisdomController.rb
 $ rm app/views/${X}/*jbuilder
 # Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
 # Copy app/views/wisdom/* over to app/views/${X} and replace all instances of wisdom with ${X}
@@ -154,6 +154,7 @@ $ rm app/views/${X}/*jbuilder
   can :manage, ${X}, :identity => identity
 # Edit app/tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # Edit app/tests/controllers/${X}_controller_test.rb and base it off of wisdoms_controller_test.rb
+$ RAILS_ENV=test bin/rake db:reset
 $ bin/rake test
 # Start rails server
 ```
