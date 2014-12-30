@@ -114,26 +114,55 @@ $ RAILS_ENV=test bin/rake db:reset test
 #### Create New Category Example
 
 ```
-# Add to config/locales/en.yml:
+# Stop rails server if running
+# ${X} is usually plural here:
+# Create a migration:
+$ bin/rails generate migration AddCategory${X}
+# Edit the new migration (${X} is all lowercase here):
+  def change
+    Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"))
+  end
+# Add to config/locales/en.yml (first ${X} is lowercase, second one is usually capitalized):
   myplaceonline:
     category:
-      passwords: "Passwords"
-# Add to db/seeds.rb:
-passwords = Category.create(name: "passwords", link: "passwords", position: 0, parent: order)
-# Create a migration:
-$ bin/rails generate migration AddCategoryPasswords
-# Edit the new migration:
-  def change
-    passwords = Category.create(name: "passwords", link: "passwords", position: 0, parent: Category.find_by_name("order"))
-  end
+      ${X}: "${X}"
+# Add to db/seeds.rb (${X} is all lowercase here):
+  ${X} = Category.create(name: "${X}", link: "${X}", position: 0, parent: ${Y})
+# ${X} is non-plural and capitlized here:
+$ bin/rails generate scaffold ${X} ${COLUMNS} identity:references:index
+# Example:
+# bin/rails generate scaffold Wisdom name:string wisdom:text identity:references:index
+# You'll get the following warning and you should answer 'Y':
+  conflict    app/assets/stylesheets/scaffolds.css.scss
+  Overwrite /work/myplaceonline/src/src/myplaceonline_rails/app/assets/stylesheets/scaffolds.css.scss? (enter "h" for help) [Ynaqdh] h
+$ git checkout -- app/assets/stylesheets/scaffolds.css.scss
 # Run migrate
 $ bin/rake db:migrate
+# Edit lib/myp.rb
+  @@all_categories[:${X}] = Category.find_by(:name => :${X})
+# Edit app/models/identity.rb
+  has_many :${X}, :dependent => :destroy
+      :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
+# Change app/controlls/${X}Controller.rb based on WisdomController.rb
+$ rm app/views/${X}/*jbuilder
+# Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
+# Copy app/views/wisdom/* over to app/views/${X} and replace all instances of wisdom with ${X}
+# Edit config/routes.rb and add after resources ${X}
+  post '${X}/new'
+# Edit app/models/${X}.rb and add any validations
+# Edit app/models/ability.rb and add a line:
+  can :manage, ${X}, :identity => identity
+# Edit app/tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
+# Edit app/tests/controllers/${X}_controller_test.rb and base it off of wisdoms_controller_test.rb
+$ bin/rake test
+# Start rails server
 ```
 
 #### Create New Page Example
 
 ```
-$ bin/rails generate controller joy index
+# ${X} is all lowercase here:
+$ bin/rails generate controller ${X} index
 # Add to config/routes.rb:
 match '/joy', :to => 'joy#index', via: :get
 # Add to config/locales/en.yml
@@ -170,4 +199,18 @@ Example:
 $ git submodule add git@github.com:myplaceonline/roo.git src/roo
 $ cd src/roo
 $ irb -rubygems -I lib -r roo.rb
+```
+
+# Testing
+
+## Notes
+
+* Test data in test/fixtures/*.yml
+* Devise user logged in for ever test in test/test_helper.rb setup
+
+## Running Tests
+
+```
+$ RAILS_ENV=test bin/bundle exec rake db:setup
+$ bin/rake
 ```
