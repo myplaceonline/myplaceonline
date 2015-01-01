@@ -59,6 +59,8 @@ if every piece of data was encrypted.
 ## TODO
 
 * Internationalize devise views
+* Make sure roo temporary files are deleted
+* Make sure accepts_nested_attributes_for can't view/delete unrelated items
 * Fix protect_from_forgery (in application controller) interaction with JQueryMobile (http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
 * Consider http://unlicense.org/
 
