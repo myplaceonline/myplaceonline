@@ -63,33 +63,16 @@ if every piece of data was encrypted.
 * Make sure accepts_nested_attributes_for can't view/delete unrelated items
 * Fix protect_from_forgery (in application controller) interaction with JQueryMobile (http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
 * Consider http://unlicense.org/
+* File download:
+  * http://stackoverflow.com/questions/18413595/how-to-download-a-file-from-php-page-using-phonegap-android-platform
+  * http://stackoverflow.com/questions/9523736/problems-with-download-link-in-phonegap-android
+  * https://github.com/apache/cordova-plugin-file-transfer/blob/master/doc/index.md
+  * https://github.com/apache/cordova-plugin-file/blob/master/doc/index.md
+* No results text for searches:
+  * http://stackoverflow.com/questions/9685921/jquery-mobile-data-filter-in-case-of-no-result
+  * http://stackoverflow.com/questions/22292250/jquery-mobile-listview-if-there-is-no-result
 
 ## Miscellaneous Notes
-
-### Create a Rails App
-
-```
-# Create new rails app
-$ mkdir -p src/rails; cd src/rails; rails new myplaceonline --git --database=postgresql; cd myplaceonline
-$ git mv config/database.yml config/database.yml.example
-# Add config/database.yml to .gitignore
-$ cp config/database.yml.example config/database.yml
-# Edit config/database.yml and uncomment & change development/username,password,host
-$ bin/rake db:create db:migrate
-$ bin/rails server
-# Add to Gemfile: gem 'jquery_mobile_rails'
-$ bin/bundle install
-# Edit app/assets/javascripts/application.js
-#  Add: //= require jquery.mobile
-#  Remove: //= require turbolinks
-# Edit app/assets/stylesheets/application.css
-#  Add after require_self: *= require jquery.mobile
-$ bin/rails generate controller welcome index
-# Edit config/routes.rb
-#  Uncomment: root 'welcome#index'
-# Edit app/views/layouts/application.html.erb
-#  Remove all instances of data-turbolinks-track=true
-```
 
 ### Rails Tips
 
@@ -159,6 +142,31 @@ $ rm app/views/${X}/*jbuilder
 $ RAILS_ENV=test bin/rake db:reset
 $ bin/rake test
 # Start rails server
+```
+
+#### Create a Rails App
+
+```
+# Create new rails app
+$ mkdir -p src/rails; cd src/rails; rails new myplaceonline --git --database=postgresql; cd myplaceonline
+$ git mv config/database.yml config/database.yml.example
+# Add config/database.yml to .gitignore
+$ cp config/database.yml.example config/database.yml
+# Edit config/database.yml and uncomment & change development/username,password,host
+$ bin/rake db:create db:migrate
+$ bin/rails server
+# Add to Gemfile: gem 'jquery_mobile_rails'
+$ bin/bundle install
+# Edit app/assets/javascripts/application.js
+#  Add: //= require jquery.mobile
+#  Remove: //= require turbolinks
+# Edit app/assets/stylesheets/application.css
+#  Add after require_self: *= require jquery.mobile
+$ bin/rails generate controller welcome index
+# Edit config/routes.rb
+#  Uncomment: root 'welcome#index'
+# Edit app/views/layouts/application.html.erb
+#  Remove all instances of data-turbolinks-track=true
 ```
 
 #### Create New Page Example
