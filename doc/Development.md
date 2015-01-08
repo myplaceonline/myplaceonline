@@ -31,6 +31,14 @@ else should go into myplaceonline_final.js or page-specific JS files.
 When updating myplaceonline.js, update the version at the top of the file and
 update the file in both apps and do rebuilds.
 
+## Rails
+
+* The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
+  app/views/shared/_model_form.html.erb passing in obj: @obj as a local.
+  Normally the view would just reference the @obj member variable of the 
+  controller directly, but we use the obj:@obj model so that one form
+  can include another form (usually a belongs_to relationship).
+
 ## Encryption
 
 Values are encrypted using a symmetric cipher with the user's password. When
@@ -42,6 +50,32 @@ When a model has a potentially encrypted value, it will have two columns:
 one is a plain text value and the other is the foreign key reference to the
 encrypted values table. We can check if a value is encrypted or not by checking
 whether or not the encrypted value reference is nil or not.
+
+### Encryption Algorithms
+
+There are many parts to encryption: key exchange, authentication, symmetric
+ciphers, message authentication codes, hashing, etc. The information on which
+ones to use in which situations is confusing, contradictory, and constantly
+changing. These are some findings after reading many articles, but they are
+amateur findings and need more investigation and citation:
+
+In general:
+* Avoid MD5, SHA1, elliptic curve+NIST, bit sizes less than 2048, block sizes
+  less than 128 bits, DES, RC4, ECB cipher mode, CBC cipher mode with
+  non-random IV, CTR mode with repeating IV, MAC-then-encrypt, encrypt-and-MAC.
+* Prefer forward secrecy (e.g. ephemeral), Authenticated Encryption with
+  Associated Data (AEAD) Cipher (e.g. GCM).
+
+Therefore:
+* DHE+SHA2 or ECDH+Curve25519+SHA2
+* RSA/4069 or Ed25519
+* AES-128-GCM or AES-256-GCM or ChaCha20-poly1305
+* HMAC+SHA2+ETM (unless using GCM which is already authenticated)
+
+References:
+* "This presents a problem for cipher constructions with data-dependent padding
+  (such as CBC). TLS 1.3 removes the length field and relies on the AEAD cipher"
+  (http://tlswg.github.io/tls13-spec/)
 
 ### Why not encrypt all data?
 
@@ -140,6 +174,7 @@ $ rm app/views/${X}/*jbuilder
 # Edit app/tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # Edit app/tests/controllers/${X}_controller_test.rb and base it off of wisdoms_controller_test.rb
 $ RAILS_ENV=test bin/rake db:reset
+# Add space to lib/myp.rb and re-save
 $ bin/rake test
 # Start rails server
 ```
