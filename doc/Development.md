@@ -147,7 +147,7 @@ $ bin/rails generate migration AddCategory${X}
       ${X}: "${X}"
 # Add to db/seeds.rb (${X} is all lowercase here and usually plural):
   ${X} = Category.create(name: "${X}", link: "${X}", position: 0, parent: ${Y})
-# ${X} is non-plural and capitalized here:
+# ${X} is non-plural, lower-case and underscores instead of camel case:
 $ bin/rails generate scaffold ${X} ${COLUMNS} identity:references:index
 # Example:
 # bin/rails generate scaffold Wisdom name:string wisdom:text identity:references:index
