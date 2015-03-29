@@ -105,6 +105,7 @@ if every piece of data was encrypted.
 * No results text for searches:
   * http://stackoverflow.com/questions/9685921/jquery-mobile-data-filter-in-case-of-no-result
   * http://stackoverflow.com/questions/22292250/jquery-mobile-listview-if-there-is-no-result
+* http://stackoverflow.com/a/15746205/4135310
 
 ## Miscellaneous Notes
 
@@ -130,14 +131,44 @@ $ bin/rails generate migration AddPointsToIdentities points:integer
 $ RAILS_ENV=test bin/rake db:reset test
 ```
 
-#### Create New Category Example
+#### Create New Sub-Category Example
 
 ```
 # Stop rails server if running
-# ${X} is usually plural here:
+# ${X} is usually plural here in capital camel case:
 # Create a migration:
 $ bin/rails generate migration AddCategory${X}
-# Edit the new migration (${X} is all lowercase here and usually plural):
+# Edit the new migration (${X} is all lowercase here and usually plural and underscores):
+  def change
+    Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"))
+  end
+$ bin/rake db:migrate
+# Add to config/locales/en.yml (first ${X} is lowercase, second one is usually capitalized):
+  myplaceonline:
+    category:
+      ${X}: "${X}"
+# Add to db/seeds.rb (${X} is all lowercase here and usually plural):
+  ${X} = Category.create(name: "${X}", link: "${X}", position: 0, parent: ${Y})
+$ mkdir app/views/${X}/
+$ cp app/views/order/* app/views/${X}/ and replace the translation name
+$ cp app/controllers/order_controller.rb app/controllers/${X}_controller.rb and replace what's necessary
+# Add to config/routes.rb
+  get '${X}/index'
+  get '${X}', :to => '${X}#index'
+$ RAILS_ENV=test bin/rake db:reset
+# Add space to lib/myp.rb and re-save
+$ bin/rake test
+# Start rails server
+```
+
+#### Create New Leaf Category Example
+
+```
+# Stop rails server if running
+# ${X} is usually plural here in capital camel case:
+# Create a migration:
+$ bin/rails generate migration AddCategory${X}
+# Edit the new migration (${X} is all lowercase here and usually plural and underscores):
   def change
     Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"))
   end
@@ -149,23 +180,22 @@ $ bin/rails generate migration AddCategory${X}
   ${X} = Category.create(name: "${X}", link: "${X}", position: 0, parent: ${Y})
 # ${X} is non-plural, lower-case and underscores instead of camel case:
 $ bin/rails generate scaffold ${X} ${COLUMNS} identity:references:index
+# x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time
 # Example:
 # bin/rails generate scaffold Wisdom name:string wisdom:text identity:references:index
 # You'll get the following warning and you should answer 'Y':
   conflict    app/assets/stylesheets/scaffolds.css.scss
-  Overwrite /work/myplaceonline/src/src/myplaceonline_rails/app/assets/stylesheets/scaffolds.css.scss? (enter "h" for help) [Ynaqdh] h
+  Overwrite /work/myplaceonline/src/src/myplaceonline_rails/app/assets/stylesheets/scaffolds.css.scss? (enter "h" for help) [Ynaqdh] Y
 $ git checkout -- app/assets/stylesheets/scaffolds.css.scss
 # Run migrate
 $ bin/rake db:migrate
-# Edit lib/myp.rb
-  @@all_categories[:${X}] = Category.find_by(:name => :${X})
 # Edit app/models/identity.rb
   has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
 # Change app/controllers/${X}Controller.rb based on WisdomController.rb
 $ rm app/views/${X}/*jbuilder
 # Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
-# Copy app/views/wisdom/* over to app/views/${X} and replace all instances of wisdom with ${X}
+# cp app/views/wisdoms/* app/views/${X} and replace all instances of wisdom with ${X}
 # Edit config/routes.rb and add after resources ${X}
   post '${X}/new'
 # Edit app/models/${X}.rb and add any validations
@@ -177,6 +207,81 @@ $ RAILS_ENV=test bin/rake db:reset
 # Add space to lib/myp.rb and re-save
 $ bin/rake test
 # Start rails server
+```
+
+#### Add encrypted column(s)
+
+```
+$ bin/rails generate migration AddEncryptionTo${MODEL} ${COLUMN}_encrypted:references:index
+$ bin/rake db:migrate
+# Add to model:
+  include EncryptedConcern
+  belongs_to :${COLUMN}_encrypted, class_name: EncryptedValue, dependent: :destroy, :autosave => true
+  belongs_to_encrypted :${COLUMN}
+  attr_accessor :encrypt
+# Change any validations to check both the encrypted and unencrypted values:
+  validate do
+    if ${COLUMN}.blank? && ${COLUMN}_encrypted.nil?
+      errors.add(:${COLUMN}, t("myplaceonline.general.non_blank"))
+    end
+  end
+# Remove potentially unencrypted values from JSON
+  def as_json(options={})
+    if ${COLUMN}_encrypted?
+      options[:except] ||= %w(${COLUMN})
+    end
+    super.as_json(options)
+  end
+# Add :encrypt to controller permitted params
+# Add to controller:
+  protected
+    def sensitive
+      true
+    end
+    
+    def create_presave
+      @obj.${COLUMN}_finalize
+    end
+    
+    def update_presave
+      @obj.${COLUMN}_finalize
+    end
+
+    def before_edit
+      @obj.encrypt = @obj.${COLUMN}_encrypted?
+    end
+# Add to _form.html.erb
+<%= myp_check_box_tag :encrypt, "myplaceonline.general.encrypt", @encrypt %>
+```
+
+#### Change Category Name
+
+```
+$ bin/rails generate migration Rename${OLD}To${NEW}
+rename_table :${OLD}, :${NEW}
+$ bin/rails generate migration ChangeCategory${OLD}
+    cat = ${OLD}.where(name: "${OLD}").take!
+    cat.name = "${NEW}"
+    cat.link = "${NEW}"
+    cat.save
+# Change config/locales/en.yml
+# Change db/seeds.rb
+$ git mv app/views/${OLD}/ app/views/${NEW}/
+$ git mv app/controllers/${OLD}_controller.rb app/controllers/${NEW}_controller.rb
+$ git mv app/models/${OLD}.rb app/models/${NEW}.rb
+$ git mv app/helpers/${OLD}_helper.rb app/helpers/${NEW}_helper.rb
+$ git mv test/controllers/${OLD}_controller_test.rb test/controllers/${NEW}_controller_test.rb
+$ git mv test/factories/${OLD}.rb test/factories/${NEW}.rb
+$ git mv test/fixtures/${OLD}.yml test/fixtures/${NEW}.yml
+$ git mv test/helpers/${OLD}_helper_test.rb test/helpers/${NEW}_helper_test.rb
+$ git mv test/models/${OLD}_test.rb test/models/${NEW}_test.rb
+$ git mv app/assets/javascripts/${OLD}.js.coffee app/assets/javascripts/${NEW}.js.coffee
+$ git mv app/assets/stylesheets/${OLD}.css.scss app/assets/stylesheets/${NEW}.css.scss
+$ bin/rake db:migrate
+# Change lib/myp.rb
+# Change config/routes.rb
+# Change app/models/ability.rb
+# Change app/models/identity.rb
 ```
 
 #### Create a Rails App
@@ -204,21 +309,6 @@ $ bin/rails generate controller welcome index
 #  Remove all instances of data-turbolinks-track=true
 ```
 
-#### Create New Page Example
-
-```
-# ${X} is all lowercase here:
-$ bin/rails generate controller ${X} index
-# Add to config/routes.rb:
-match '/joy', :to => 'joy#index', via: :get
-# Add to config/locales/en.yml
-    joy:
-      title: "Joy"
-# Edit app/views/joy/index.html.erb
-<% content_for :heading do -%><%= t('myplaceonline.joy.title') %><% end -%>
-<h1><%= t('myplaceonline.joy.title') %></h1>
-```
-
 ### PostgreSQL Tips
 
 ```
@@ -233,6 +323,8 @@ $ psql -U user1 -h localhost -d myplaceonline_development
 # CREATE DATABASE ${DB} WITH OWNER ${USER} ENCODING 'UTF8';
 # GRANT ALL PRIVILEGES ON DATABASE ${DB} TO ${USER};
 # DROP DATABASE ${DB};
+# Equivalent to MySQL \G: \x before the command
+# Backup: pg_dump -U postgres -h localhost -d myplaceonline_production > backup_`date +%Y%m%d%H%M%S`.sql
 ```
 
 ### Git Tips
