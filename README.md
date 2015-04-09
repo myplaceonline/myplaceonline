@@ -59,39 +59,23 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 * Manage addresses.
 * Manage rebates.
 
-### Running Locally
+## Running Locally
 
-First, [install a database and create a user](#installdb).
+1. [Prepare your operating system](#prepos)
+2. [Prepare your database](#prepdb)
+3. [Download and prepare the source code](#prepsrc)
+4. [Run the Rails server](#run)
 
-Then:
+### <a name="prepos"></a>Prepare Operating System
 
-```
-$ git clone --recursive git@github.com:myplaceonline/myplaceonline.git
-$ cd myplaceonline
-$ export NAME="Name"
-$ export EMAIL="name@example.com"
-$ git config --replace-all user.name "${NAME}"
-$ git config --replace-all user.email "${EMAIL}"
-$ git submodule foreach "git config --replace-all user.name \"${NAME}\""
-$ git submodule foreach "git config --replace-all user.email \"${EMAIL}\""
-$ git submodule foreach git checkout master
-$ cd src/myplaceonline_rails/
-$ cp config/database.yml.example config/database.yml
-# Put database credentials into config/database.yml. For example, replace 'letmein' with your password:
-$ sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
-# Initialize the database
-$ bin/rake db:setup
-```
-
-### Running the site
+#### Fedora, CentOS, RHEL
 
 ```
-$ bin/rails server
+$ sudo yum install git ruby ruby-devel rubygem-bundler zlib-devel patch nodejs
+$ sudo yum groupinstall "C Development Tools and Libraries"
 ```
 
-Open [http://localhost:3000/](http://localhost:3000/)
-
-### <a name="installdb"></a>Install Database (e.g. PostgreSQL)
+### <a name="prepdb"></a>Prepare Database (e.g. PostgreSQL)
 
 #### Fedora, CentOS, RHEL
 
@@ -105,6 +89,33 @@ $ sudo gem install pg
 $ sudo -u postgres psql postgres
 # CREATE ROLE myplaceonline WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
 ```
+
+### <a name="prepsrc"></a>Download and prepare the source code
+
+```
+$ git clone --recursive https://github.com/myplaceonline/myplaceonline.git
+$ cd myplaceonline
+$ export NAME="Name"
+$ export EMAIL="name@example.com"
+$ git config --replace-all user.name "${NAME}"
+$ git config --replace-all user.email "${EMAIL}"
+$ git submodule foreach "git config --replace-all user.name \"${NAME}\""
+$ git submodule foreach "git config --replace-all user.email \"${EMAIL}\""
+$ git submodule foreach git checkout master
+$ cd src/myplaceonline_rails/
+$ cp config/database.yml.example config/database.yml
+# Replace 'letmein' with your database user password:
+$ sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
+$ bin/rake db:setup
+```
+
+### <a name="run"></a>Run the Rails server
+
+```
+$ bin/rails server
+```
+
+Open [http://localhost:3000/](http://localhost:3000/)
 
 ## <a name="theory"></a>Theory
 
