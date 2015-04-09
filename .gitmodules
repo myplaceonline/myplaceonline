@@ -1,12 +1,12 @@
 [submodule "src/myplaceonline_rails"]
 	path = src/myplaceonline_rails
-	url = git@github.com:myplaceonline/myplaceonline_rails.git
+	url = https://github.com/myplaceonline/myplaceonline_rails.git
 [submodule "src/myplaceonline_phonegap"]
 	path = src/myplaceonline_phonegap
-	url = git@github.com:myplaceonline/myplaceonline_phonegap.git
+	url = https://github.com/myplaceonline/myplaceonline_phonegap.git
 [submodule "src/myplaceonline_chef"]
 	path = src/myplaceonline_chef
-	url = git@github.com:myplaceonline/myplaceonline_chef.git
+	url = https://github.com/myplaceonline/myplaceonline_chef.git
 [submodule "src/myplaceonline_scripts"]
 	path = src/myplaceonline_scripts
-	url = git@github.com:myplaceonline/myplaceonline_scripts.git
+	url = https://github.com/myplaceonline/myplaceonline_scripts.git
