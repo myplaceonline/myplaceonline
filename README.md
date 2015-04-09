@@ -103,7 +103,7 @@ $ sudo sed -ri 's/(host    all.*)ident/\1password/' /var/lib/pgsql/data/pg_hba.c
 $ sudo systemctl start postgresql
 $ sudo gem install pg
 $ sudo -u postgres psql postgres
-# CREATE ROLE user1 WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
+# CREATE ROLE myplaceonline WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
 ```
 
 ## <a name="theory"></a>Theory
