@@ -87,7 +87,8 @@ $ sudo sed -ri 's/(host    all.*)ident/\1password/' /var/lib/pgsql/data/pg_hba.c
 $ sudo systemctl start postgresql
 $ sudo gem install pg
 $ sudo -u postgres psql postgres
-# CREATE ROLE myplaceonline WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
+postgres=# CREATE ROLE myplaceonline WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
+postgres=# \q
 ```
 
 ### <a name="prepsrc"></a>Download and prepare the source code
@@ -106,6 +107,7 @@ $ cd src/myplaceonline_rails/
 $ cp config/database.yml.example config/database.yml
 # Replace 'letmein' with your database user password:
 $ sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
+$ bin/bundle install
 $ bin/rake db:setup
 ```
 
