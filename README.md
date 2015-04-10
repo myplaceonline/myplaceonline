@@ -95,15 +95,7 @@ postgres=# \q
 
 ```
 $ git clone --recursive https://github.com/myplaceonline/myplaceonline.git
-$ cd myplaceonline
-$ export NAME="Name"
-$ export EMAIL="name@example.com"
-$ git config --replace-all user.name "${NAME}"
-$ git config --replace-all user.email "${EMAIL}"
-$ git submodule foreach "git config --replace-all user.name \"${NAME}\""
-$ git submodule foreach "git config --replace-all user.email \"${EMAIL}\""
-$ git submodule foreach git checkout master
-$ cd src/myplaceonline_rails/
+$ cd myplaceonline/src/myplaceonline_rails/
 $ cp config/database.yml.example config/database.yml
 # Replace 'letmein' with your database user password:
 $ sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
@@ -118,6 +110,21 @@ $ bin/rails server
 ```
 
 Open [http://localhost:3000/](http://localhost:3000/)
+
+### <a name="prepsrccommitter"></a>Prepare source if you'll be committing
+
+```
+$ cd ${MYPLACEONLINESRCDIR}
+$ export NAME="Name"
+$ export EMAIL="name@example.com"
+$ git config --replace-all user.name "${NAME}"
+$ git config --replace-all user.email "${EMAIL}"
+$ git submodule foreach "git config --replace-all user.name \"${NAME}\""
+$ git submodule foreach "git config --replace-all user.email \"${EMAIL}\""
+$ git submodule foreach git checkout master
+# Optional if using SSH Keys
+$ git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+```
 
 ## <a name="theory"></a>Theory
 
