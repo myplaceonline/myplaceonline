@@ -10,3 +10,6 @@
 [submodule "src/myplaceonline_scripts"]
 	path = src/myplaceonline_scripts
 	url = https://github.com/myplaceonline/myplaceonline_scripts.git
+[submodule "src/myplaceonline_ffclipboard"]
+	path = src/myplaceonline_ffclipboard
+	url = https://github.com/myplaceonline/myplaceonline_ffclipboard.git
