@@ -334,9 +334,13 @@ $ psql -U user1 -h localhost -d myplaceonline_development
 Example:
 
 ```
-$ git submodule add git@github.com:myplaceonline/roo.git src/roo
-$ cd src/roo
-$ irb -rubygems -I lib -r roo.rb
+$ git submodule add https://github.com/myplaceonline/myplaceonline_ffclipboard.git src/myplaceonline_ffclipboard
+$ cd src/myplaceonline_ffclipboard
+$ export NAME="Name"
+$ export EMAIL="name@example.com"
+$ git config --replace-all user.name "${NAME}"
+$ git config --replace-all user.email "${EMAIL}"
+$ cd ../..
 ```
 
 # Testing
