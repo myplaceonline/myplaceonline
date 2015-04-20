@@ -33,11 +33,16 @@ update the file in both apps and do rebuilds.
 
 ## Rails
 
-* The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
-  app/views/shared/_model_form.html.erb passing in obj: @obj as a local.
-  Normally the view would just reference the @obj member variable of the 
-  controller directly, but we use the obj:@obj model so that one form
-  can include another form (usually a belongs_to relationship).
+1. The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
+   app/views/shared/_model_form.html.erb passing in obj: @obj as a local.
+   Normally the view would just reference the @obj member variable of the 
+   controller directly, but we use the obj:@obj model so that one form
+   can include another form (usually a belongs_to relationship).
+2. Use semantic names. For example, if you have the date of a weight
+   measurement, use a field named measurement_start instead of just start. The
+   reason for this is that, by default, we use form field names matching the
+   model field name, so the autocomplete will be more specific if the field
+   name is more specific.
 
 ## Encryption
 
@@ -138,7 +143,7 @@ $ RAILS_ENV=test bin/rake db:reset test
 # ${X} is usually plural here in capital camel case:
 # Create a migration:
 $ bin/rails generate migration AddCategory${X}
-# Edit the new migration (${X} is all lowercase here and usually plural and underscores):
+# Edit the new migration (${X} is all lowercase here and underscores):
   def change
     Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"))
   end
@@ -180,7 +185,7 @@ $ bin/rails generate migration AddCategory${X}
   ${X} = Category.create(name: "${X}", link: "${X}", position: 0, parent: ${Y})
 # ${X} is non-plural, lower-case and underscores instead of camel case:
 $ bin/rails generate scaffold ${X} ${COLUMNS} identity:references:index
-# x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time
+# x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
 # Example:
 # bin/rails generate scaffold Wisdom name:string wisdom:text identity:references:index
 # You'll get the following warning and you should answer 'Y':
