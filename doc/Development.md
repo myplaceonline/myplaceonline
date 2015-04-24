@@ -3,6 +3,8 @@
 ## General
 
 * Please follow these style guides: https://github.com/styleguide
+* Site tests:
+** https://www.google.com/webmasters/tools/mobile-friendly/
 
 ## Design Goals
 
