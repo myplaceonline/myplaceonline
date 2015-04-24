@@ -27,11 +27,14 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
     * Generate random passwords.
     * Use [ZeroClipboard](https://github.com/zeroclipboard/zeroclipboard) to quickly copy passwords to the clipboard.
     * Password notes support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax using [kramdown](https://github.com/gettalong/kramdown).
-  * Manage To Dos.
+  * Manage apartments, bank accounts, contacts, credit cards, credit scores, RSS feeds, files, ideas, lists, vehicles, To Dos, etc.
+  * Create calculation forms with inputs and an equation and then create calculations from these forms.
 * Joy
+  * Manage jokes.
   * Manage movies you want to watch or have watched.
 * Meaning
   * Manage notes of wisdom gathered in life.
+  * Manage questions including hypotheses.
 * General Features
   * Export all data to a [JSON](https://en.wikipedia.org/wiki/JSON) file with the option of encrypting it in a standardized, [OpenPGP](https://tools.ietf.org/html/rfc4880) format (using AES-256/SHA512) which can be decrypted with [GnuPG](https://www.gnupg.org/) or [PGP](http://www.symantec.com/encryption/).
   * Save exported data in offline browser storage and display some of it even without internet using [Ember.js](http://emberjs.com/).
