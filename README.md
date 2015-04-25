@@ -103,7 +103,7 @@ $ cp config/database.yml.example config/database.yml
 # Replace 'letmein' with your database user password:
 $ sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
 $ bin/bundle install
-$ bin/rake db:setup
+$ bin/rake db:create db:migrate
 ```
 
 ### <a name="run"></a>Run the Rails server

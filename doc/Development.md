@@ -183,8 +183,6 @@ $ bin/rails generate migration AddCategory${X}
   myplaceonline:
     category:
       ${X}: "${X}"
-# Add to db/seeds.rb (${X} is all lowercase here and usually plural):
-  ${X} = Category.create(name: "${X}", link: "${X}", position: 0, parent: ${Y})
 # ${X} is non-plural, lower-case and underscores instead of camel case:
 $ bin/rails generate scaffold ${X} ${COLUMNS} identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
@@ -210,7 +208,7 @@ $ rm app/views/${X}/*jbuilder
   can :manage, ${X}, :identity => identity
 # Edit app/tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # Edit app/tests/controllers/${X}_controller_test.rb and base it off of wisdoms_controller_test.rb
-$ RAILS_ENV=test bin/rake db:reset
+$ RAILS_ENV=test bin/rake db:drop db:create db:migrate
 # Add space to lib/myp.rb and re-save
 $ bin/rake test
 # Start rails server
