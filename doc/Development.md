@@ -45,6 +45,8 @@ update the file in both apps and do rebuilds.
    reason for this is that, by default, we use form field names matching the
    model field name, so the autocomplete will be more specific if the field
    name is more specific.
+3. belongs_to: In the class that has the foreign key.
+   has_one: If the other class has the foreign key.
 
 ## Encryption
 
@@ -162,7 +164,7 @@ $ cp app/controllers/order_controller.rb app/controllers/${X}_controller.rb and 
 # Add to config/routes.rb
   get '${X}/index'
   get '${X}', :to => '${X}#index'
-$ RAILS_ENV=test bin/rake db:reset
+$ RAILS_ENV=test bin/rake db:drop db:create db:migrate
 # Add space to lib/myp.rb and re-save
 $ bin/rake test
 # Start rails server
@@ -361,3 +363,11 @@ $ cd ../..
 $ RAILS_ENV=test bin/bundle exec rake db:setup
 $ bin/rake
 ```
+
+# PhoneGap
+
+## Building New Version
+
+1. Go to https://build.phonegap.com/
+2. Login with Adobe ID
+3. Click Update Code > Pull Latest
