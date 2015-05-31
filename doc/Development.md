@@ -47,6 +47,9 @@ update the file in both apps and do rebuilds.
    name is more specific.
 3. belongs_to: In the class that has the foreign key.
    has_one: If the other class has the foreign key.
+4. MyplaceonlineController supports an "insecure" mode where items can be
+   added without needing to re-enter a password (just a remember me cookie is
+   needed).
 
 ## Encryption
 
@@ -179,7 +182,7 @@ $ bin/rake test
 $ bin/rails generate migration AddCategory${X}
 # Edit the new migration (${X} is all lowercase here and usually plural and underscores):
   def change
-    Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"))
+    Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"), icon: "FatCow_Icons16x16/check_box_uncheck.png")
   end
 # Add to config/locales/en.yml (first ${X} is lowercase, second one is usually capitalized):
   myplaceonline:
@@ -189,7 +192,7 @@ $ bin/rails generate migration AddCategory${X}
 $ bin/rails generate scaffold ${X} ${COLUMNS} identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
 # Example:
-# bin/rails generate scaffold Wisdom name:string wisdom:text identity:references:index
+# bin/rails generate scaffold wisdom name:string wisdom:text identity:references:index
 # You'll get the following warning and you should answer 'Y':
   conflict    app/assets/stylesheets/scaffolds.css.scss
   Overwrite /work/myplaceonline/src/src/myplaceonline_rails/app/assets/stylesheets/scaffolds.css.scss? (enter "h" for help) [Ynaqdh] Y
@@ -199,20 +202,18 @@ $ bin/rake db:migrate
 # Edit app/models/identity.rb
   has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
-# Change app/controllers/${X}Controller.rb based on WisdomController.rb
+# Change after: cp app/controllers/wisdoms_controller.rb app/controllers/${X}_controller.rb
 $ rm app/views/${X}/*jbuilder
 # Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
 # cp app/views/wisdoms/* app/views/${X} and replace all instances of wisdom with ${X}
 # Edit config/routes.rb and add after resources ${X}
   post '${X}/new'
-# Edit app/models/${X}.rb and add any validations
+# Replace ${X} with singular version: cp app/models/wisdom.rb app/models/${X}.rb
 # Edit app/models/ability.rb and add a line:
   can :manage, ${X}, :identity => identity
 # Edit app/tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
-# Edit app/tests/controllers/${X}_controller_test.rb and base it off of wisdoms_controller_test.rb
-$ RAILS_ENV=test bin/rake db:drop db:create db:migrate
-# Add space to lib/myp.rb and re-save
-$ bin/rake test
+# cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
+$ RAILS_ENV=test bin/rake db:drop db:create db:migrate && bin/rake test
 # Start rails server
 ```
 
