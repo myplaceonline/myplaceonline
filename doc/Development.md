@@ -50,6 +50,10 @@ update the file in both apps and do rebuilds.
 4. MyplaceonlineController supports an "insecure" mode where items can be
    added without needing to re-enter a password (just a remember me cookie is
    needed).
+5. Order has_many example:
+   has_many :job_salaries, -> { order('started DESC') }, :dependent => :destroy
+6. Is not null example:
+   IdentityDriversLicense.where("identity_id = ? and expires is not null and expires < ?", user.primary_identity, threshold)
 
 ## Encryption
 
@@ -333,6 +337,12 @@ $ psql -U user1 -h localhost -d myplaceonline_development
 # DROP DATABASE ${DB};
 # Equivalent to MySQL \G: \x before the command
 # Backup: pg_dump -U postgres -h localhost -d myplaceonline_production > backup_`date +%Y%m%d%H%M%S`.sql
+# Restore:
+$ sudo -u postgres psql postgres
+=> drop database myplaceonline_development;
+=> create database myplaceonline_development;
+=> \q
+$ psql -U user1 -h localhost -d myplaceonline_development -f import.sql
 ```
 
 ### Git Tips
