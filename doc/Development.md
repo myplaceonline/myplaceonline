@@ -33,28 +33,6 @@ else should go into myplaceonline_final.js or page-specific JS files.
 When updating myplaceonline.js, update the version at the top of the file and
 update the file in both apps and do rebuilds.
 
-## Rails
-
-1. The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
-   app/views/shared/_model_form.html.erb passing in obj: @obj as a local.
-   Normally the view would just reference the @obj member variable of the 
-   controller directly, but we use the obj:@obj model so that one form
-   can include another form (usually a belongs_to relationship).
-2. Use semantic names. For example, if you have the date of a weight
-   measurement, use a field named measurement_start instead of just start. The
-   reason for this is that, by default, we use form field names matching the
-   model field name, so the autocomplete will be more specific if the field
-   name is more specific.
-3. belongs_to: In the class that has the foreign key.
-   has_one: If the other class has the foreign key.
-4. MyplaceonlineController supports an "insecure" mode where items can be
-   added without needing to re-enter a password (just a remember me cookie is
-   needed).
-5. Order has_many example:
-   has_many :job_salaries, -> { order('started DESC') }, :dependent => :destroy
-6. Is not null example:
-   IdentityDriversLicense.where("identity_id = ? and expires is not null and expires < ?", user.primary_identity, threshold)
-
 ## Encryption
 
 Values are encrypted using a symmetric cipher with the user's password. When
@@ -123,7 +101,131 @@ if every piece of data was encrypted.
   * http://stackoverflow.com/questions/22292250/jquery-mobile-listview-if-there-is-no-result
 * http://stackoverflow.com/a/15746205/4135310
 
-## Miscellaneous Notes
+## Rails
+
+1. The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
+   app/views/shared/_model_form.html.erb passing in obj: @obj as a local.
+   Normally the view would just reference the @obj member variable of the 
+   controller directly, but we use the obj:@obj model so that one form
+   can include another form (usually a belongs_to relationship).
+2. Use semantic names. For example, if you have the date of a weight
+   measurement, use a field named measurement_start instead of just start. The
+   reason for this is that, by default, we use form field names matching the
+   model field name, so the autocomplete will be more specific if the field
+   name is more specific.
+3. belongs_to: In the class that has the foreign key.
+   has_one: If the other class has the foreign key.
+4. MyplaceonlineController supports an "insecure" mode where items can be
+   added without needing to re-enter a password (just a remember me cookie is
+   needed).
+5. Order has_many example:
+   has_many :job_salaries, -> { order('started DESC') }, :dependent => :destroy
+6. Is not null example:
+   IdentityDriversLicense.where("owner_id = ? and expires is not null and expires < ?", user.primary_identity, threshold)
+7. Enumeration:
+   controller: Add permit param
+   model:
+      CONTACT_TYPES = [
+        ["myplaceonline.contacts.best_friend", 0],
+        ["myplaceonline.contacts.good_friend", 1],
+        ["myplaceonline.contacts.acquiantance", 2],
+        ["myplaceonline.contacts.business_contact", 3],
+        ["myplaceonline.contacts.best_family", 4],
+        ["myplaceonline.contacts.good_family", 5]
+      ]
+   _form: <%= myp_select(f, :dimensions_type, "myplaceonline.recreational_vehicles.dimensions_type", Myp.translate_options(Myp::DIMENSIONS), obj.dimensions_type) %>
+   show: <%= attribute_table_row_select t("myplaceonline.recreational_vehicles.dimensions_type"), @obj.dimensions_type, Myp::DIMENSIONS %>
+   filter:
+        <div class="horizontal_center" data-role="collapsible">
+          <h4><%= t("myplaceonline.general.filter") %></h4>
+          <%= myp_select_tag(:program_type, "myplaceonline.reward_programs.program_type", Myp.translate_options(RewardProgram::REWARD_PROGRAM_TYPES), @program_type, false, nil, false, "refreshWithParam('program_type', $('#program_type').val())") %>
+        </div>
+     controller:
+        def index
+          @contact_type = params[:contact_type]
+          if !@contact_type.blank?
+            @contact_type = @contact_type.to_i
+          end
+          super
+        end
+
+        def all
+          if @program_type.blank?
+            model.where(
+              owner_id: current_user.primary_identity.id
+            )
+          else
+            model.where(
+              owner_id: current_user.primary_identity.id,
+              program_type: @program_type
+            )
+          end
+        end
+8. List of Pictures
+  $ bin/rails generate model vehicle_picture vehicle:references:index identity_file:references:index owner:references:index
+  $ bin/rake db:migrate
+  $ cp app/models/vehicle_picture.rb app/models/${X}
+  controller:
+    def may_upload
+      true
+    end
+
+    vehicle_pictures_attributes: [
+      :id,
+      :_destroy,
+      identity_file_attributes: [
+        :id,
+        :file,
+        :notes
+      ]
+    ]
+    
+    def presave
+      @obj.vehicle_pictures.each do |pic|
+        if pic.identity_file.folder.nil?
+          pic.identity_file.folder = IdentityFileFolder.find_or_create([I18n.t("myplaceonline.category.recreational_vehicles"), @obj.display])
+        end
+      end
+    end
+  config/locales
+    vehicles:
+      pictures: "Pictures"
+      picture: "Picture"
+      add_picture: "Add Picture"
+      delete_picture: "Delete Picture"
+  _form
+    <%=
+      render layout: 'myplaceonline/childproperties', locals: {
+        f: f,
+        heading: t("myplaceonline.vehicles.pictures"),
+        childpropertiesname: :vehicle_pictures,
+        childproperties: obj.vehicle_pictures,
+        deletebutton: t("myplaceonline.vehicles.delete_picture"),
+        addbutton: t("myplaceonline.vehicles.add_picture"),
+        expanded: obj.vehicle_pictures.length > 0,
+        formjson: [
+          {
+            type: 'file',
+            name: 'identity_file_attributes.file',
+            placeholder: t("myplaceonline.vehicles.picture")
+          }
+        ]
+      } do |child_fields, childproperty|
+    %>
+      <%= child_fields.fields_for :identity_file, childproperty.identity_file do |file_fields| %>
+        <%= myp_file_field file_fields, :file, "myplaceonline.vehicles.picture", childproperty.identity_file.file %>
+      <% end %>
+    <% end %>
+  show
+    <% @obj.vehicle_pictures.each do |pic| %>
+      <%= table_row_heading(t("myplaceonline.vehicles.picture")) %>
+      <% if !pic.identity_file.nil? && !pic.identity_file.file_content_type.nil? && (pic.identity_file.file_content_type.start_with?("image")) %>
+        <%= attribute_table_row_image(t("myplaceonline.vehicles.picture"), file_view_path(pic.identity_file)) %>
+      <% end %>
+    <% end %>
+  model
+    has_many :vehicle_pictures, :dependent => :destroy
+    accepts_nested_attributes_for :vehicle_pictures, allow_destroy: true, reject_if: :all_blank
 
 ### Rails Tips
 
@@ -180,7 +282,6 @@ $ bin/rake test
 #### Create New Leaf Category Example
 
 ```
-# Stop rails server if running
 # ${X} is usually plural here in capital camel case:
 # Create a migration:
 $ bin/rails generate migration AddCategory${X}
@@ -193,10 +294,10 @@ $ bin/rails generate migration AddCategory${X}
     category:
       ${X}: "${X}"
 # ${X} is non-plural, lower-case and underscores instead of camel case:
-$ bin/rails generate scaffold ${X} ${COLUMNS} identity:references:index
+$ bin/rails generate scaffold ${X} ${COLUMNS} owner:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
 # Example:
-# bin/rails generate scaffold wisdom name:string wisdom:text identity:references:index
+# bin/rails generate scaffold wisdom name:string wisdom:text owner:references:index
 # You'll get the following warning and you should answer 'Y':
   conflict    app/assets/stylesheets/scaffolds.css.scss
   Overwrite /work/myplaceonline/src/src/myplaceonline_rails/app/assets/stylesheets/scaffolds.css.scss? (enter "h" for help) [Ynaqdh] Y
@@ -204,8 +305,9 @@ $ git checkout -- app/assets/stylesheets/scaffolds.css.scss
 # Run migrate
 $ bin/rake db:migrate
 # Edit app/models/identity.rb
-  has_many :${X}, :dependent => :destroy
+  has_many :${X}, :foreign_key => 'owner_id', :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
+$ X=...
 # Change after: cp app/controllers/wisdoms_controller.rb app/controllers/${X}_controller.rb
 $ rm app/views/${X}/*jbuilder
 # Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
@@ -214,11 +316,10 @@ $ rm app/views/${X}/*jbuilder
   post '${X}/new'
 # Replace ${X} with singular version: cp app/models/wisdom.rb app/models/${X}.rb
 # Edit app/models/ability.rb and add a line:
-  can :manage, ${X}, :identity => identity
-# Edit app/tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
+  can :manage, ${X}, :owner => identity
+# Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=test bin/rake db:drop db:create db:migrate && bin/rake test
-# Start rails server
 ```
 
 #### Add encrypted column(s)
@@ -321,7 +422,14 @@ $ bin/rails generate controller welcome index
 #  Remove all instances of data-turbolinks-track=true
 ```
 
-### PostgreSQL Tips
+### Add additional filtertext to category
+
+```
+$ bin/rails generate migration UpdateFilterTextForCategory
+Myp.migration_add_filtertext("vehicles", "truck")
+```
+
+## PostgreSQL Tips
 
 ```
 # Basic Usage
@@ -342,10 +450,12 @@ $ sudo -u postgres psql postgres
 => drop database myplaceonline_development;
 => create database myplaceonline_development;
 => \q
-$ psql -U user1 -h localhost -d myplaceonline_development -f import.sql
+$ gpg --output tmp.sql --decrypt file.sql.pgp
+$ psql -U myplaceonline -h localhost -d myplaceonline_development -f tmp.sql
+$ rm tmp.sql
 ```
 
-### Git Tips
+## Git Tips
 
 #### Add submodule
 
