@@ -446,12 +446,8 @@ $ psql -U user1 -h localhost -d myplaceonline_development
 # Equivalent to MySQL \G: \x before the command
 # Backup: pg_dump -U postgres -h localhost -d myplaceonline_production > backup_`date +%Y%m%d%H%M%S`.sql
 # Restore:
-$ sudo -u postgres psql postgres
-=> drop database myplaceonline_development;
-=> create database myplaceonline_development;
-=> \q
 $ gpg --output tmp.sql --decrypt file.sql.pgp
-$ psql -U myplaceonline -h localhost -d myplaceonline_development -f tmp.sql
+$ pg_restore -U myplaceonline -h localhost -d myplaceonline_development -c -n public tmp.sql
 $ rm tmp.sql
 ```
 
