@@ -134,7 +134,7 @@ if every piece of data was encrypted.
         ["myplaceonline.contacts.good_family", 5]
       ]
    _form: <%= myp_select(f, :dimensions_type, "myplaceonline.recreational_vehicles.dimensions_type", Myp.translate_options(Myp::DIMENSIONS), obj.dimensions_type) %>
-   show: <%= attribute_table_row_select t("myplaceonline.recreational_vehicles.dimensions_type"), @obj.dimensions_type, Myp::DIMENSIONS %>
+   show: <%= attribute_table_row_select(t("myplaceonline.recreational_vehicles.dimensions_type"), @obj.dimensions_type, Myp::DIMENSIONS) %>
    filter:
         <div class="horizontal_center" data-role="collapsible">
           <h4><%= t("myplaceonline.general.filter") %></h4>
@@ -226,6 +226,13 @@ if every piece of data was encrypted.
   model
     has_many :vehicle_pictures, :dependent => :destroy
     accepts_nested_attributes_for :vehicle_pictures, allow_destroy: true, reject_if: :all_blank
+9. Add model initialization code
+  def self.build(params = nil)
+    result = super(params)
+    # initialize result here
+    result
+  end
+
 
 ### Rails Tips
 
@@ -273,9 +280,7 @@ $ cp app/controllers/order_controller.rb app/controllers/${X}_controller.rb and 
 # Add to config/routes.rb
   get '${X}/index'
   get '${X}', :to => '${X}#index'
-$ RAILS_ENV=test bin/rake db:drop db:create db:migrate
-# Add space to lib/myp.rb and re-save
-$ bin/rake test
+$ RAILS_ENV=test bin/rake db:drop db:create db:migrate && bin/rake test
 # Start rails server
 ```
 
@@ -331,7 +336,6 @@ $ bin/rake db:migrate
   include EncryptedConcern
   belongs_to :${COLUMN}_encrypted, class_name: EncryptedValue, dependent: :destroy, :autosave => true
   belongs_to_encrypted :${COLUMN}
-  attr_accessor :encrypt
 # Change any validations to check both the encrypted and unencrypted values:
   validate do
     if ${COLUMN}.blank? && ${COLUMN}_encrypted.nil?
