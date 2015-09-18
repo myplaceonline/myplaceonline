@@ -42,7 +42,7 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 
 ## Screenshots
 
-![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot1.png)
+![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot2.png)
 
 ## Planned Features
 
