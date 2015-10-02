@@ -232,7 +232,9 @@ if every piece of data was encrypted.
     # initialize result here
     result
   end
-
+10. Add category filter text
+  $ bin/rails generate migration AddCategoryFiltertext
+  Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
 
 ### Rails Tips
 
@@ -299,7 +301,7 @@ $ bin/rails generate migration AddCategory${X}
     category:
       ${X}: "${X}"
 # ${X} is non-plural, lower-case and underscores instead of camel case:
-$ bin/rails generate scaffold ${X} ${COLUMNS} owner:references:index
+$ bin/rails generate scaffold ${X} ${COLUMNS} visit_count:integer owner:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
 # Example:
 # bin/rails generate scaffold wisdom name:string wisdom:text owner:references:index
