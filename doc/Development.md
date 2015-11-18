@@ -118,6 +118,10 @@ if every piece of data was encrypted.
 4. MyplaceonlineController supports an "insecure" mode where items can be
    added without needing to re-enter a password (just a remember me cookie is
    needed).
+    def insecure
+      true
+    end
+
 5. Order has_many example:
    has_many :job_salaries, -> { order('started DESC') }, :dependent => :destroy
 6. Is not null example:
