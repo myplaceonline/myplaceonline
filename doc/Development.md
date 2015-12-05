@@ -117,7 +117,7 @@ if every piece of data was encrypted.
    has_one: If the other class has the foreign key.
 4. MyplaceonlineController supports an "insecure" mode where items can be
    added without needing to re-enter a password (just a remember me cookie is
-   needed).
+   needed). Add in the protected section.
     def insecure
       true
     end
