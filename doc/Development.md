@@ -383,28 +383,28 @@ $ bin/rake db:migrate
 $ bin/rails generate migration Rename${OLD}To${NEW}
 rename_table :${OLD}, :${NEW}
 $ bin/rails generate migration ChangeCategory${OLD}
-    cat = ${OLD}.where(name: "${OLD}").take!
+    cat = Category.where(name: "${OLD}").take!
     cat.name = "${NEW}"
     cat.link = "${NEW}"
-    cat.save
+    cat.additional_filtertext = "${OLD}"
+    cat.save!
 # Change config/locales/en.yml
-# Change db/seeds.rb
 $ git mv app/views/${OLD}/ app/views/${NEW}/
 $ git mv app/controllers/${OLD}_controller.rb app/controllers/${NEW}_controller.rb
-$ git mv app/models/${OLD}.rb app/models/${NEW}.rb
+$ git mv app/models/${OLD}.rb app/models/${NEW}.rb # SINGULAR
 $ git mv app/helpers/${OLD}_helper.rb app/helpers/${NEW}_helper.rb
 $ git mv test/controllers/${OLD}_controller_test.rb test/controllers/${NEW}_controller_test.rb
 $ git mv test/factories/${OLD}.rb test/factories/${NEW}.rb
 $ git mv test/fixtures/${OLD}.yml test/fixtures/${NEW}.yml
 $ git mv test/helpers/${OLD}_helper_test.rb test/helpers/${NEW}_helper_test.rb
-$ git mv test/models/${OLD}_test.rb test/models/${NEW}_test.rb
+$ git mv test/models/${OLD}_test.rb test/models/${NEW}_test.rb # SINGULAR
 $ git mv app/assets/javascripts/${OLD}.js.coffee app/assets/javascripts/${NEW}.js.coffee
 $ git mv app/assets/stylesheets/${OLD}.css.scss app/assets/stylesheets/${NEW}.css.scss
 $ bin/rake db:migrate
-# Change lib/myp.rb
 # Change config/routes.rb
 # Change app/models/ability.rb
 # Change app/models/identity.rb
+# If the model has reminders, check due_item.rb
 ```
 
 #### Create a Rails App
