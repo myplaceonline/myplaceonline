@@ -184,12 +184,11 @@ if every piece of data was encrypted.
       ]
     ]
     
-    def presave
-      @obj.vehicle_pictures.each do |pic|
-        if pic.identity_file.folder.nil?
-          pic.identity_file.folder = IdentityFileFolder.find_or_create([I18n.t("myplaceonline.category.recreational_vehicles"), @obj.display])
-        end
-      end
+  model:
+    before_validation :update_pic_folders
+    
+    def update_pic_folders
+      put_pictures_in_folder(apartment_pictures, [I18n.t("myplaceonline.category.apartments"), display])
     end
   config/locales
     vehicles:
