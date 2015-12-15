@@ -238,6 +238,10 @@ if every piece of data was encrypted.
 10. Add category filter text
   $ bin/rails generate migration AddCategoryFiltertext
   Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
+  
+### Jobs
+
+bin/delayed_job run --exit-on-complete
 
 ### Rails Tips
 
