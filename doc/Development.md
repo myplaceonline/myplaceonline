@@ -231,7 +231,7 @@ if every piece of data was encrypted.
     accepts_nested_attributes_for :vehicle_pictures, allow_destroy: true, reject_if: :all_blank
 9. Add model initialization code
   def self.build(params = nil)
-    result = super(params)
+    result = self.dobuild(params)
     # initialize result here
     result
   end
