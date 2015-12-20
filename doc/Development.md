@@ -190,6 +190,9 @@ if every piece of data was encrypted.
     def update_pic_folders
       put_pictures_in_folder(apartment_pictures, [I18n.t("myplaceonline.category.apartments"), display])
     end
+
+    has_many :vehicle_pictures, :dependent => :destroy
+    accepts_nested_attributes_for :vehicle_pictures, allow_destroy: true, reject_if: :all_blank
   config/locales
     vehicles:
       pictures: "Pictures"
@@ -226,9 +229,6 @@ if every piece of data was encrypted.
         placeholder: "myplaceonline.vehicles.picture"
       }
     %>
-  model
-    has_many :vehicle_pictures, :dependent => :destroy
-    accepts_nested_attributes_for :vehicle_pictures, allow_destroy: true, reject_if: :all_blank
 9. Add model initialization code
   def self.build(params = nil)
     result = self.dobuild(params)
