@@ -220,12 +220,12 @@ if every piece of data was encrypted.
       <% end %>
     <% end %>
   show
-    <% @obj.vehicle_pictures.each do |pic| %>
-      <%= table_row_heading(t("myplaceonline.vehicles.picture")) %>
-      <% if !pic.identity_file.nil? && !pic.identity_file.file_content_type.nil? && (pic.identity_file.file_content_type.start_with?("image")) %>
-        <%= attribute_table_row_image(t("myplaceonline.vehicles.picture"), file_view_path(pic.identity_file)) %>
-      <% end %>
-    <% end %>
+    <%=
+      render partial: 'myplaceonline/pictures', locals: {
+        pics: @obj.vehicle_pictures,
+        placeholder: "myplaceonline.vehicles.picture"
+      }
+    %>
   model
     has_many :vehicle_pictures, :dependent => :destroy
     accepts_nested_attributes_for :vehicle_pictures, allow_destroy: true, reject_if: :all_blank
@@ -238,6 +238,8 @@ if every piece of data was encrypted.
 10. Add category filter text
   $ bin/rails generate migration AddCategoryFiltertext
   Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
+11.
+    add_foreign_key :concert_pictures, :identities, column: :owner_id
   
 ### Jobs
 
