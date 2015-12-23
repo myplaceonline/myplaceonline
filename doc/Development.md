@@ -240,7 +240,7 @@ if every piece of data was encrypted.
   Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
 11.
     add_foreign_key :concert_pictures, :identities, column: :owner_id
-  
+
 ### Jobs
 
 bin/delayed_job run --exit-on-complete
