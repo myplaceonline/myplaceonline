@@ -517,3 +517,4 @@ $ bin/rake
   * Source Editing Area
   * Tab Key Handling
 
+dev/builder/build.sh --leave-js-unminified -s
