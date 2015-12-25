@@ -502,3 +502,18 @@ $ bin/rake
 1. Go to https://build.phonegap.com/
 2. Login with Adobe ID
 3. Click Update Code > Pull Latest
+
+# CKEditor
+
+* Remove
+  * About CKEditor
+* Add
+  * Blockquote
+  * Editor Resize
+  * Format
+  * Maximize
+  * Paste As Plain Text
+  * Remove Format
+  * Source Editing Area
+  * Tab Key Handling
+
