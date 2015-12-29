@@ -74,6 +74,7 @@ $ sudo systemctl start postgresql
 $ sudo gem install pg
 $ sudo -u postgres psql postgres
 postgres=# CREATE ROLE myplaceonline WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
+# http://stackoverflow.com/a/28515064/5657303
 postgres=# ALTER ROLE myplaceonline WITH SUPERUSER;
 postgres=# \q
 ```
