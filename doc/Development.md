@@ -446,7 +446,7 @@ Myp.migration_add_filtertext("vehicles", "truck")
 
 ```
 # Basic Usage
-$ psql -U user1 -h localhost -d myplaceonline_development
+$ psql -U myplaceonline -h localhost -d myplaceonline_development
 # List databases: \l
 # List users: \du
 # Connect to database: \c ${DB}
