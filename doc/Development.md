@@ -239,7 +239,7 @@ if every piece of data was encrypted.
   $ bin/rails generate migration AddCategoryFiltertext
   Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
 11.
-    add_foreign_key :concert_pictures, :identities, column: :owner_id
+  add_foreign_key :concert_pictures, :identities, column: :owner_id
 
 ### Jobs
 
@@ -291,7 +291,7 @@ $ cp app/controllers/order_controller.rb app/controllers/${X}_controller.rb and 
 # Add to config/routes.rb
   get '${X}/index'
   get '${X}', :to => '${X}#index'
-$ RAILS_ENV=test bin/rake db:drop db:create db:migrate && bin/rake test
+$ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed && bin/rake test
 # Start rails server
 ```
 
@@ -333,7 +333,7 @@ $ rm app/views/${X}/*jbuilder
 # Replace ${X} with singular version: cp app/models/wisdom.rb app/models/${X}.rb
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
-$ RAILS_ENV=test bin/rake db:drop db:create db:migrate && bin/rake test
+$ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed && bin/rake test
 ```
 
 #### Add encrypted column(s)
