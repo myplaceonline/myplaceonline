@@ -334,6 +334,7 @@ $ rm app/views/${X}/*jbuilder
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed && bin/rake test
+# RAILS_ENV=development bin/rake myp:dump
 ```
 
 #### Add encrypted column(s)
