@@ -125,7 +125,7 @@ if every piece of data was encrypted.
 5. Order has_many example:
    has_many :job_salaries, -> { order('started DESC') }, :dependent => :destroy
 6. Is not null example:
-   IdentityDriversLicense.where("owner_id = ? and expires is not null and expires < ?", user.primary_identity, threshold)
+   IdentityDriversLicense.where("identity_id = ? and expires is not null and expires < ?", user.primary_identity, threshold)
 7. Enumeration:
    controller: Add permit param
    model:
@@ -156,17 +156,17 @@ if every piece of data was encrypted.
         def all
           if @program_type.blank?
             model.where(
-              owner_id: current_user.primary_identity.id
+              identity_id: current_user.primary_identity.id
             )
           else
             model.where(
-              owner_id: current_user.primary_identity.id,
+              identity_id: current_user.primary_identity.id,
               program_type: @program_type
             )
           end
         end
 8. List of Pictures
-  $ bin/rails generate model vehicle_picture vehicle:references:index identity_file:references:index owner:references:index
+  $ bin/rails generate model vehicle_picture vehicle:references:index identity_file:references:index identity:references:index
   $ bin/rake db:migrate
   $ cp app/models/vehicle_picture.rb app/models/${X}
   controller:
@@ -238,8 +238,6 @@ if every piece of data was encrypted.
 10. Add category filter text
   $ bin/rails generate migration AddCategoryFiltertext
   Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
-11.
-  add_foreign_key :concert_pictures, :identities, column: :owner_id
 
 ### Jobs
 
@@ -310,10 +308,10 @@ $ bin/rails generate migration AddCategory${X}
     category:
       ${X}: "${X}"
 # ${X} is non-plural, lower-case and underscores instead of camel case:
-$ bin/rails generate scaffold ${X} ${COLUMNS} visit_count:integer owner:references:index
+$ bin/rails generate scaffold ${X} ${COLUMNS} visit_count:integer identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
 # Example:
-# bin/rails generate scaffold wisdom name:string wisdom:text owner:references:index
+# bin/rails generate scaffold wisdom name:string wisdom:text identity:references:index
 # You'll get the following warning and you should answer 'Y':
   conflict    app/assets/stylesheets/scaffolds.css.scss
   Overwrite /work/myplaceonline/src/src/myplaceonline_rails/app/assets/stylesheets/scaffolds.css.scss? (enter "h" for help) [Ynaqdh] Y
@@ -321,7 +319,7 @@ $ git checkout -- app/assets/stylesheets/scaffolds.css.scss
 # Run migrate
 $ bin/rake db:migrate
 # Edit app/models/identity.rb
-  has_many :${X}, :foreign_key => 'owner_id', :dependent => :destroy
+  has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
 $ X=...
 # Change after: cp app/controllers/wisdoms_controller.rb app/controllers/${X}_controller.rb
