@@ -191,7 +191,7 @@ if every piece of data was encrypted.
     before_validation :update_pic_folders
     
     def update_pic_folders
-      put_pictures_in_folder(apartment_pictures, [I18n.t("myplaceonline.category.apartments"), display])
+      put_files_in_folder(apartment_pictures, [I18n.t("myplaceonline.category.apartments"), display])
     end
 
     has_many :vehicle_pictures, :dependent => :destroy
