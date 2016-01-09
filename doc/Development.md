@@ -170,6 +170,9 @@ if every piece of data was encrypted.
   $ bin/rake db:migrate
   $ cp app/models/vehicle_picture.rb app/models/${X}
   controller:
+  
+    # public
+  
     def may_upload
       true
     end
@@ -289,7 +292,8 @@ $ cp app/controllers/order_controller.rb app/controllers/${X}_controller.rb and 
 # Add to config/routes.rb
   get '${X}/index'
   get '${X}', :to => '${X}#index'
-$ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed && bin/rake test
+$ RAILS_ENV=development bin/rake myp:dump
+$ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Start rails server
 ```
 
@@ -331,8 +335,8 @@ $ rm app/views/${X}/*jbuilder
 # Replace ${X} with singular version: cp app/models/wisdom.rb app/models/${X}.rb
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
-$ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed && bin/rake test
-# RAILS_ENV=development bin/rake myp:dump
+$ RAILS_ENV=development bin/rake myp:dump
+$ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 ```
 
 #### Add encrypted column(s)
