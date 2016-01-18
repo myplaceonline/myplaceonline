@@ -408,7 +408,6 @@ $ git mv app/assets/javascripts/${OLD}.js.coffee app/assets/javascripts/${NEW}.j
 $ git mv app/assets/stylesheets/${OLD}.css.scss app/assets/stylesheets/${NEW}.css.scss
 $ bin/rake db:migrate
 # Change config/routes.rb
-# Change app/models/ability.rb
 # Change app/models/identity.rb
 # If the model has reminders, check due_item.rb
 ```
