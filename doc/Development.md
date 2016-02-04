@@ -241,6 +241,9 @@ if every piece of data was encrypted.
 10. Add category filter text
   $ bin/rails generate migration AddCategoryFiltertext
   Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
+11. Transaction
+  ActiveRecord::Base.transaction do
+  end
 
 ### Jobs
 
