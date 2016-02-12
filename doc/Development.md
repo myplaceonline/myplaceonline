@@ -2,9 +2,35 @@
 
 ## General
 
-* Please follow these style guides: https://github.com/styleguide
 * Site tests:
 ** https://www.google.com/webmasters/tools/mobile-friendly/
+
+## Architecture
+
+                                           web1
+                                        +--------+            +---------+
+                                        |        |            |         |
+                                     XXXX        XXXXXXXXXXXXXX   db1   |
+                   frontdoor1      XXX  |        |        XX  +         |
++--------+       +-----------+   XXX    +--------+       XX   +----+----+
+|        |       |           | XXX                     XXX         |
+|  user  +------->   nginx   XXXX                     XX           |
+|        |       |           |  XX         web2      XX            |
++--------+       +-----------+   XXX    +--------+  XX        +----v----+
+                                   XXX  |        |  X         |         |
+                                     XXXX        XXXX         |   db2   |
+                                        |        |            |         |
+                                        +--------+            +---------+
+
+
+                                 admin
+                              +----------+
+                              |          |
+                              |          |
+                              |          |
+                              +----------+
+
+* Made with ASCIIFlow Infinity: http://asciiflow.com/
 
 ## Design Goals
 
