@@ -22,29 +22,6 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 ![Screenshot7](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot7.png)
 ![Screenshot8](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot8.png)
 
-## Current Features
-
-* Points system tracks life across three categories related to [happiness](#theory): order, joy, and meaning.
-* Order
-  * Manage online passwords (user name, password, URL, notes, recovery questions & answers, etc.)
-    * Optionally encrypt passwords for storage in the database using [AES-256-CBC](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
-    * Import passwords from an [OpenOffice](https://www.openoffice.org/)/[LibreOffice](https://www.libreoffice.org/) [OpenDocument](http://en.wikipedia.org/wiki/OpenDocument) .ods spreadsheet (with support for encrypted spreadsheets) using [roo](https://github.com/roo-rb/roo).
-    * Generate random passwords.
-    * Use [ZeroClipboard](https://github.com/zeroclipboard/zeroclipboard) to quickly copy passwords to the clipboard.
-    * Password notes support [Markdown](http://daringfireball.net/projects/markdown/syntax) syntax using [kramdown](https://github.com/gettalong/kramdown).
-  * Manage apartments, bank accounts, contacts, credit cards, credit scores, RSS feeds, files, ideas, lists, vehicles, To Dos, etc.
-  * Create calculation forms with inputs and an equation and then create calculations from these forms.
-* Joy
-  * Manage jokes.
-  * Manage movies you want to watch or have watched.
-* Meaning
-  * Manage notes of wisdom gathered in life.
-  * Manage questions including hypotheses.
-* General Features
-  * Export all data to a [JSON](https://en.wikipedia.org/wiki/JSON) file with the option of encrypting it in a standardized, [OpenPGP](https://tools.ietf.org/html/rfc4880) format (using AES-256/SHA512) which can be decrypted with [GnuPG](https://www.gnupg.org/) or [PGP](http://www.symantec.com/encryption/).
-  * Save exported data in offline browser storage and display some of it even without internet using [Ember.js](http://emberjs.com/).
-    * Supports decrypting AES-256-CBC passwords using [forge.js](https://github.com/digitalbazaar/forge).
-
 ## Running Locally
 
 1. [Prepare your operating system](#prepos)

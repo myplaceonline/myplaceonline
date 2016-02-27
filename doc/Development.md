@@ -203,17 +203,11 @@ if every piece of data was encrypted.
       true
     end
 
-    vehicle_pictures_attributes: [
-      :id,
-      :_destroy,
-      identity_file_attributes: [
-        :id,
-        :file,
-        :notes
-      ]
-    ]
+    vehicle_pictures_attributes: FilesController.multi_param_names
     
   model:
+    include AllowExistingConcern
+
     before_validation :update_pic_folders
     
     def update_pic_folders
@@ -222,6 +216,7 @@ if every piece of data was encrypted.
 
     has_many :vehicle_pictures, :dependent => :destroy
     accepts_nested_attributes_for :vehicle_pictures, allow_destroy: true, reject_if: :all_blank
+    allow_existing_children :vehicle_pictures, [{:name => :identity_file}]
   config/locales
     vehicles:
       pictures: "Pictures"
@@ -230,27 +225,12 @@ if every piece of data was encrypted.
       delete_picture: "Delete Picture"
   _form
     <%=
-      render layout: 'myplaceonline/childproperties', locals: {
+      render partial: "myplaceonline/pictures_form", locals: {
         f: f,
-        heading: t("myplaceonline.vehicles.pictures"),
-        childpropertiesname: :vehicle_pictures,
-        childproperties: obj.vehicle_pictures,
-        deletebutton: t("myplaceonline.vehicles.delete_picture"),
-        addbutton: t("myplaceonline.vehicles.add_picture"),
-        expanded: obj.vehicle_pictures.length > 0,
-        formjson: [
-          {
-            type: 'file',
-            name: 'identity_file_attributes.file',
-            placeholder: t("myplaceonline.vehicles.picture")
-          }
-        ]
-      } do |child_fields, childproperty|
+        obj: obj,
+        pictures_field: :vehicle_pictures
+      }
     %>
-      <%= child_fields.fields_for :identity_file, childproperty.identity_file do |file_fields| %>
-        <%= myp_file_field file_fields, :file, "myplaceonline.vehicles.picture", childproperty.identity_file.file %>
-      <% end %>
-    <% end %>
   show
     <%=
       render partial: 'myplaceonline/pictures', locals: {
