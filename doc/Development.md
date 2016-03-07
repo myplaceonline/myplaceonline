@@ -286,17 +286,14 @@ $ RAILS_ENV=test bin/rake db:reset test
 $ bin/rails generate migration AddCategory${X}
 # Edit the new migration (${X} is all lowercase here and underscores):
   def change
-    Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"))
+    Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"), icon: "FatCow_Icons16x16/check_box_uncheck.png")
   end
 $ bin/rake db:migrate
 # Add to config/locales/en.yml (first ${X} is lowercase, second one is usually capitalized):
   myplaceonline:
     category:
       ${X}: "${X}"
-# Add to db/seeds.rb (${X} is all lowercase here and usually plural):
-  ${X} = Category.create(name: "${X}", link: "${X}", position: 0, parent: ${Y})
-$ mkdir app/views/${X}/
-$ cp app/views/order/* app/views/${X}/ and replace the translation name
+$ cp -R app/views/order app/views/${$}
 $ cp app/controllers/order_controller.rb app/controllers/${X}_controller.rb and replace what's necessary
 # Add to config/routes.rb
   get '${X}/index'
@@ -352,6 +349,8 @@ $ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed myp:reload_ca
 
 ```
 $ bin/rails generate migration AddEncryptionTo${MODEL} ${COLUMN}_encrypted:references:index
+    add_reference :ssh_keys, :ssh_private_key_encrypted, index: true, foreign_key: false
+    add_foreign_key :ssh_keys, :encrypted_values, column: :ssh_private_key_encrypted_id
 $ bin/rake db:migrate
 # Add to model:
   include EncryptedConcern
@@ -377,14 +376,6 @@ $ bin/rake db:migrate
       true
     end
     
-    def create_presave
-      @obj.${COLUMN}_finalize
-    end
-    
-    def update_presave
-      @obj.${COLUMN}_finalize
-    end
-
     def before_edit
       @obj.encrypt = @obj.${COLUMN}_encrypted?
     end
