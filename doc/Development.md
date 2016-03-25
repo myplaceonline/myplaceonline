@@ -96,6 +96,8 @@ References:
 * "This presents a problem for cipher constructions with data-dependent padding
   (such as CBC). TLS 1.3 removes the length field and relies on the AEAD cipher"
   (http://tlswg.github.io/tls13-spec/)
+  
+The future appears to be Dan Bernstein's Curve25519/EdDSA/Poly1305/ChaCha20
 
 ### Why not encrypt all data?
 
