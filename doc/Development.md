@@ -9,16 +9,16 @@
 
                                            web1
                                         +--------+            +---------+
-                                        |        |            |         |
-                                     XXXX        XXXXXXXXXXXXXX   db1   |
+                                        | nginx  |            |         |
+                                     XXXX  RoR   XXXXXXXXXXXXXX   db1   |
                    frontdoor1      XXX  |        |        XX  +         |
 +--------+       +-----------+   XXX    +--------+       XX   +----+----+
 |        |       |           | XXX                     XXX         |
-|  user  +------->   nginx   XXXX                     XX           |
+|  user  +------->  haproxy  XXXX                     XX           |
 |        |       |           |  XX         web2      XX            |
 +--------+       +-----------+   XXX    +--------+  XX        +----v----+
-                                   XXX  |        |  X         |         |
-                                     XXXX        XXXX         |   db2   |
+                                   XXX  | nginx  |  X         |         |
+                                     XXXX  RoR   XXXX         |   db2   |
                                         |        |            |         |
                                         +--------+            +---------+
 
