@@ -11,7 +11,7 @@
                                             +--------+            +---------+
                                             | nginx  |            |         |
                                          XXXX  RoR   XXXXXXXXXXXXXX   db1   |
-                       frontdoor1      XXX  |        |        XX  +         |
+                       frontend1       XXX  |        |        XX  +         |
     +--------+       +-----------+   XXX    +--------+       XX   +----+----+
     |        |       |           | XXX                     XXX         |
     |  user  +------->  haproxy  XXXX                     XX           |
