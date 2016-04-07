@@ -112,23 +112,6 @@ One option to reduce the overhead of such decryption is to have a cache
 from (encrypted_data,salt)->(decrypted_data), but that might not be scalable
 if every piece of data was encrypted.
 
-## TODO
-
-* Internationalize devise views
-* Make sure roo temporary files are deleted
-* Make sure accepts_nested_attributes_for can't view/delete unrelated items
-* Fix protect_from_forgery (in application controller) interaction with JQueryMobile (http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
-* Consider http://unlicense.org/
-* File download:
-  * http://stackoverflow.com/questions/18413595/how-to-download-a-file-from-php-page-using-phonegap-android-platform
-  * http://stackoverflow.com/questions/9523736/problems-with-download-link-in-phonegap-android
-  * https://github.com/apache/cordova-plugin-file-transfer/blob/master/doc/index.md
-  * https://github.com/apache/cordova-plugin-file/blob/master/doc/index.md
-* No results text for searches:
-  * http://stackoverflow.com/questions/9685921/jquery-mobile-data-filter-in-case-of-no-result
-  * http://stackoverflow.com/questions/22292250/jquery-mobile-listview-if-there-is-no-result
-* http://stackoverflow.com/a/15746205/4135310
-
 ## Rails
 
 1. The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
