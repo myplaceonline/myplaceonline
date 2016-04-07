@@ -3,7 +3,7 @@
 ## General
 
 * Site tests:
-** https://www.google.com/webmasters/tools/mobile-friendly/
+  * https://www.google.com/webmasters/tools/mobile-friendly/
 
 ## Architecture
 
