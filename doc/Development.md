@@ -7,28 +7,28 @@
 
 ## Architecture
 
-                                           web1
-                                        +--------+            +---------+
-                                        | nginx  |            |         |
-                                     XXXX  RoR   XXXXXXXXXXXXXX   db1   |
-                   frontdoor1      XXX  |        |        XX  +         |
-+--------+       +-----------+   XXX    +--------+       XX   +----+----+
-|        |       |           | XXX                     XXX         |
-|  user  +------->  haproxy  XXXX                     XX           |
-|        |       |           |  XX         web2      XX            |
-+--------+       +-----------+   XXX    +--------+  XX        +----v----+
-                                   XXX  | nginx  |  X         |         |
-                                     XXXX  RoR   XXXX         |   db2   |
-                                        |        |            |         |
-                                        +--------+            +---------+
-
-
-                                 admin
-                              +----------+
-                              |          |
-                              |          |
-                              |          |
-                              +----------+
+                                               web1
+                                            +--------+            +---------+
+                                            | nginx  |            |         |
+                                         XXXX  RoR   XXXXXXXXXXXXXX   db1   |
+                       frontdoor1      XXX  |        |        XX  +         |
+    +--------+       +-----------+   XXX    +--------+       XX   +----+----+
+    |        |       |           | XXX                     XXX         |
+    |  user  +------->  haproxy  XXXX                     XX           |
+    |        |       |           |  XX         web2      XX            |
+    +--------+       +-----------+   XXX    +--------+  XX        +----v----+
+                                       XXX  | nginx  |  X         |         |
+                                         XXXX  RoR   XXXX         |   db2   |
+                                            |        |            |         |
+                                            +--------+            +---------+
+    
+    
+                                     admin
+                                  +----------+
+                                  |          |
+                                  |          |
+                                  |          |
+                                  +----------+
 
 * Made with ASCIIFlow Infinity: http://asciiflow.com/
 
