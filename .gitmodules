@@ -4,9 +4,6 @@
 [submodule "src/myplaceonline_phonegap"]
 	path = src/myplaceonline_phonegap
 	url = https://github.com/myplaceonline/myplaceonline_phonegap.git
-[submodule "src/myplaceonline_chef"]
-	path = src/myplaceonline_chef
-	url = https://github.com/myplaceonline/myplaceonline_chef.git
 [submodule "src/myplaceonline_scripts"]
 	path = src/myplaceonline_scripts
 	url = https://github.com/myplaceonline/myplaceonline_scripts.git
