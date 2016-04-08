@@ -11,7 +11,7 @@
                                             +--------+            +---------+
                                             | nginx  |            |         |
                                          XXXX  RoR   XXXXXXXXXXXXXX   db1   |
-                       frontend1       XXX  |        |        XX  +         |
+                        frontend       XXX  |        |        XX  +         |
     +--------+       +-----------+   XXX    +--------+       XX   +----+----+
     |        |       |           | XXX                     XXX         |
     |  user  +------->  haproxy  XXXX                     XX           |
@@ -26,11 +26,22 @@
                                      admin
                                   +----------+
                                   |          |
-                                  |          |
+                                  |  chef    |
                                   |          |
                                   +----------+
 
 * Made with ASCIIFlow Infinity: http://asciiflow.com/
+
+### High Availability
+
+* The database is backed up asynchronously using PostgreSQL streaming
+  replication; however, it is not currently a hot-standy.
+* Some user-uploaded files are stored on the filesystem instead of in the
+  database. These are stored on the primary database server and the web servers
+  read/write over NFS. This NFS share is rsync'ed nightly to the backup
+  database server.
+* If the frontend server is unavailable, create another frontend server
+  and then change the DigitalOcean Floating IP address to point to it.
 
 ## Design Goals
 
