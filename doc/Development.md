@@ -43,6 +43,11 @@
 * If the frontend server is unavailable, create another frontend server
   and then change the DigitalOcean Floating IP address to point to it.
 
+### Administration
+
+* HAProxy statistics (admin/{passwords/haproxy/stats}): https://myplaceonline.com:9443/
+* Chef administration: https://admin.myplaceonline.com/
+
 ## Design Goals
 
 * Mobile/tablet first design. Single Page Application (SPA): http://docs.phonegap.com/en/3.5.0/guide_next_index.md.html
