@@ -9,26 +9,26 @@
 
                                                web1
                                             +--------+            +---------+
-                                            | nginx  |            |         |
+                                            + nginx  +            +         |
                                          XXXX  RoR   XXXXXXXXXXXXXX   db1   |
-                        frontend       XXX  |        |        XX  +         |
+                       frontend2       XXX  +        +        XX  +         |
     +--------+       +-----------+   XXX    +--------+       XX   +----+----+
-    |        |       |           | XXX                     XXX         |
-    |  user  +------->  haproxy  XXXX                     XX           |
-    |        |       |           |  XX         web2      XX            |
+    |        |       |           + XXX                     XXX         | Streaming
+    |  user  +------->  haproxy  XXXX                     XX           | Replication
+    |        |       |           +  XX         web2      XX            |
     +--------+       +-----------+   XXX    +--------+  XX        +----v----+
-                                       XXX  | nginx  |  X         |         |
+                                       XXX  + nginx  +  X         |         |
                                          XXXX  RoR   XXXX         |   db2   |
-                                            |        |            |         |
+                                            +        +            |         |
                                             +--------+            +---------+
     
     
-                                     admin
-                                  +----------+
-                                  |          |
-                                  |  chef    |
-                                  |          |
-                                  +----------+
+                                     admin             sendgrid
+                                  +----------+        +---------+
+                                  |          |        |         |
+                                  |   chef   |        |  email  |
+                                  |          |        |         |
+                                  +----------+        +---------+
 
 * Made with ASCIIFlow Infinity: http://asciiflow.com/
 
