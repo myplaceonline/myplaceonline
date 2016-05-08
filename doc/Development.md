@@ -505,6 +505,7 @@ $ bin/rake
 1. Go to https://build.phonegap.com/
 1. Login with Adobe ID
 1. Click Update Code > Pull Latest
+1. Download APKs to lib/android/builds
 
 # CKEditor
 
