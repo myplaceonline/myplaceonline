@@ -46,6 +46,8 @@
 ### Administration
 
 * HAProxy statistics (admin/{passwords/haproxy/stats}): https://myplaceonline.com:9443/
+  * /var/log/haproxy.log
+  * "8.2.3. HTTP log format" in http://www.haproxy.org/download/1.7/doc/configuration.txt
 * Chef administration: https://admin.myplaceonline.com/
 
 ## Design Goals
