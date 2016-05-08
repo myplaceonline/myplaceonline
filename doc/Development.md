@@ -500,9 +500,11 @@ $ bin/rake
 
 ## Building New Version
 
+1. Bump app version in config.xml
+1. Commit any changes in src/myplaceonline_phonegap
 1. Go to https://build.phonegap.com/
-2. Login with Adobe ID
-3. Click Update Code > Pull Latest
+1. Login with Adobe ID
+1. Click Update Code > Pull Latest
 
 # CKEditor
 
