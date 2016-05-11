@@ -2,7 +2,7 @@
 
 ## Summary
 
-myplaceonline is a virtual life assistant: [https://myplaceonline.com/](https://myplaceonline.com/)
+myplaceonline is a joy and meaning maximizer: [https://myplaceonline.com/](https://myplaceonline.com/)
 
 ## Source Code
 
@@ -18,9 +18,9 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 ## Screenshots
 
 ![Screenshot1](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot2.png)
-![Screenshot6](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot6.png)
 ![Screenshot7](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot7.png)
 ![Screenshot8](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot8.png)
+![Screenshot6](https://raw.githubusercontent.com/myplaceonline/myplaceonline_rails/master/app/assets/images/screenshot6.png)
 
 ## Running Locally
 
