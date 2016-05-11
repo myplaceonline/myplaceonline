@@ -253,6 +253,8 @@ if every piece of data was encrypted.
 11. Transaction
   ActiveRecord::Base.transaction do
   end
+12. Logging
+  Rails.logger.debug{"test"}
 
 ### Jobs
 
