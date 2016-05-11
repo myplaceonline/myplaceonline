@@ -527,3 +527,11 @@ $ bin/rake
   * Tab Key Handling
 
 dev/builder/build.sh --leave-js-unminified -s
+
+# Server Administration
+
+## Analyze Crash
+
+http://averageradical.github.io/Linux_Core_Dumps.pdf
+
+    $ /usr/local/src/crash-*/crash /usr/lib/debug/lib/modules/4*/vmlinux /var/crash/*/vmcore
