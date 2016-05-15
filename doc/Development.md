@@ -347,7 +347,7 @@ $ rm app/views/${X}/*jbuilder
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=development bin/rake myp:dump
-$ RAILS_ENV=test SKIP_LARGE_IMPORTS=true bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
+$ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 ```
 
 #### Add encrypted column(s)
