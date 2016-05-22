@@ -537,3 +537,7 @@ dev/builder/build.sh --leave-js-unminified -s
 http://averageradical.github.io/Linux_Core_Dumps.pdf
 
     $ /usr/local/src/crash-*/crash /usr/lib/debug/lib/modules/4*/vmlinux /var/crash/*/vmcore
+
+## Kibana
+
+* Search: _id:1004 AND _type:museum
