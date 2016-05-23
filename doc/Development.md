@@ -528,7 +528,34 @@ $ bin/rake
   * Source Editing Area
   * Tab Key Handling
 
-dev/builder/build.sh --leave-js-unminified -s
+Build new version
+* cd /work/myplaceonline/ckeditor-dev
+* git remote add upstream ssh://git@github.com/ckeditor/ckeditor-dev
+* git fetch upstream
+* git rebase upstream/master
+* git push -f origin master
+# Make changes
+* git commit -a -m "Pull request #237: Fix additional null dereferences"
+* git push
+* dev/builder/build.sh --leave-js-unminified -s
+* cd ../ckeditor
+* git remote add upstream ssh://git@github.com/galetahub/ckeditor
+* git fetch upstream
+* git reset --hard 0ebc23b5c512b1ceb6de58a2616cacf25ec5c2f6
+* git rebase upstream/master
+* git push -f origin master
+* git rm -rf ./vendor/assets/javascripts/ckeditor
+* git commit -a -m "Remove galetahub/ckeditor version of ckeditor"
+* mkdir -p vendor/assets/javascripts/; cd vendor/assets/javascripts/
+* cp ../../../../ckeditor-dev/dev/builder/release/ckeditor_*.tar.gz .
+* tar xzvf ckeditor_*.tar.gz
+* rm ckeditor_*.tar.gz
+* rm -rf ckeditor/samples/
+* git add ../../
+* git commit -a -m "Add ckeditor build from myplaceonline/ckeditor-dev"
+* git push
+* cd $MYPLACEONLINE_SRC
+* bin/bundle update
 
 # Server Administration
 
