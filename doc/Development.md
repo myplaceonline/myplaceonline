@@ -346,6 +346,7 @@ $ rm app/views/${X}/*jbuilder
 # Edit config/routes.rb and add after resources ${X}
   post '${X}/new'
 # Replace ${X} with singular version: cp app/models/wisdom.rb app/models/${X}.rb
+# Add migration with UserIndex.reset!
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=development bin/rake myp:dump
