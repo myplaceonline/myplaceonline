@@ -51,6 +51,7 @@
 * Chef administration: https://admin.myplaceonline.com/
 * ElasticSearch:
   * curl http://db2-internal.myplaceonline.com:9200/_stats?pretty=1
+* Grafana: https://admin.myplaceonline.com:3000/
 
 ## Design Goals
 
