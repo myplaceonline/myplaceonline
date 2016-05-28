@@ -285,6 +285,8 @@ $ bin/rails generate migration AddPointsToIdentities points:integer
 $ RAILS_ENV=test bin/rake db:reset test
 ```
 
+* GC: https://github.com/ruby/ruby/blob/trunk/gc.c#L7373
+
 #### Create New Sub-Category Example
 
 ```
