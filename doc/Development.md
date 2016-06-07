@@ -53,6 +53,21 @@
   * curl http://db2-internal.myplaceonline.com:9200/_stats?pretty=1
 * Grafana: https://admin.myplaceonline.com:3000/
 
+### Logs
+
+* Central syslog server: db2.myplaceonline.com
+** tail -f /var/log/messages | grep -v -e audit: -e telegraf: -e STATS
+
+* Linux
+** `atop -r` and use `t` and `T` to move forward/backward, and `b` to jump to time
+** Crashes in /var/crash/
+* Rails
+** Most things rsyslog'd to db2, /var/log/messages
+** /var/www/html/myplaceonline/log/passenger.log
+* ElasticSearch
+** curl http://db2-internal.myplaceonline.com:9200/_cluster/stats?pretty
+** /var/log/elasticsearch/
+
 ## Design Goals
 
 * Mobile/tablet first design. Single Page Application (SPA): http://docs.phonegap.com/en/3.5.0/guide_next_index.md.html
