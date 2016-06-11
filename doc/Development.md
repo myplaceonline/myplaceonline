@@ -367,11 +367,18 @@ $ rm app/views/${X}/*jbuilder
 # Edit config/routes.rb and add after resources ${X}
   post '${X}/new'
 # Replace ${X} with singular version: cp app/models/wisdom.rb app/models/${X}.rb
-# Add migration with UserIndex.reset!
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=development bin/rake myp:dump
+$ pkill -9 -f "spring.*test mode"
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
+# Add migration with UserIndex.reset!
+$ bin/rails generate migration ResetSearch001
+  def change
+    UserIndex.reset!
+  end
+# Run migrate
+$ bin/rake db:migrate
 ```
 
 #### Add encrypted column(s)
