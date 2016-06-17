@@ -392,6 +392,7 @@ $ bin/rake db:migrate
   include EncryptedConcern
   belongs_to :${COLUMN}_encrypted, class_name: EncryptedValue, dependent: :destroy, :autosave => true
   belongs_to_encrypted :${COLUMN}
+  before_validation :${COLUMN}_finalize
 # Change any validations to check both the encrypted and unencrypted values:
   validate do
     if ${COLUMN}.blank? && ${COLUMN}_encrypted.nil?
