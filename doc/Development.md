@@ -589,11 +589,22 @@ Build new version
 
 # Server Administration
 
+## Reboot
+
+### Web Server
+
+NODE=web1; ssh root@${NODE}.myplaceonline.com "systemctl stop nginx; reboot"
+
 ## Analyze Crash
 
 http://averageradical.github.io/Linux_Core_Dumps.pdf
 
     $ /usr/local/src/crash-*/crash /usr/lib/debug/lib/modules/4*/vmlinux /var/crash/*/vmcore
+    # ps
+    # http://averageradical.github.io/Linux_Core_Dumps.pdf
+    
+* strings /var/crash/*/vmcore | grep "Linux version"
+* dnf list installed | grep kernel-debuginfo
 
 ## Kibana
 
