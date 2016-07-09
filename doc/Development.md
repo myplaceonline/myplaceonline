@@ -217,9 +217,9 @@ if every piece of data was encrypted.
   $ bin/rake db:migrate
   $ cp app/models/vehicle_picture.rb app/models/${X}
   controller:
-  
+
     # public
-  
+
     def may_upload
       true
     end
