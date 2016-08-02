@@ -501,6 +501,8 @@ $ psql -U myplaceonline -h localhost -d myplaceonline_development
 # Restore:
 $ gpg --output tmp.sql --decrypt file.sql.pgp
 $ dropdb -U myplaceonline -h localhost  myplaceonline_development; createdb -U myplaceonline -h localhost myplaceonline_development; pg_restore -U myplaceonline -h localhost -d myplaceonline_development -n public tmp.sql; rm -f tmp.sql
+$ bin/rails c
+# UserIndex.reset!
 ```
 
 ## Git Tips
