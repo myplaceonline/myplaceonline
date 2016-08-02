@@ -62,8 +62,9 @@
 ** `atop -r` and use `t` and `T` to move forward/backward, and `b` to jump to time
 ** Crashes in /var/crash/
 * Rails
-** Most things rsyslog'd to db2, /var/log/messages
+** Most things rsyslog'd to db2 (/var/log/messages); however, Rails app logging doesn't support syslog, so it goes to /var/log/messages
 ** /var/www/html/myplaceonline/log/passenger.log
+** tail -f /var/log/messages | grep rails
 * ElasticSearch
 ** curl http://db2-internal.myplaceonline.com:9200/_cluster/stats?pretty
 ** /var/log/elasticsearch/
