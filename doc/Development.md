@@ -213,10 +213,11 @@ if every piece of data was encrypted.
             )
           end
         end
-8. List of Pictures
-  $ bin/rails generate model vehicle_picture vehicle:references:index identity_file:references:index identity:references:index
+8. List of Files/Pictures
+  $ bin/rails generate model quest_file quest:references:index identity_file:references:index identity:references:index position:integer
   $ bin/rake db:migrate
-  $ cp app/models/vehicle_picture.rb app/models/${X}
+  $ cp app/models/quest_file.rb app/models/${X}
+  
   controller:
 
     # public
@@ -225,39 +226,46 @@ if every piece of data was encrypted.
       true
     end
 
-    vehicle_pictures_attributes: FilesController.multi_param_names
+    quest_files_attributes: FilesController.multi_param_names
     
   model:
     include AllowExistingConcern
 
-    before_validation :update_pic_folders
-    
-    def update_pic_folders
-      put_files_in_folder(apartment_pictures, [I18n.t("myplaceonline.category.apartments"), display])
-    end
+    has_many :quest_files, :dependent => :destroy
+    accepts_nested_attributes_for :quest_files, allow_destroy: true, reject_if: :all_blank
+    allow_existing_children :quest_files, [{:name => :identity_file}]
 
-    has_many :vehicle_pictures, :dependent => :destroy
-    accepts_nested_attributes_for :vehicle_pictures, allow_destroy: true, reject_if: :all_blank
-    allow_existing_children :vehicle_pictures, [{:name => :identity_file}]
+    before_validation :update_file_folders
+    
+    def update_file_folders
+      put_files_in_folder(quest_files, [I18n.t("myplaceonline.category.quests"), display])
+    end
   config/locales
-    vehicles:
-      pictures: "Pictures"
-      picture: "Picture"
-      add_picture: "Add Picture"
-      delete_picture: "Delete Picture"
+    quests:
+      files: "Files/Pictures"
+      file: "File/Picture"
+      add_file: "Add File/Picture"
+      add_files: "Add File(s)/Picture(s)"
+      delete_file: "Delete File/Picture"
   _form
     <%=
       render partial: "myplaceonline/pictures_form", locals: {
         f: f,
         obj: obj,
-        pictures_field: :vehicle_pictures
+        position_field: :position,
+        pictures_field: :quest_files,
+        item_placeholder: "myplaceonline.quests.file",
+        heading: "myplaceonline.quests.files",
+        addbutton: "myplaceonline.quests.add_file",
+        addbutton_multi: "myplaceonline.quests.add_files",
+        deletebutton: "myplaceonline.quests.delete_file"
       }
     %>
   show
     <%=
       render partial: 'myplaceonline/pictures', locals: {
-        pics: @obj.vehicle_pictures,
-        placeholder: "myplaceonline.vehicles.picture"
+        pics: @obj.quest_files,
+        placeholder: "myplaceonline.quests.file"
       }
     %>
 9. Add model initialization code
