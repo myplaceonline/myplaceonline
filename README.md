@@ -2,7 +2,13 @@
 
 ## Summary
 
-myplaceonline is a joy and meaning maximizer: [https://myplaceonline.com/](https://myplaceonline.com/)
+Do you feel negative mental burdens? "When was the last time I had a dentist appointment?" "Where did I put that link?" "What should I eat?" Myplaceonline helps you organize your thoughts.
+
+You know that thing that usually makes you smile. Seeing some baby faces, or watching dogs play, or hiking a mountain. Myplaceonline helps you do the things that give you joy.
+
+Are you feeling fulfilled? Myplaceonline helps you find meaning in the world.
+
+[https://myplaceonline.com/](https://myplaceonline.com/)
 
 ## Source Code
 
