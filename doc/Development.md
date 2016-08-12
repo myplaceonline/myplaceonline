@@ -83,6 +83,13 @@
   that caches HTML pages because that might cache sensitive information
   such as decrypted passwords.
 
+## Autocomplete
+
+* "Standard": https://html.spec.whatwg.org/multipage/forms.html#autofilling-form-controls:-the-autocomplete-attribute
+* Chrome: https://bugs.chromium.org/p/chromium/issues/detail?id=468153#c164
+* Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=956906
+* IE: https://blogs.msdn.microsoft.com/ieinternals/2013/09/24/ie11-changes/
+
 ## JavaScript
 
 There is some sharing of JavaScript between the rails and phonegap apps. The
