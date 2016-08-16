@@ -290,7 +290,7 @@ if every piece of data was encrypted.
 12. Logging
   Rails.logger.debug{"test"}
 13. Rebuild index
-  $ bin/rails generate migration RebuildIndex001
+  $ bin/rails generate migration RebuildIndex005
   UserIndex.reset!
 
 ### Jobs
