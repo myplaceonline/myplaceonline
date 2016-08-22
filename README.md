@@ -4,7 +4,7 @@
 
 Do you feel overwhelmed by information? "When was the last time I had a dentist appointment?" "Where did I put that link?" Myplaceonline helps you organize your thoughts.
 
-You know that thing that usually makes you smile. Talking to a friend, or blowing bubbles, or hiking a mountain. Myplaceonline helps you do the things that give you joy.
+Remember those things that usually make you smile? Talking to a friend, or blowing bubbles, or hiking a mountain. Myplaceonline helps you do the things that give you joy.
 
 Are you feeling fulfilled? Myplaceonline helps you find meaning in the world.
 
