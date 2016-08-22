@@ -56,15 +56,17 @@
 ### Logs
 
 * Central syslog server: db2.myplaceonline.com
-** tail -f /var/log/messages | grep -v -e audit: -e telegraf: -e STATS
+** ssh root@db2.myplaceonline.com tail -f /var/log/messages | grep -v -e audit: -e telegraf: -e STATS
+* Rails
+** Most things rsyslog'd to db2 (/var/log/messages); however, Rails app logging doesn't support syslog, so it goes to /var/log/messages
+** ssh root@web1.myplaceonline.com tail -f /var/log/messages | grep rails
+** ssh root@web2.myplaceonline.com tail -f /var/log/messages | grep rails
 
 * Linux
 ** `atop -r` and use `t` and `T` to move forward/backward, and `b` to jump to time
 ** Crashes in /var/crash/
-* Rails
-** Most things rsyslog'd to db2 (/var/log/messages); however, Rails app logging doesn't support syslog, so it goes to /var/log/messages
+* Sometimes stuff in
 ** /var/www/html/myplaceonline/log/passenger.log
-** tail -f /var/log/messages | grep rails
 * ElasticSearch
 ** curl http://db2-internal.myplaceonline.com:9200/_cluster/stats?pretty
 ** /var/log/elasticsearch/

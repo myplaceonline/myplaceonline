@@ -2,9 +2,9 @@
 
 ## Summary
 
-Do you feel negative mental burdens? "When was the last time I had a dentist appointment?" "Where did I put that link?" "What should I eat?" Myplaceonline helps you organize your thoughts.
+Do you feel overwhelmed by information? "When was the last time I had a dentist appointment?" "Where did I put that link?" Myplaceonline helps you organize your thoughts.
 
-You know that thing that usually makes you smile. Seeing some baby faces, or watching dogs play, or hiking a mountain. Myplaceonline helps you do the things that give you joy.
+You know that thing that usually makes you smile. Talking to a friend, or blowing bubbles, or hiking a mountain. Myplaceonline helps you do the things that give you joy.
 
 Are you feeling fulfilled? Myplaceonline helps you find meaning in the world.
 
