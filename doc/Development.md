@@ -224,7 +224,7 @@ if every piece of data was encrypted.
   $ bin/rails generate model quest_file quest:references:index identity_file:references:index identity:references:index position:integer
   $ bin/rake db:migrate
   $ cp app/models/quest_file.rb app/models/${X}
-  
+
   controller:
 
     # public
@@ -379,6 +379,7 @@ $ X=...
 # Change after: cp app/controllers/wisdoms_controller.rb app/controllers/${X}_controller.rb
 $ rm app/views/${X}/*jbuilder
 # Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
+# rm app/views/${X}/*
 # cp app/views/wisdoms/* app/views/${X} and replace all instances of wisdom with ${X}
 # Edit config/routes.rb and add after resources ${X}
   post '${X}/new'
@@ -389,7 +390,7 @@ $ RAILS_ENV=development bin/rake myp:dump
 $ pkill -9 -f "spring.*test mode"
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Add migration with UserIndex.reset!
-$ bin/rails generate migration ResetSearch007
+$ bin/rails generate migration ResetSearch008
   def change
     UserIndex.reset!
   end
