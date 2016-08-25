@@ -590,7 +590,8 @@ Build new version
 * git push
 * dev/builder/build.sh --leave-js-unminified -s
 * cd ../ckeditor
-* git remote add upstream ssh://git@github.com/galetahub/ckeditor
+# First time only:
+# git remote add upstream ssh://git@github.com/galetahub/ckeditor
 * git fetch upstream
 * git reset --hard 0ebc23b5c512b1ceb6de58a2616cacf25ec5c2f6
 * git rebase upstream/master
