@@ -581,7 +581,8 @@ $ bin/rake
 
 Build new version
 * cd /work/myplaceonline/ckeditor-dev
-* git remote add upstream ssh://git@github.com/ckeditor/ckeditor-dev
+# First time only:
+# git remote add upstream ssh://git@github.com/ckeditor/ckeditor-dev
 * git fetch upstream
 * git rebase upstream/master
 * git push -f origin master
