@@ -17,6 +17,8 @@ The phone application is written in jQuery Mobile and PhoneGap, and built using 
 
 Latest Android App in the Google Play Store: https://play.google.com/store/apps/details?id=com.myplaceonline
 
+Latest iOS App in the Apple App Store: https://itunes.apple.com/us/app/myplaceonline/id1148233790
+
 ## License and Contributions
 
 myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LICENSE). The AGPL basically means that you may do whatever you want with the code, but if you distribute the code or serve it through a website, share the code either by forking this repository or contributing to it. Pull requests are welcome. Guidelines for contributing: [CONTRIBUTE.md](CONTRIBUTE.md)
