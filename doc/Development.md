@@ -404,7 +404,7 @@ $ bin/rake db:migrate
 
 ```
 $ bin/rails generate migration AddEncryptionTo${MODEL} ${COLUMN}_encrypted:references:index
-    add_reference :ssh_keys, :ssh_private_key_encrypted, index: true, foreign_key: false
+    add_reference :ssh_keys, :ssh_private_key_encrypted_id, index: true, foreign_key: false
     add_foreign_key :ssh_keys, :encrypted_values, column: :ssh_private_key_encrypted_id
 $ bin/rake db:migrate
 # Add to model:
