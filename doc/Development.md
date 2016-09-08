@@ -53,6 +53,13 @@
   * curl http://db2-internal.myplaceonline.com:9200/_stats?pretty=1
 * Grafana: https://admin.myplaceonline.com:3000/
 
+* Cleanup elasticsearch
+** curl http://db2-internal.myplaceonline.com:9200/_aliases?pretty=1
+** curl -XDELETE 'http://db2-internal.myplaceonline.com:9200/logstash-2016.08*/'
+
+* Take a web server down for maintenance:
+** systemctl stop nginx
+
 ### Logs
 
 * Central syslog server: db2.myplaceonline.com
@@ -379,7 +386,6 @@ $ bin/rake db:migrate
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
 $ X=...
 # Change after: cp app/controllers/wisdoms_controller.rb app/controllers/${X}_controller.rb
-$ rm app/views/${X}/*jbuilder
 # Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
 # rm app/views/${X}/*
 # cp app/views/wisdoms/* app/views/${X} and replace all instances of wisdom with ${X}
@@ -392,7 +398,7 @@ $ RAILS_ENV=development bin/rake myp:dump
 $ pkill -9 -f "spring.*test mode"
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Add migration with UserIndex.reset!
-$ bin/rails generate migration ResetSearch008
+$ bin/rails generate migration ResetSearch010
   def change
     UserIndex.reset!
   end
