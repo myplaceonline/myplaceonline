@@ -60,6 +60,9 @@
 * Take a web server down for maintenance:
 ** systemctl stop nginx
 
+* Put web server back into rotation:
+** systemctl stop nginx
+
 ### Logs
 
 * Central syslog server: db2.myplaceonline.com
@@ -77,6 +80,10 @@
 * ElasticSearch
 ** curl http://db2-internal.myplaceonline.com:9200/_cluster/stats?pretty
 ** /var/log/elasticsearch/
+
+* Journal disk usage: journalctl --disk-usage
+* Restart journald: sudo systemctl restart systemd-journald.service
+* Clear: journalctl --vacuum-size=1M
 
 ## Design Goals
 
@@ -628,12 +635,13 @@ NODE=web1; ssh root@${NODE}.myplaceonline.com "systemctl stop nginx; reboot"
 
 http://averageradical.github.io/Linux_Core_Dumps.pdf
 
-    $ /usr/local/src/crash-*/crash /usr/lib/debug/lib/modules/4*/vmlinux /var/crash/*/vmcore
+    $ /usr/local/src/crash*/crash /usr/lib/debug/lib/modules/4*/vmlinux /var/crash/*/vmcore
     # ps
     # http://averageradical.github.io/Linux_Core_Dumps.pdf
     
 * strings /var/crash/*/vmcore | grep "Linux version"
 * dnf list installed | grep kernel-debuginfo
+* Emulate a crash: echo c > /proc/sysrq-trigger
 
 ## Kibana
 
