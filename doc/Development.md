@@ -69,6 +69,7 @@
 ** ssh root@db2.myplaceonline.com tail -f /var/log/messages | grep -v -e audit: -e telegraf: -e STATS
 * Rails
 ** Most things rsyslog'd to db2 (/var/log/messages); however, Rails app logging doesn't support syslog, so it goes to /var/log/messages
+*** grep rails /var/log/messages
 ** ssh root@web1.myplaceonline.com tail -f /var/log/messages | grep rails
 ** ssh root@web2.myplaceonline.com tail -f /var/log/messages | grep rails
 
