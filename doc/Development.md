@@ -73,6 +73,12 @@
 ** ssh root@web1.myplaceonline.com tail -f /var/log/messages | grep rails
 ** ssh root@web2.myplaceonline.com tail -f /var/log/messages | grep rails
 
+Common issues:
+* grep "rails.*processed.*[^0] failed" /var/log/messages
+* grep "rails.*Performing" /var/log/messages
+* journalctl -p warning
+* /var/www/html/myplaceonline/log/passenger.log
+
 * Linux
 ** `atop -r` and use `t` and `T` to move forward/backward, and `b` to jump to time
 ** Crashes in /var/crash/
