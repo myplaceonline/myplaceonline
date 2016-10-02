@@ -385,7 +385,7 @@ $ bin/rails generate migration AddCategory${X}
     category:
       ${X}: "${X}"
 # ${X} is non-plural, lower-case and underscores instead of camel case:
-$ bin/rails generate scaffold ${X} ${COLUMNS} visit_count:integer identity:references:index
+$ bin/rails generate scaffold ${X} ${COLUMNS} visit_count:integer archived:datetime rating:integer identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
 # Example:
 # bin/rails generate scaffold wisdom name:string wisdom:text identity:references:index
@@ -403,8 +403,7 @@ $ X=...
 # Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
 # rm app/views/${X}/*
 # cp app/views/wisdoms/* app/views/${X} and replace all instances of wisdom with ${X}
-# Edit config/routes.rb and add after resources ${X}
-  post '${X}/new'
+# Edit config/routes.rb and remove the resources line that was auto-generated
 # Replace ${X} with singular version: cp app/models/wisdom.rb app/models/${X}.rb
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
