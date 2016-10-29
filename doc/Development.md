@@ -294,7 +294,7 @@ if every piece of data was encrypted.
   show
     <%=
       render partial: 'myplaceonline/pictures', locals: {
-        pics: @obj.quest_files,
+        pics: obj.quest_files,
         placeholder: "myplaceonline.quests.file"
       }
     %>
@@ -411,7 +411,7 @@ $ RAILS_ENV=development bin/rake myp:dump
 $ pkill -9 -f "spring.*test mode"
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Add migration with UserIndex.reset!
-$ bin/rails generate migration ResetSearch014
+$ bin/rails generate migration ResetSearch016
   def change
     UserIndex.reset!
   end
@@ -456,6 +456,36 @@ $ bin/rake db:migrate
     end
 # Add to _form.html.erb
 <%= myp_check_box_tag :encrypt, "myplaceonline.general.encrypt", @encrypt %>
+```
+
+#### Add Nested Model
+
+```
+$ cp app/controllers/vehicle_services_controller.rb app/controllers/${MODEL}_controller.rb
+# Add category to en.yml
+$ cp -r app/views/vehicle_services/ app/views/${MODEL}/
+# Add to parent controller
+  def footer_items_show
+    super + [
+      {
+        title: I18n.t("myplaceonline.vehicles.add_vehicle_service"),
+        link: new_vehicle_vehicle_service_path(@obj),
+        icon: "plus"
+      },
+      {
+        title: I18n.t("myplaceonline.vehicles.vehicle_services"),
+        link: vehicle_vehicle_services_path(@obj),
+        icon: "bars"
+      },
+    ]
+  end
+# Add to routes
+    vehicles: [
+      {
+        subresources: true,
+        name: :vehicle_services
+      }
+    ],
 ```
 
 #### Change Category Name
