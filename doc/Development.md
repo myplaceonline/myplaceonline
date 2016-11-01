@@ -542,13 +542,6 @@ $ bin/rails generate controller welcome index
 #  Remove all instances of data-turbolinks-track=true
 ```
 
-### Add additional filtertext to category
-
-```
-$ bin/rails generate migration UpdateFilterTextForCategory
-Myp.migration_add_filtertext("vehicles", "truck")
-```
-
 ## PostgreSQL Tips
 
 ```
