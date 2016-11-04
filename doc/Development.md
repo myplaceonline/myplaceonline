@@ -45,6 +45,9 @@
 
 ### Administration
 
+* Frontend HTTP requests:
+  ssh root@frontend2.myplaceonline.com "date; tail -f /var/log/haproxy.log" | grep -v -e STATS
+
 * HAProxy statistics (admin/{passwords/haproxy/stats}): https://myplaceonline.com:9443/
   * /var/log/haproxy.log
   * "8.2.3. HTTP log format" in http://www.haproxy.org/download/1.7/doc/configuration.txt
