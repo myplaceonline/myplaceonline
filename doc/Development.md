@@ -10,30 +10,30 @@
     passing of hashes across functions and avoiding needing to go into the definition
     of the function to find the default; however, Ruby doesn't support this.
     Instead, follow a hybrid approach:
-        1.  If a method does not expect to pass its options as a hash
-            to another method, then define explicit keyword arguments (with
-            required and optional arguments as needed).
-            This should be the most common case. Example:
-                
-                def foo(required_param1:, optional_param1: "default")
-                  # ... definition ...
-                end
-                
-                foo(required_param1: 1, optional_param1: "test")
-                
-        2.  If a method expects to pass its options as a hash to another
-            method (or might do so in the future), then define an
-            arbitrary keyword arguments options hash and set default values
-            at the top of the function (if needed). If a parameter is required,
-            throw a MissingArgumentError using the check_hash method. Example:
-                
-                def foo(**options)
-                  MissingArgumentError.check_hash(name: :required_param1, hash: options)
-                  options[:optional_param1] ||= "default"
-                  # ... definition ...
-                end
-                
-                foo(required_param1: 1, optional_param1: "test")
+    1.  If a method does not expect to pass its options as a hash
+        to another method, then define explicit keyword arguments (with
+        required and optional arguments as needed).
+        This should be the most common case. Example:
+            
+            def foo(required_param1:, optional_param1: "default")
+              # ... definition ...
+            end
+            
+            foo(required_param1: 1, optional_param1: "test")
+            
+    2.  If a method expects to pass its options as a hash to another
+        method (or might do so in the future), then define an
+        arbitrary keyword arguments options hash and set default values
+        at the top of the function (if needed). If a parameter is required,
+        throw a MissingArgumentError using the check_hash method. Example:
+            
+            def foo(**options)
+              MissingArgumentError.check_hash(name: :required_param1, hash: options)
+              options[:optional_param1] ||= "default"
+              # ... definition ...
+            end
+            
+            foo(required_param1: 1, optional_param1: "test")
 
 ## General
 
