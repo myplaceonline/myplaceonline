@@ -53,6 +53,14 @@
             end
             
             foo(required_param1: 1, optional_param1: "test")
+1.  Split long function calls into multiple lines. Example:
+        
+        foo(
+          required_param1: 1,
+          required_param2: 2,
+          required_param3: 3,
+          optional_param1: "test"
+        )
 
 ## General
 
