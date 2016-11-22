@@ -112,7 +112,7 @@
 
 * Rails response times:
 
-      ssh root@db2.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
+        ssh root@db2.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
 
 * HAProxy statistics (admin/{passwords/haproxy/stats}): https://myplaceonline.com:9443/
   * /var/log/haproxy.log
