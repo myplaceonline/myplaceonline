@@ -10,7 +10,6 @@
     passing of hashes across functions and avoiding needing to go into the definition
     of the function to find the default; however, Ruby doesn't support this.
     Instead, follow a hybrid approach:
-
         1.  If a method does not expect to pass its options as a hash
             to another method, then define explicit keyword arguments (with
             required and optional arguments as needed).
