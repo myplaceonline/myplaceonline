@@ -111,7 +111,6 @@
   ssh root@frontend2.myplaceonline.com "date; tail -f /var/log/haproxy.log" | grep -v -e STATS
 
 * Rails response times:
-
         ssh root@db2.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
 
 * HAProxy statistics (admin/{passwords/haproxy/stats}): https://myplaceonline.com:9443/
