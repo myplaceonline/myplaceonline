@@ -1,5 +1,41 @@
 # Development
 
+## Ruby
+
+1.  Pass keyword arguments to methods. This is more verbose and lengthens
+    refactoring, but it makes function calls self-descriptive. Ideally, there would 
+    be a way to combine
+    [arbitrary keyword arguments](https://github.com/ruby/ruby/blob/trunk/doc/syntax/methods.rdoc#keyword-arguments)
+    with default values in the function definition, thus allowing transparent
+    passing of hashes across functions and avoiding needing to go into the definition
+    of the function to find the default; however, Ruby doesn't support this.
+    Instead, follow a hybrid approach:
+
+        1.  If a method does not expect to pass its options as a hash
+            to another method, then define explicit keyword arguments (with
+            required and optional arguments as needed).
+            This should be the most common case. Example:
+                
+                def foo(required_param1:, optional_param1: "default")
+                  # ... definition ...
+                end
+                
+                foo(required_param1: 1, optional_param1: "test")
+                
+        2.  If a method expects to pass its options as a hash to another
+            method (or might do so in the future), then define an
+            arbitrary keyword arguments options hash and set default values
+            at the top of the function (if needed). If a parameter is required,
+            throw a MissingArgumentError using the check_hash method. Example:
+                
+                def foo(**options)
+                  MissingArgumentError.check_hash(name: :required_param1, hash: options)
+                  options[:optional_param1] ||= "default"
+                  # ... definition ...
+                end
+                
+                foo(required_param1: 1, optional_param1: "test")
+
 ## General
 
 * Site tests:
@@ -184,140 +220,140 @@ if every piece of data was encrypted.
 
 ## Rails
 
-1. The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
-   app/views/shared/_model_form.html.erb passing in obj: @obj as a local.
-   Normally the view would just reference the @obj member variable of the 
-   controller directly, but we use the obj:@obj model so that one form
-   can include another form (usually a belongs_to relationship).
-2. Use semantic names. For example, if you have the date of a weight
-   measurement, use a field named measurement_start instead of just start. The
-   reason for this is that, by default, we use form field names matching the
-   model field name, so the autocomplete will be more specific if the field
-   name is more specific.
-3. belongs_to: In the class that has the foreign key.
-   has_one: If the other class has the foreign key.
-4. MyplaceonlineController supports an "insecure" mode where items can be
-   added without needing to re-enter a password (just a remember me cookie is
-   needed). Add in the protected section.
-    def insecure
-      true
-    end
-
-5. Order has_many example:
-   has_many :job_salaries, -> { order('started DESC') }, :dependent => :destroy
-6. Is not null example:
-   IdentityDriversLicense.where("identity_id = ? and expires is not null and expires < ?", user.primary_identity, threshold)
-7. Enumeration:
-   controller: Add permit param
-   model:
-      CONTACT_TYPES = [
-        ["myplaceonline.contacts.best_friend", 0],
-        ["myplaceonline.contacts.good_friend", 1],
-        ["myplaceonline.contacts.acquiantance", 2],
-        ["myplaceonline.contacts.business_contact", 3],
-        ["myplaceonline.contacts.best_family", 4],
-        ["myplaceonline.contacts.good_family", 5]
-      ]
-   _form: <%= myp_select(f, :dimensions_type, "myplaceonline.recreational_vehicles.dimensions_type", Myp.translate_options(Myp::DIMENSIONS), obj.dimensions_type) %>
-   show: <%= attribute_table_row_select(t("myplaceonline.recreational_vehicles.dimensions_type"), @obj.dimensions_type, Myp::DIMENSIONS) %>
-   filter:
-        <div class="horizontal_center" data-role="collapsible">
-          <h4><%= t("myplaceonline.general.filter") %></h4>
-          <%= myp_select_tag(:program_type, "myplaceonline.reward_programs.program_type", Myp.translate_options(RewardProgram::REWARD_PROGRAM_TYPES), @program_type, false, nil, false, "refreshWithParam('program_type', $('#program_type').val())") %>
-        </div>
-     controller:
-        def index
-          @contact_type = params[:contact_type]
-          if !@contact_type.blank?
-            @contact_type = @contact_type.to_i
-          end
-          super
+1.  The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
+    app/views/shared/_model_form.html.erb passing in obj: @obj as a local.
+    Normally the view would just reference the @obj member variable of the 
+    controller directly, but we use the obj:@obj model so that one form
+    can include another form (usually a belongs_to relationship).
+2.  Use semantic names. For example, if you have the date of a weight
+    measurement, use a field named measurement_start instead of just start. The
+    reason for this is that, by default, we use form field names matching the
+    model field name, so the autocomplete will be more specific if the field
+    name is more specific.
+3.  belongs_to: In the class that has the foreign key.
+    has_one: If the other class has the foreign key.
+4.  MyplaceonlineController supports an "insecure" mode where items can be
+    added without needing to re-enter a password (just a remember me cookie is
+    needed). Add in the protected section.
+        def insecure
+          true
         end
 
-        def all
-          if @program_type.blank?
-            model.where(
-              identity_id: current_user.primary_identity.id
-            )
-          else
-            model.where(
-              identity_id: current_user.primary_identity.id,
-              program_type: @program_type
-            )
+5.  Order has_many example:
+    has_many :job_salaries, -> { order('started DESC') }, :dependent => :destroy
+6.  Is not null example:
+    IdentityDriversLicense.where("identity_id = ? and expires is not null and expires < ?", user.primary_identity, threshold)
+7.  Enumeration:
+    controller: Add permit param
+    model:
+        CONTACT_TYPES = [
+          ["myplaceonline.contacts.best_friend", 0],
+          ["myplaceonline.contacts.good_friend", 1],
+          ["myplaceonline.contacts.acquiantance", 2],
+          ["myplaceonline.contacts.business_contact", 3],
+          ["myplaceonline.contacts.best_family", 4],
+          ["myplaceonline.contacts.good_family", 5]
+        ]
+    _form: <%= myp_select(f, :dimensions_type, "myplaceonline.recreational_vehicles.dimensions_type", Myp.translate_options(Myp::DIMENSIONS), obj.dimensions_type) %>
+    show: <%= attribute_table_row_select(t("myplaceonline.recreational_vehicles.dimensions_type"), @obj.dimensions_type, Myp::DIMENSIONS) %>
+    filter:
+          <div class="horizontal_center" data-role="collapsible">
+            <h4><%= t("myplaceonline.general.filter") %></h4>
+            <%= myp_select_tag(:program_type, "myplaceonline.reward_programs.program_type", Myp.translate_options(RewardProgram::REWARD_PROGRAM_TYPES), @program_type, false, nil, false, "refreshWithParam('program_type', $('#program_type').val())") %>
+          </div>
+      controller:
+          def index
+            @contact_type = params[:contact_type]
+            if !@contact_type.blank?
+              @contact_type = @contact_type.to_i
+            end
+            super
           end
+
+          def all
+            if @program_type.blank?
+              model.where(
+                identity_id: current_user.primary_identity.id
+              )
+            else
+              model.where(
+                identity_id: current_user.primary_identity.id,
+                program_type: @program_type
+              )
+            end
+          end
+8.  List of Files/Pictures
+    $ bin/rails generate model quest_file quest:references:index identity_file:references:index identity:references:index position:integer
+    $ bin/rake db:migrate
+    $ cp app/models/quest_file.rb app/models/${X}
+
+    controller:
+
+      # public
+
+      def may_upload
+        true
+      end
+
+      quest_files_attributes: FilesController.multi_param_names
+    
+    model:
+      include AllowExistingConcern
+
+      has_many :quest_files, -> { order("position ASC, updated_at ASC") }, :dependent => :destroy
+      accepts_nested_attributes_for :quest_files, allow_destroy: true, reject_if: :all_blank
+      allow_existing_children :quest_files, [{:name => :identity_file}]
+
+      before_validation :update_file_folders
+    
+      def update_file_folders
+        put_files_in_folder(quest_files, [I18n.t("myplaceonline.category.quests"), display])
+      end
+    config/locales
+      quests:
+        files: "Files/Pictures"
+        file: "File/Picture"
+        add_file: "Add File/Picture"
+        add_files: "Add File(s)/Picture(s)"
+        delete_file: "Delete File/Picture"
+    _form
+      <%=
+        render partial: "myplaceonline/pictures_form", locals: {
+          f: f,
+          obj: obj,
+          position_field: :position,
+          pictures_field: :quest_files,
+          item_placeholder: "myplaceonline.quests.file",
+          heading: "myplaceonline.quests.files",
+          addbutton: "myplaceonline.quests.add_file",
+          addbutton_multi: "myplaceonline.quests.add_files",
+          deletebutton: "myplaceonline.quests.delete_file"
+        }
+      %>
+    show
+      <%=
+        render partial: 'myplaceonline/pictures', locals: {
+          pics: obj.quest_files,
+          placeholder: "myplaceonline.quests.file"
+        }
+      %>
+9.  Add model initialization code
+        def self.build(params = nil)
+          result = self.dobuild(params)
+          # initialize result here
+          result
         end
-8. List of Files/Pictures
-  $ bin/rails generate model quest_file quest:references:index identity_file:references:index identity:references:index position:integer
-  $ bin/rake db:migrate
-  $ cp app/models/quest_file.rb app/models/${X}
-
-  controller:
-
-    # public
-
-    def may_upload
-      true
-    end
-
-    quest_files_attributes: FilesController.multi_param_names
-    
-  model:
-    include AllowExistingConcern
-
-    has_many :quest_files, -> { order("position ASC, updated_at ASC") }, :dependent => :destroy
-    accepts_nested_attributes_for :quest_files, allow_destroy: true, reject_if: :all_blank
-    allow_existing_children :quest_files, [{:name => :identity_file}]
-
-    before_validation :update_file_folders
-    
-    def update_file_folders
-      put_files_in_folder(quest_files, [I18n.t("myplaceonline.category.quests"), display])
-    end
-  config/locales
-    quests:
-      files: "Files/Pictures"
-      file: "File/Picture"
-      add_file: "Add File/Picture"
-      add_files: "Add File(s)/Picture(s)"
-      delete_file: "Delete File/Picture"
-  _form
-    <%=
-      render partial: "myplaceonline/pictures_form", locals: {
-        f: f,
-        obj: obj,
-        position_field: :position,
-        pictures_field: :quest_files,
-        item_placeholder: "myplaceonline.quests.file",
-        heading: "myplaceonline.quests.files",
-        addbutton: "myplaceonline.quests.add_file",
-        addbutton_multi: "myplaceonline.quests.add_files",
-        deletebutton: "myplaceonline.quests.delete_file"
-      }
-    %>
-  show
-    <%=
-      render partial: 'myplaceonline/pictures', locals: {
-        pics: obj.quest_files,
-        placeholder: "myplaceonline.quests.file"
-      }
-    %>
-9. Add model initialization code
-  def self.build(params = nil)
-    result = self.dobuild(params)
-    # initialize result here
-    result
-  end
 10. Add category filter text
-  $ bin/rails generate migration AddCategoryFiltertext
-  Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
+        $ bin/rails generate migration AddCategoryFiltertext
+        Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
 11. Transaction
-  ActiveRecord::Base.transaction do
-  end
+        ActiveRecord::Base.transaction do
+        end
 12. Logging
-  Rails.logger.debug{"test"}
+        Rails.logger.debug{"test"}
 13. Rebuild index
-  $ bin/rails generate migration RebuildIndex005
-  UserIndex.reset!
+        $ bin/rails generate migration RebuildIndex005
+        UserIndex.reset!
 
 ### Jobs
 
