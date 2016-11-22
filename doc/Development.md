@@ -108,28 +108,37 @@
 ### Administration
 
 * Frontend HTTP requests:
-  ssh root@frontend2.myplaceonline.com "date; tail -f /var/log/haproxy.log" | grep -v -e STATS
+
+        ssh root@frontend2.myplaceonline.com "date; tail -f /var/log/haproxy.log" | grep -v -e STATS
 
 * Rails response times:
+
         ssh root@db2.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
 
 * HAProxy statistics (admin/{passwords/haproxy/stats}): https://myplaceonline.com:9443/
-  * /var/log/haproxy.log
+
+        /var/log/haproxy.log
+
   * "8.2.3. HTTP log format" in http://www.haproxy.org/download/1.7/doc/configuration.txt
 * Chef administration: https://admin.myplaceonline.com/
 * ElasticSearch:
-  * curl http://db2-internal.myplaceonline.com:9200/_stats?pretty=1
+  
+        curl http://db2-internal.myplaceonline.com:9200/_stats?pretty=1
+
 * Grafana: https://admin.myplaceonline.com:3000/
 
 * Cleanup elasticsearch
-** curl http://db2-internal.myplaceonline.com:9200/_aliases?pretty=1
-** curl -XDELETE 'http://db2-internal.myplaceonline.com:9200/logstash-2016.08*/'
+
+        curl http://db2-internal.myplaceonline.com:9200/_aliases?pretty=1
+        curl -XDELETE 'http://db2-internal.myplaceonline.com:9200/logstash-2016.08*/'
 
 * Take a web server down for maintenance:
-** systemctl stop nginx
+
+        systemctl stop nginx
 
 * Put web server back into rotation:
-** systemctl stop nginx
+
+        systemctl stop nginx
 
 ### Logs
 
