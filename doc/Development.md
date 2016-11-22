@@ -2,6 +2,7 @@
 
 ## Ruby
 
+1.  Follow the [Ruby on Rails Coding Conventions](http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html#follow-the-coding-conventions).
 1.  Pass keyword arguments to methods. This is more verbose and lengthens
     refactoring, but it makes function calls self-descriptive. Ideally, there would 
     be a way to combine
@@ -21,7 +22,7 @@
             
             foo(required_param1: 1, optional_param1: "test")
             
-    2.  If a method expects to pass its options as a hash to another
+    1.  If a method expects to pass its options as a hash to another
         method (or might do so in the future), then define an
         arbitrary keyword arguments options hash and set default values
         at the top of the function (if needed). If a parameter is required,
