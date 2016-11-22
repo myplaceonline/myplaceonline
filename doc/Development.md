@@ -3,6 +3,19 @@
 ## Ruby
 
 1.  Follow the [Ruby on Rails Coding Conventions](http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html#follow-the-coding-conventions).
+
+    > Two spaces, no tabs (for indentation).
+    > No trailing whitespace. Blank lines should not have any spaces.
+    > Indent after private/protected.
+    > Use Ruby >= 1.9 syntax for hashes. Prefer { a: :b } over { :a => :b }.
+    > Prefer &&/|| over and/or.
+    > Prefer class << self over self.method for class methods.
+    > Use my_method(my_arg) not my_method( my_arg ) or my_method my_arg.
+    > Use a = b and not a=b.
+    > Use assert_not methods instead of refute.
+    > Prefer method { do_stuff } instead of method{do_stuff} for single-line blocks.
+    > Follow the conventions in the source you see used already.
+
 1.  Pass keyword arguments to methods. This is more verbose and lengthens
     refactoring, but it makes function calls self-descriptive. Ideally, there would 
     be a way to combine
