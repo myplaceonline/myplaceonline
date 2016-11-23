@@ -259,6 +259,8 @@ One option to reduce the overhead of such decryption is to have a cache
 from (encrypted_data,salt)->(decrypted_data), but that might not be scalable
 if every piece of data was encrypted.
 
+TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pages/sp800-63b/sec5_authenticators.md#5112-memorized-secret-verifiers)
+
 ## Rails
 
 1.  The basic flow of views is app/views/${CATEGORY}/_form.html.erb includes
