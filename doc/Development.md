@@ -107,6 +107,10 @@
 
 ### Administration
 
+* HAProxy statistics (admin/{chef encrypted data bag: passwords/haproxy/stats}): https://myplaceonline.com:9443/
+  * To put the backends into maintenance mode, check all web* servers and apply "Set state to MAINT"
+  * To remove maintenance mode, check all web* servers and apply "Set state to READY"
+
 * Frontend HTTP requests:
 
         ssh root@frontend2.myplaceonline.com "date; tail -f /var/log/haproxy.log" | grep -v -e STATS
@@ -115,14 +119,14 @@
 
         ssh root@db2.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
 
-* HAProxy statistics (admin/{passwords/haproxy/stats}): https://myplaceonline.com:9443/
+* HAProxy Log
 
-        /var/log/haproxy.log
+        ssh root@frontend2.myplaceonline.com "cat /var/log/haproxy.log"
 
   * "8.2.3. HTTP log format" in http://www.haproxy.org/download/1.7/doc/configuration.txt
 * Chef administration: https://admin.myplaceonline.com/
 * ElasticSearch:
-  
+
         curl http://db2-internal.myplaceonline.com:9200/_stats?pretty=1
 
 * Grafana: https://admin.myplaceonline.com:3000/
