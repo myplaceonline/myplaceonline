@@ -107,7 +107,8 @@
 
 ### Administration
 
-* HAProxy statistics (admin/{chef encrypted data bag: passwords/haproxy/stats}): https://myplaceonline.com:9443/
+* HAProxy statistics (admin/{chef encrypted data bag: passwords/haproxy/stats})
+  * https://myplaceonline.com:9443/
   * To put the backends into maintenance mode, check all web* servers and apply "Set state to MAINT"
   * To remove maintenance mode, check all web* servers and apply "Set state to READY"
 
