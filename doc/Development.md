@@ -650,6 +650,9 @@ $ bin/rails c
 # UserIndex.reset!
 ```
 
+* Log in as root: sudo -u postgres psql postgres
+* List advisory locks: SELECT * FROM pg_locks where locktype = 'advisory';
+
 ## Git Tips
 
 #### Add submodule
