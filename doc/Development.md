@@ -108,6 +108,7 @@
 ### Administration
 
 * HAProxy statistics (admin/{chef encrypted data bag: passwords/haproxy/stats})
+  * export DATABAG=globalsecrets && knife data bag show $DATABAG $DATABAG --secret-file secret_key_databag_$DATABAG 2>/dev/null | grep -A 1 haproxy: | grep stats
   * https://myplaceonline.com:9443/
   * To put the backends into maintenance mode, check all web* servers and apply "Set state to MAINT"
   * To remove maintenance mode, check all web* servers and apply "Set state to READY"
