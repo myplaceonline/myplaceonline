@@ -61,6 +61,7 @@
           required_param3: 3,
           optional_param1: "test"
         )
+1.  Prefer double quotes over single quotes.
 
 ## General
 
