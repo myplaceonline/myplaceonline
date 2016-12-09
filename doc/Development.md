@@ -109,7 +109,7 @@
 
 * Central syslog server: db2.myplaceonline.com
 
-        ssh root@db2.myplaceonline.com tail -f /var/log/messages | grep -v -e audit: -e telegraf: -e STATS
+        ssh root@db2.myplaceonline.com tail -50f /var/log/messages | grep -v -e audit: -e telegraf: -e STATS -e systemd
 
 * HAProxy statistics (admin/{chef encrypted data bag: passwords/haproxy/stats})
   * export DATABAG=globalsecrets && knife data bag show $DATABAG $DATABAG --secret-file secret_key_databag_$DATABAG 2>/dev/null | grep -A 1 haproxy: | grep stats
