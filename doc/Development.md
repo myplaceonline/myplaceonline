@@ -202,6 +202,10 @@ Common issues:
 * Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=956906
 * IE: https://blogs.msdn.microsoft.com/ieinternals/2013/09/24/ie11-changes/
 
+## Learn
+
+* https://github.com/ssllabs/research/wiki/SSL-and-TLS-Deployment-Best-Practices
+
 ## JavaScript
 
 There is some sharing of JavaScript between the rails and phonegap apps. The
