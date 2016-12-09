@@ -107,6 +107,10 @@
 
 ### Administration
 
+* Central syslog server: db2.myplaceonline.com
+
+        ssh root@db2.myplaceonline.com tail -f /var/log/messages | grep -v -e audit: -e telegraf: -e STATS
+
 * HAProxy statistics (admin/{chef encrypted data bag: passwords/haproxy/stats})
   * export DATABAG=globalsecrets && knife data bag show $DATABAG $DATABAG --secret-file secret_key_databag_$DATABAG 2>/dev/null | grep -A 1 haproxy: | grep stats
   * https://myplaceonline.com:9443/
@@ -117,7 +121,7 @@
 
 * Frontend HTTP requests:
 
-        ssh root@frontend2.myplaceonline.com "date; tail -f /var/log/haproxy.log" | grep -v -e STATS
+        ssh root@frontend2.myplaceonline.com "date; tail -50f /var/log/haproxy.log" | grep -v -e STATS
 
 * Rails:
 
@@ -150,12 +154,6 @@
 * Put web server back into rotation:
 
         systemctl stop nginx
-
-### Logs
-
-* Central syslog server: db2.myplaceonline.com
-
-        ssh root@db2.myplaceonline.com tail -f /var/log/messages | grep -v -e audit: -e telegraf: -e STATS
 
 * Rails
   * Most things rsyslog'd to db2 (/var/log/messages); however, Rails app logging doesn't support syslog, so it goes to /var/log/messages
