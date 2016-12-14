@@ -406,6 +406,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         end
 12. Logging
         Rails.logger.debug{"test"}
+        Rails.logger.info{"test"}
 13. Rebuild index
         $ bin/rails generate migration RebuildIndex005
         UserIndex.reset!
