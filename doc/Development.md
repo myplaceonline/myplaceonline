@@ -402,8 +402,17 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         $ bin/rails generate migration AddCategoryFiltertext
         Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
 11. Transaction
+
+        # See http://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html
+        
         ActiveRecord::Base.transaction do
         end
+        
+        or
+        
+        ActiveRecord::Base.transaction(requires_new: true) do
+        end
+
 12. Logging
         Rails.logger.debug{"test"}
         Rails.logger.info{"test"}
