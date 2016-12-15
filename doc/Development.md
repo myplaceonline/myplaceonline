@@ -783,3 +783,7 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 
 * http://localhost:5601/
 * Search: _id:1004 AND _type:museum
+
+## rsyslog
+
+* tcpdump -Xni eth1 port 514
