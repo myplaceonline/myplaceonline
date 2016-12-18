@@ -13,3 +13,6 @@
 [submodule "src/myplaceonline_chefrepo"]
 	path = src/myplaceonline_chefrepo
 	url = https://github.com/myplaceonline/myplaceonline_chefrepo.git
+[submodule "src/myplaceonline_posixcubes"]
+	path = src/myplaceonline_posixcubes
+	url = https://github.com/myplaceonline/myplaceonline_posixcubes.git
