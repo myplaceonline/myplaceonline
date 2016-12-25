@@ -118,7 +118,7 @@
   * To put the backends into maintenance mode, check all web* servers and apply "Set state to MAINT"
   * To remove maintenance mode, check all web* servers and apply "Set state to READY"
 
-* Grafana: https://admin.myplaceonline.com:3000/
+* Grafana: https://grafana.myplaceonline.com/
 
 * Frontend HTTP requests:
 
