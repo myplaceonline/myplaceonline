@@ -112,8 +112,8 @@
 
         ssh root@db2.myplaceonline.com tail -50f /var/log/messages
 
-* HAProxy statistics (admin/{chef encrypted data bag: passwords/haproxy/stats})
-  * export DATABAG=globalsecrets && knife data bag show $DATABAG $DATABAG --secret-file secret_key_databag_$DATABAG 2>/dev/null | grep -A 1 haproxy: | grep stats
+* HAProxy statistics (admin/cubevar_app_passwords_haproxy_stats)
+  * posixcube.sh show | grep cubevar_app_passwords_haproxy_stats
   * https://myplaceonline.com:9443/
   * To put the backends into maintenance mode, check all web* servers and apply "Set state to MAINT"
   * To remove maintenance mode, check all web* servers and apply "Set state to READY"
@@ -128,17 +128,9 @@
 
         ssh root@db2.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
         
-        PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/passenger-instreg/ /usr/local/share/gems/gems/passenger-5.0.30/bin/passenger-status
-        
-        PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/passenger-instreg/ /usr/local/share/gems/gems/passenger-5.0.30/bin/passenger-memory-stats
+        PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-status
+        PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-memory-stats
 
-* HAProxy Log
-
-        ssh root@frontend2.myplaceonline.com "cat /var/log/haproxy.log"
-
-  * "8.2.3. HTTP log format" in http://www.haproxy.org/download/1.7/doc/configuration.txt
-
-* Chef administration: https://admin.myplaceonline.com/
 * ElasticSearch:
 
         curl http://db2-internal.myplaceonline.com:9200/_stats?pretty=1
