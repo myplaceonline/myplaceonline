@@ -16,9 +16,9 @@
     > * Prefer method { do_stuff } instead of method{do_stuff} for single-line blocks.
     > * Follow the conventions in the source you see used already.
 
-1.  Pass keyword arguments to methods. This is more verbose and lengthens
-    refactoring, but it makes function calls self-descriptive. Ideally, there would 
-    be a way to combine
+1.  Except for trivially self-description functions, pass keyword arguments to
+    methods. This is more verbose and lengthens refactoring, but it makes
+    function calls self-descriptive. Ideally, there would be a way to combine
     [arbitrary keyword arguments](https://github.com/ruby/ruby/blob/trunk/doc/syntax/methods.rdoc#keyword-arguments)
     with default values in the function definition, thus allowing transparent
     passing of hashes across functions and avoiding needing to go into the definition
