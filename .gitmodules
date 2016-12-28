@@ -4,15 +4,6 @@
 [submodule "src/myplaceonline_phonegap"]
 	path = src/myplaceonline_phonegap
 	url = https://github.com/myplaceonline/myplaceonline_phonegap.git
-[submodule "src/myplaceonline_scripts"]
-	path = src/myplaceonline_scripts
-	url = https://github.com/myplaceonline/myplaceonline_scripts.git
-[submodule "src/myplaceonline_ffclipboard"]
-	path = src/myplaceonline_ffclipboard
-	url = https://github.com/myplaceonline/myplaceonline_ffclipboard.git
-[submodule "src/myplaceonline_chefrepo"]
-	path = src/myplaceonline_chefrepo
-	url = https://github.com/myplaceonline/myplaceonline_chefrepo.git
 [submodule "src/myplaceonline_posixcubes"]
 	path = src/myplaceonline_posixcubes
 	url = https://github.com/myplaceonline/myplaceonline_posixcubes.git
