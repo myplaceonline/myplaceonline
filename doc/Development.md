@@ -16,6 +16,8 @@
     > * Prefer method { do_stuff } instead of method{do_stuff} for single-line blocks.
     > * Follow the conventions in the source you see used already.
 
+1.  Prefer double quotes (") over single quotes (').
+
 1.  Except for trivially self-description functions, pass keyword arguments to
     methods. This is more verbose and lengthens refactoring, but it makes
     function calls self-descriptive. Ideally, there would be a way to combine
@@ -70,41 +72,40 @@
 
 ## Architecture
 
-                                               web1
+                                               web4
                                             +--------+            +---------+
                                             + nginx  +            +         |
-                                         XXXX  RoR   XXXXXXXXXXXXXX   db1   |
-                       frontend2       XXX  +        +        XX  +         |
+                                         XXXX  RoR   XXXXXXXXXXXXXX   db5   |
+                       frontend1       XXX  +        +        XX  +         |
     +--------+       +-----------+   XXX    +--------+       XX   +----+----+
     |        |       |           + XXX                     XXX         | Streaming
     |  user  +------->  haproxy  XXXX                     XX           | Replication
-    |        |       |           +  XX         web2      XX            |
+    |        |       |           +  XX         web5      XX            |
     +--------+       +-----------+   XXX    +--------+  XX        +----v----+
                                        XXX  + nginx  +  X         |         |
-                                         XXXX  RoR   XXXX         |   db2   |
+                                         XXXX  RoR   XXXX         |   db6   |
                                             +        +            |         |
                                             +--------+            +---------+
     
     
-                                     admin             sendgrid
-                                  +----------+        +---------+
-                                  |          |        |         |
-                                  |   chef   |        |  email  |
-                                  |          |        |         |
-                                  +----------+        +---------+
+                                                       sendgrid
+                                                      +---------+
+                                                      |         |
+                                                      |  email  |
+                                                      |         |
+                                                      +---------+
 
 * Made with ASCIIFlow Infinity: http://asciiflow.com/
 
 ### High Availability
 
 * The database is backed up asynchronously using PostgreSQL streaming
-  replication; however, it is not currently a hot-standy.
+  replication. It's a read-only standby that may be promoted in case of primary
+  database failure.
 * Some user-uploaded files are stored on the filesystem instead of in the
   database. These are stored on the primary database server and the web servers
   read/write over NFS. This NFS share is rsync'ed nightly to the backup
   database server.
-* If the frontend server is unavailable, create another frontend server
-  and then change the DigitalOcean Floating IP address to point to it.
 
 ### Administration
 
@@ -122,23 +123,24 @@
 
 * Frontend HTTP requests:
 
-        ssh root@frontend2.myplaceonline.com "date; tail -50f /var/log/haproxy.log" | grep -v -e STATS
+        ssh root@frontend1.myplaceonline.com "date; tail -50f /var/log/haproxy.log" | grep -v -e STATS
 
 * Rails:
 
-        ssh root@db2.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
+        ssh root@db6.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
         
         PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-status
         PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-memory-stats
 
 * ElasticSearch:
 
-        curl http://db2-internal.myplaceonline.com:9200/_stats?pretty=1
+        curl http://db6-internal.myplaceonline.com:9200/
+        curl http://db6-internal.myplaceonline.com:9200/_stats?pretty=1
 
 * Cleanup elasticsearch
 
-        curl http://db2-internal.myplaceonline.com:9200/_aliases?pretty=1
-        curl -XDELETE 'http://db2-internal.myplaceonline.com:9200/logstash-2016.08*/'
+        curl http://db6-internal.myplaceonline.com:9200/_aliases?pretty=1
+        curl -XDELETE 'http://db6-internal.myplaceonline.com:9200/logstash-2016.08*/'
 
 * Take a web server down for maintenance:
 
