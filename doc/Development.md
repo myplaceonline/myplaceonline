@@ -490,7 +490,6 @@ $ bin/rails generate scaffold ${X} ${COLUMNS} visit_count:integer archived:datet
 # You'll get the following warning and you should answer 'Y':
   conflict    app/assets/stylesheets/scaffolds.css.scss
   Overwrite /work/myplaceonline/src/src/myplaceonline_rails/app/assets/stylesheets/scaffolds.css.scss? (enter "h" for help) [Ynaqdh] Y
-$ git checkout -- app/assets/stylesheets/scaffolds.css.scss
 # Run migrate
 $ bin/rake db:migrate
 # Edit app/models/identity.rb
@@ -509,7 +508,7 @@ $ RAILS_ENV=development bin/rake myp:dump
 $ pkill -9 -f "spring.*test mode"
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Add migration with UserIndex.reset!
-$ bin/rails generate migration ResetSearch017
+$ bin/rails generate migration ResetSearch018
   def change
     UserIndex.reset!
   end
