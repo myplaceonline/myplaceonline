@@ -55,6 +55,7 @@
             end
             
             foo(required_param1: 1, optional_param1: "test")
+            
 1.  Try to keep lines less than 120 characters. Line splitting example:
         
         foo(
