@@ -2,11 +2,13 @@
 
 ## Summary
 
-Do you feel overwhelmed by information? "When was the last time I had a dentist appointment?" "Where did I put that link?" Myplaceonline helps you organize your thoughts.
+myplaceonline is your online helper.
+
+Do you feel overwhelmed by information? "When was the last time I had a dentist appointment?" "Where did I put that link?" Myplaceonline helps you organize your thoughts, documents, files, etc.
 
 Remember those things that usually make you smile? Talking to a friend, or blowing bubbles, or hiking a mountain. Myplaceonline helps you do the things that give you joy.
 
-Are you feeling fulfilled? Myplaceonline helps you find meaning in the world.
+Are you feeling fulfilled? Amongst other things, Myplaceonline can remind you to enter three good things that went okay every day, for which there's evidence this will increase your happiness. Myplaceonline helps you find meaning in the world.
 
 [https://myplaceonline.com/](https://myplaceonline.com/)
 
