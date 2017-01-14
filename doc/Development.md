@@ -359,13 +359,6 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
       def update_file_folders
         put_files_in_folder(quest_files, [I18n.t("myplaceonline.category.quests"), display])
       end
-    config/locales
-      quests:
-        files: "Files/Pictures"
-        file: "File/Picture"
-        add_file: "Add File/Picture"
-        add_files: "Add File(s)/Picture(s)"
-        delete_file: "Delete File/Picture"
     _form
       <%=
         render partial: "myplaceonline/pictures_form", locals: {
@@ -373,18 +366,18 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
           obj: obj,
           position_field: :position,
           pictures_field: :quest_files,
-          item_placeholder: "myplaceonline.quests.file",
-          heading: "myplaceonline.quests.files",
-          addbutton: "myplaceonline.quests.add_file",
-          addbutton_multi: "myplaceonline.quests.add_files",
-          deletebutton: "myplaceonline.quests.delete_file"
+          item_placeholder: "myplaceonline.identity_files.file",
+          heading: "myplaceonline.identity_files.files",
+          addbutton: "myplaceonline.identity_files.add_file",
+          addbutton_multi: "myplaceonline.identity_files.add_files",
+          deletebutton: "myplaceonline.identity_files.delete_file"
         }
       %>
     show
       <%=
         render partial: 'myplaceonline/pictures', locals: {
           pics: obj.quest_files,
-          placeholder: "myplaceonline.quests.file"
+          placeholder: "myplaceonline.identity_files.file"
         }
       %>
 9.  Add model initialization code
@@ -414,6 +407,9 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
 13. Rebuild index
         $ bin/rails generate migration RebuildIndex005
         UserIndex.reset!
+14. Error: ArgumentError: Index name '...' on table '...' is too long; the limit is 63 characters
+    Modify migration to set index: false, and:
+    add_index :table_name, :column_id, name: "table_shortname_on_column_shortname"
 
 ### Jobs
 
