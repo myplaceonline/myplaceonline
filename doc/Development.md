@@ -44,13 +44,13 @@
         throw a MissingArgumentError using the check_hash method. Example:
             
             def foo(**options)
-              options[:optional_param1] ||= "foo default"
+              options = { optional_param1: "foo default" }.merge(options)
               bar(options)
             end
             
             def bar(**options)
               MissingArgumentError.check_hash(name: :required_param1, hash: options)
-              options[:optional_param1] ||= "bar default"
+              options = { optional_param1: "bar default" }.merge(options)
               # ... definition ...
             end
             
