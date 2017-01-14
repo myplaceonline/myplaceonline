@@ -492,7 +492,7 @@ $ bin/rails generate scaffold ${X} ${COLUMNS} visit_count:integer archived:datet
   conflict    app/assets/stylesheets/scaffolds.css.scss
   Overwrite /work/myplaceonline/src/src/myplaceonline_rails/app/assets/stylesheets/scaffolds.css.scss? (enter "h" for help) [Ynaqdh] Y
 # Run migrate
-$ bin/rake db:migrate
+$ bin/rails db:migrate
 # Edit app/models/identity.rb
   has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
