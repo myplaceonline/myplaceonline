@@ -505,12 +505,12 @@ $ RAILS_ENV=development bin/rake myp:dump
 $ pkill -9 -f "spring.*test mode"
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Add migration with UserIndex.reset!
-$ bin/rails generate migration ResetSearch019
+$ bin/rails generate migration ResetSearch020
   def change
     UserIndex.reset!
   end
 # Run migrate
-$ bin/rake db:migrate
+$ bin/rails db:migrate
 ```
 
 #### Add encrypted column(s)
