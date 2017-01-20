@@ -336,6 +336,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
     $ bin/rails generate model quest_file quest:references:index identity_file:references:index identity:references:index position:integer
     $ bin/rails db:migrate
     $ cp app/models/quest_file.rb app/models/${X}
+      And then update the parent
 
     controller:
 
