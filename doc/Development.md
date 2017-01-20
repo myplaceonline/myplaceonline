@@ -348,17 +348,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
       quest_files_attributes: FilesController.multi_param_names
     
     model:
-      include AllowExistingConcern
-
-      has_many :quest_files, -> { order("position ASC, updated_at ASC") }, :dependent => :destroy
-      accepts_nested_attributes_for :quest_files, allow_destroy: true, reject_if: :all_blank
-      allow_existing_children :quest_files, [{:name => :identity_file}]
-
-      before_validation :update_file_folders
-    
-      def update_file_folders
-        put_files_in_folder(quest_files, [I18n.t("myplaceonline.category.quests"), display])
-      end
+      child_files
     _form
       <%=
         render partial: "myplaceonline/pictures_form", locals: {
@@ -375,7 +365,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
       %>
     show
       <%=
-        render partial: 'myplaceonline/pictures', locals: {
+        render partial: "myplaceonline/pictures", locals: {
           pics: obj.quest_files,
           placeholder: "myplaceonline.identity_files.file"
         }
