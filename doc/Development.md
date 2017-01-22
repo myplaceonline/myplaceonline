@@ -484,19 +484,19 @@ $ bin/rails db:migrate
   has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
 $ X=...
-# Change after: cp app/controllers/wisdoms_controller.rb app/controllers/${X}_controller.rb
+# Change after: cp app/controllers/test_objects_controller.rb app/controllers/${X}_controller.rb
 # Create a myplaceonline.${X} section config/locales/en.yml based on myplaceonline.wisdom
 # rm app/views/${X}/*
-# cp app/views/wisdoms/* app/views/${X} and replace all instances of wisdom with ${X}
+# cp app/views/test_objects/* app/views/${X} and replace all instances of wisdom with ${X}
 # Edit config/routes.rb and remove the resources line that was auto-generated
-# Replace ${X} with singular version: cp app/models/wisdom.rb app/models/${X}.rb
+# Replace ${X} with singular version: cp app/models/test_object.rb app/models/${X}.rb
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
-# cp test/controllers/wisdoms_controller_test.rb test/controllers/${X}_controller_test.rb
+# cp test/controllers/test_objects_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=development bin/rake myp:dump
 $ pkill -9 -f "spring.*test mode"
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Add migration with UserIndex.reset!
-$ bin/rails generate migration ResetSearch021
+$ bin/rails generate migration ResetSearch022
   def change
     UserIndex.reset!
   end
