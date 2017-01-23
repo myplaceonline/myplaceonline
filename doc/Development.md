@@ -333,9 +333,9 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
             end
           end
 8.  List of Files/Pictures
-    $ bin/rails generate model quest_file quest:references:index identity_file:references:index identity:references:index position:integer
+    $ bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer
     $ bin/rails db:migrate
-    $ cp app/models/quest_file.rb app/models/${X}
+    $ cp app/models/test_object_file.rb app/models/${X}
       And then update the parent
 
     controller:
@@ -493,7 +493,6 @@ $ X=...
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see wisdoms.yml)
 # cp test/controllers/test_objects_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=development bin/rake myp:dump
-$ pkill -9 -f "spring.*test mode"
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Add migration with UserIndex.reset!
 $ bin/rails generate migration ResetSearch022
