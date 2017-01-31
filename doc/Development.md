@@ -70,6 +70,7 @@
 
 * Site tests:
   * https://www.google.com/webmasters/tools/mobile-friendly/
+* Passwords: https://www.schneier.com/blog/archives/2014/03/choosing_secure_1.html
 
 ## Architecture
 
