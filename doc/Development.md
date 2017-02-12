@@ -18,14 +18,15 @@
 
 1.  Prefer double quotes (") over single quotes (').
 
-1.  Except for trivially self-description functions, pass keyword arguments to
-    methods. This is more verbose and lengthens refactoring, but it makes
-    function calls self-descriptive. Ideally, there would be a way to combine
+1.  Except for self-descriptive arguments (by function name or usage), pass
+    keyword arguments to methods. This is more verbose and lengthens
+    refactoring, but it makes function calls self-descriptive. Ideally, there
+    would be a way to combine
     [arbitrary keyword arguments](https://github.com/ruby/ruby/blob/trunk/doc/syntax/methods.rdoc#keyword-arguments)
     with default values in the function definition, thus allowing transparent
-    passing of hashes across functions and avoiding needing to go into the definition
-    of the function to find the default; however, Ruby doesn't support this.
-    Instead, follow a hybrid approach:
+    passing of hashes across functions and avoiding needing to go into the
+    definition of the function to find the default; however, Ruby doesn't
+    support this. Instead, follow a hybrid approach:
     1.  If a method does not expect to pass its options as a hash
         to another method, then define explicit keyword arguments (with
         required and optional arguments as needed).
@@ -64,7 +65,6 @@
           required_param3: 3,
           optional_param1: "test"
         )
-1.  Prefer double quotes over single quotes.
 
 ## General
 
