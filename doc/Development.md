@@ -492,7 +492,7 @@ $ X=...
 $ RAILS_ENV=development bin/rake myp:dump
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
 # Add migration with UserIndex.reset!
-$ bin/rails generate migration ResetSearch028
+$ bin/rails generate migration ResetSearch029
   def change
     UserIndex.reset!
   end
