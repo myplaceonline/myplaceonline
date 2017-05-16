@@ -509,7 +509,7 @@ $ bin/rails generate migration AddEncryptionTo${MODEL} ${COLUMN}_encrypted:refer
 $ bin/rake db:migrate
 # Add to model:
   include EncryptedConcern
-  belongs_to :${COLUMN}_encrypted, class_name: EncryptedValue, dependent: :destroy, :autosave => true
+  belongs_to :${COLUMN}_encrypted, class_name: "EncryptedValue", dependent: :destroy, :autosave => true
   belongs_to_encrypted :${COLUMN}
   before_validation :${COLUMN}_finalize
 # Change any validations to check both the encrypted and unencrypted values:
