@@ -491,13 +491,6 @@ $ X=...
 # cp test/controllers/test_objects_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=development bin/rake myp:dump
 $ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reload_categories test
-# Add migration with UserIndex.reset!
-$ bin/rails generate migration ResetSearch032
-  def change
-    UserIndex.reset!
-  end
-# Run migrate
-$ bin/rails db:migrate
 ```
 
 #### Add encrypted column(s)
