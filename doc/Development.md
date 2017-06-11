@@ -72,6 +72,10 @@
   * https://www.google.com/webmasters/tools/mobile-friendly/
 * Passwords: https://www.schneier.com/blog/archives/2014/03/choosing_secure_1.html
 
+"Note: Out-of-band authentication using the PSTN (SMS or voice) is discouraged and is being considered for removal in future editions of this guideline." (https://pages.nist.gov/800-63-3/sp800-63b.html)
+
+https://github.com/berzerk0/Probable-Wordlists
+
 ## Architecture
 
                                                web4
