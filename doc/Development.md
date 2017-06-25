@@ -180,6 +180,9 @@ Common issues:
 * Restart journald: sudo systemctl restart systemd-journald.service
 * Clear: journalctl --vacuum-size=1M
 
+* PostgreSQL archive files in 
+** pg_archivecleanup /var/lib/pgsql/data/pg_xlog/
+
 ## Design Goals
 
 * Mobile/tablet first design. Single Page Application (SPA): http://docs.phonegap.com/en/3.5.0/guide_next_index.md.html
