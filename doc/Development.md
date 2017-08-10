@@ -71,6 +71,13 @@
 * Site tests:
   * https://www.google.com/webmasters/tools/mobile-friendly/
 * Passwords: https://www.schneier.com/blog/archives/2014/03/choosing_secure_1.html
+* Performance/Security:
+  * https://developers.google.com/web/tools/lighthouse/
+  * https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fmyplaceonline.com%2F
+  * https://securityheaders.io/?q=myplaceonline.com&followRedirects=on
+  * https://www.ssllabs.com/ssltest/analyze.html?d=myplaceonline.com&hideResults=on
+  * https://observatory.mozilla.org/analyze.html?host=myplaceonline.com
+  * https://monkeytest.it/
 
 "Note: Out-of-band authentication using the PSTN (SMS or voice) is discouraged and is being considered for removal in future editions of this guideline." (https://pages.nist.gov/800-63-3/sp800-63b.html)
 
