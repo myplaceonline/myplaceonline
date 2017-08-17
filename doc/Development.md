@@ -771,3 +771,12 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 ## rsyslog
 
 * tcpdump -Xni eth1 port 514
+
+# Add domain
+
+* SendGrid > Settings > Whitelabels > Add Domain
+  * Subdomain = email
+  * Domain = Add new domain
+* Update SPF @ TXT record to include both the email host and sendgrid, e.g.:
+  * v=spf1 include:zoho.com include:sendgrid.net ~all
+  * v=spf1 include:_spf.google.com include:sendgrid.net ~all
