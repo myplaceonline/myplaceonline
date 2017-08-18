@@ -690,7 +690,7 @@ $ bin/rake
 
 ## Building New Version
 
-1. Bump app version in config.xml
+1. Bump version and versionCode in config.xml
 1. Commit any changes in src/myplaceonline_phonegap
 1. Go to https://build.phonegap.com/
 1. Login with Adobe ID
