@@ -774,9 +774,16 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 
 # Add domain
 
+* DNS
+  * Set A records to frontend
 * SendGrid > Settings > Whitelabels > Add Domain
   * Subdomain = email
   * Domain = Add new domain
+  * Create NDS domain keys
 * Update SPF @ TXT record to include both the email host and sendgrid, e.g.:
   * v=spf1 include:zoho.com include:sendgrid.net ~all
   * v=spf1 include:_spf.google.com include:sendgrid.net ~all
+* Email hosting enable SPF and DKIM
+* Create WebsiteDomain with all of the hosting details filled out and update verified = true on it
+* Update cubevar_app_letsencrypt_tls_domains and cubevar_app_tls_domains in envars_production.sh
+* Log into frontend and run the commands in /etc/cron.d/letsencrypt
