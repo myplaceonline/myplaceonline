@@ -175,13 +175,14 @@ Common issues:
 * journalctl -p warning
 
 * Linux
-** `atop -r` and use `t` and `T` to move forward/backward, and `b` to jump to time
-** Crashes in /var/crash/
+  * `atop -r` and use `t` and `T` to move forward/backward, and `b` to jump to time
+    * ls -l /var/log/atop/atop_*
+* Crashes in /var/crash/
 * Sometimes stuff in
-** /var/www/html/myplaceonline/log/passenger.log
+  * /var/www/html/myplaceonline/log/passenger.log
 * ElasticSearch
-** curl http://db2-internal.myplaceonline.com:9200/_cluster/stats?pretty
-** /var/log/elasticsearch/
+  * curl http://db2-internal.myplaceonline.com:9200/_cluster/stats?pretty
+  * /var/log/elasticsearch/
 
 * Journal disk usage: journalctl --disk-usage
 * Restart journald: sudo systemctl restart systemd-journald.service
