@@ -142,6 +142,15 @@ https://github.com/berzerk0/Probable-Wordlists
         
         log-format             %ci:%cp\ [%t]\ %ft\ %b/%s\ %Th/%Ti/%TR/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %U\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %{+Q}r\ %hr
         
+                      first request               2nd request
+            |<-------------------------------->|<-------------- ...
+            t         tr                       t    tr ...
+            |----|----|----|----|----|----|----|----|--
+            : Th   Ti   TR   Tw   Tc   Tr   Td : Ti   ...
+            :<---- Tq ---->:                   :
+            :<-------------- Tt -------------->:
+                      :<--------- Ta --------->:
+        
         Times in milliseconds:
         
         - Th: total time to accept tcp connection and execute handshakes for low level
