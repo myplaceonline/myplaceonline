@@ -137,7 +137,98 @@ https://github.com/berzerk0/Probable-Wordlists
 * Frontend HTTP requests:
 
         ssh root@frontend1.myplaceonline.com "date; tail -50f /var/log/haproxy.log" | grep -v -e STATS
+        
+        Log Format (http://cbonte.github.io/haproxy-dconv/1.7/configuration.html#8.2.4):
+        
+        log-format             %ci:%cp\ [%t]\ %ft\ %b/%s\ %Th/%Ti/%TR/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %U\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %{+Q}r\ %hr
+        
+        Times in milliseconds:
+        
+        - Th: total time to accept tcp connection and execute handshakes for low level
+          protocols. Currently, these protocoles are proxy-protocol and SSL. This may
+          only happen once during the whole connection's lifetime. A large time here
+          may indicate that the client only pre-established the connection without
+          speaking, that it is experiencing network issues preventing it from
+          completing a handshake in a reasonable time (eg: MTU issues), or that an
+          SSL handshake was very expensive to compute.
 
+        - Ti: is the idle time before the HTTP request (HTTP mode only). This timer
+          counts between the end of the handshakes and the first byte of the HTTP
+          request. When dealing with a second request in keep-alive mode, it starts
+          to count after the end of the transmission the previous response. Some
+          browsers pre-establish connections to a server in order to reduce the
+          latency of a future request, and keep them pending until they need it. This
+          delay will be reported as the idle time. A value of -1 indicates that
+          nothing was received on the connection.
+
+        - TR: total time to get the client request (HTTP mode only). It's the time
+          elapsed between the first bytes received and the moment the proxy received
+          the empty line marking the end of the HTTP headers. The value "-1"
+          indicates that the end of headers has never been seen. This happens when
+          the client closes prematurely or times out. This time is usually very short
+          since most requests fit in a single packet. A large time may indicate a
+          request typed by hand during a test.
+
+        - Tq: total time to get the client request from the accept date or since the
+          emission of the last byte of the previous response (HTTP mode only). It's
+          exactly equalt to Th + Ti + TR unless any of them is -1, in which case it
+          returns -1 as well. This timer used to be very useful before the arrival of
+          HTTP keep-alive and browsers' pre-connect feature. It's recommended to drop
+          it in favor of TR nowadays, as the idle time adds a lot of noise to the
+          reports.
+
+        - Tw: total time spent in the queues waiting for a connection slot. It
+          accounts for backend queue as well as the server queues, and depends on the
+          queue size, and the time needed for the server to complete previous
+          requests. The value "-1" means that the request was killed before reaching
+          the queue, which is generally what happens with invalid or denied requests.
+
+        - Tc: total time to establish the TCP connection to the server. It's the time
+          elapsed between the moment the proxy sent the connection request, and the
+          moment it was acknowledged by the server, or between the TCP SYN packet and
+          the matching SYN/ACK packet in return. The value "-1" means that the
+          connection never established.
+
+        - Tr: server response time (HTTP mode only). It's the time elapsed between
+          the moment the TCP connection was established to the server and the moment
+          the server sent its complete response headers. It purely shows its request
+          processing time, without the network overhead due to the data transmission.
+          It is worth noting that when the client has data to send to the server, for
+          instance during a POST request, the time already runs, and this can distort
+          apparent response time. For this reason, it's generally wise not to trust
+          too much this field for POST requests initiated from clients behind an
+          untrusted network. A value of "-1" here means that the last the response
+          header (empty line) was never seen, most likely because the server timeout
+          stroke before the server managed to process the request.
+
+        - Ta: total active time for the HTTP request, between the moment the proxy
+          received the first byte of the request header and the emission of the last
+          byte of the response body. The exception is when the "logasap" option is
+          specified. In this case, it only equals (TR+Tw+Tc+Tr), and is prefixed with
+          a '+' sign. From this field, we can deduce "Td", the data transmission time,
+          by subtracting other timers when valid :
+
+              Td = Ta - (TR + Tw + Tc + Tr)
+
+          Timers with "-1" values have to be excluded from this equation. Note that
+          "Ta" can never be negative.
+
+        - Tt: total session duration time, between the moment the proxy accepted it
+          and the moment both ends were closed. The exception is when the "logasap"
+          option is specified. In this case, it only equals (Th+Ti+TR+Tw+Tc+Tr), and
+          is prefixed with a '+' sign. From this field, we can deduce "Td", the data
+          transmission time, by subtracting other timers when valid :
+
+              Td = Tt - (Th + Ti + TR + Tw + Tc + Tr)
+
+          Timers with "-1" values have to be excluded from this equation. In TCP
+          mode, "Ti", "Tq" and "Tr" have to be excluded too. Note that "Tt" can never
+          be negative and that for HTTP, Tt is simply equal to (Th+Ti+Ta).
+        
+        Example output:
+        
+        [...]: ${IP}:57772 [19/Sep/2017:01:32:02.532] myplaceonline~ servers/web4 299/0/1/31/331 200 7596 81 2/1/0/0/0 0/0 "GET / HTTP/1.1" {curl/7.53.1|}
+        
 * Rails:
 
         ssh root@db6.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
