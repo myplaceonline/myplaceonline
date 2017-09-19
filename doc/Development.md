@@ -140,7 +140,7 @@ https://github.com/berzerk0/Probable-Wordlists
         
         Log Format (http://cbonte.github.io/haproxy-dconv/1.7/configuration.html#8.2.4):
         
-        log-format             %ci:%cp\ [%t]\ %ft\ %b/%s\ %Th/%Ti/%TR/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %U\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %{+Q}r\ %hr
+        log-format             %ci:%cp\ [%t]\ %ft\ %b/%s\ %Th/%Ti/%TR/%Tw/%Tc/%Tr/%Tt\ %ST\ %B\ %U\ %ac/%fc/%bc/%sc/%rc\ %sq/%bq\ %{+Q}r\ %hr %hs
         
                       first request               2nd request
             |<-------------------------------->|<-------------- ...
@@ -236,7 +236,7 @@ https://github.com/berzerk0/Probable-Wordlists
         
         Example output:
         
-        [...]: ${IP}:57772 [19/Sep/2017:01:32:02.532] myplaceonline~ servers/web4 299/0/1/31/331 200 7596 81 2/1/0/0/0 0/0 "GET / HTTP/1.1" {curl/7.53.1|}
+        [...] servers/web4 324/34/0/0/1/16/376 200 7596 81 2/1/0/0/0 0/0 "GET / HTTP/1.1" {curl/7.53.1|} {ed038329-634f-4d6b-87ab-62047c653b2a}
         
 * Rails:
 
@@ -876,7 +876,7 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 # Add domain
 
 * DNS
-  * Set A records to frontend
+  * Set A records to main floating IP
 * Email hosting: enable SPF and DKIM (emailer)
 * SendGrid > Settings > Whitelabels > Add Domain
   * Subdomain = email
