@@ -240,10 +240,27 @@ https://github.com/berzerk0/Probable-Wordlists
         
 * Rails:
 
-        ssh root@db6.myplaceonline.com "tail -f /var/log/messages" | grep "response time in millis"
+        ssh root@db6.myplaceonline.com "tail -f /var/log/messages" | grep rails
+        
+        To check the response time of a request or tracked sub-executions, check for "response time in milliseconds":
+        
+        Sep 19 04:40:53 web12 rails[18477]: Started GET "/" for [...] at 2017-09-19 04:40:53 +0000
+        Sep 19 04:40:53 web12 rails[18477]: Processing by WelcomeController#index as */*
+        Sep 19 04:40:53 web12 rails[18477]: Completed 200 OK in 79ms (Views: 28.3ms | ActiveRecord: 2.4ms)
+        Sep 19 04:40:53 web12 rails[18477]: MyplaceonlineRack.call response time in milliseconds = 85.72 context: {:uri=>"/", :request_id=>"c8757166-0f21-4ebe-8d7c-14e80f77c907", :user_id=>-1}
         
         PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-status
         PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-memory-stats
+
+* Database:
+
+        log_min_duration_statement controls which SQLs (with response time) are printed. Use 0 to print all statements;
+        otherwise, a millisecond threshold.
+        
+        Messages go to /var/log/messages:
+        
+        Sep 19 04:55:27 db5 postgres[19587]: [2412-1] 2017-09-19 04:55:27 UTC myplaceonline@10.134.19.183(37608):myplaceonline_production [19587] LOG:  duration: 0.072 ms  execute a19: SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2
+        Sep 19 04:55:27 db5 postgres[19587]: [2412-2] 2017-09-19 04:55:27 UTC myplaceonline@10.134.19.183(37608):myplaceonline_production [19587] DETAIL:  parameters: $1 = '1', $2 = '1'
 
 * ElasticSearch:
 
