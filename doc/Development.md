@@ -894,7 +894,9 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 
 * DNS
   * Set A records to main floating IP
-* Email hosting: enable SPF and DKIM (emailer)
+* Email hosting:
+  * Add to cubevar_app_email_domains
+  * Enable SPF and DKIM (emailer)
 * SendGrid > Settings > Whitelabels > Add Domain
   * Subdomain = email
   * Domain = Add new domain
