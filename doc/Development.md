@@ -126,6 +126,10 @@ https://github.com/berzerk0/Probable-Wordlists
 
         ssh root@db2.myplaceonline.com tail -50f /var/log/messages
 
+* Rails logs
+
+        multitail -l "ssh root@web4.myplaceonline.com tail -50f /var/log/messages | grep rails" -l "ssh root@web4.myplaceonline.com tail -50f /var/www/html/myplaceonline/log/passenger.log" -l "ssh root@web12.myplaceonline.com tail -50f /var/log/messages | grep rails" -l "ssh root@web12.myplaceonline.com tail -50f /var/www/html/myplaceonline/log/passenger.log"
+
 * HAProxy statistics (admin/cubevar_app_passwords_haproxy_stats)
   * posixcube.sh show | grep cubevar_app_passwords_haproxy_stats
   * https://myplaceonline.com:9443/
@@ -285,6 +289,8 @@ https://github.com/berzerk0/Probable-Wordlists
 
           grep rails /var/log/messages
           cat /var/www/html/myplaceonline/log/passenger.log
+
+  * multitail -l "ssh root@web4.myplaceonline.com tail -f /var/www/html/myplaceonline/log/passenger.log" -l "ssh root@web12.myplaceonline.com tail -f /var/www/html/myplaceonline/log/passenger.log"
 
 Common issues:
 * grep "rails.*processed.*[^0] failed" /var/log/messages
