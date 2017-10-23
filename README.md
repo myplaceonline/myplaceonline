@@ -65,7 +65,7 @@ sudo -u postgres psql postgres
   postgres=# \q
 ```
 
-ElasticSearch is not required but highly recommended:
+ElasticSearch is not required but highly recommended (for searching, recently used items, etc.):
 
 ```
 sudo tee /etc/yum.repos.d/elasticsearch.repo > /dev/null <<'HERE'
