@@ -44,8 +44,8 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 #### Fedora, CentOS, RHEL
 
 ```
-$ sudo yum install git ruby ruby-devel rubygem-bundler zlib-devel patch nodejs
-$ sudo yum groupinstall "C Development Tools and Libraries"
+$ sudo dnf install git ruby ruby-devel rubygem-bundler zlib-devel patch nodejs redhat-rpm-config libcurl-devel libxml2-devel ImageMagick-devel
+$ sudo dnf groupinstall "C Development Tools and Libraries"
 ```
 
 ### <a name="prepdb"></a>Prepare Database (e.g. PostgreSQL)
@@ -53,35 +53,59 @@ $ sudo yum groupinstall "C Development Tools and Libraries"
 #### Fedora, CentOS, RHEL
 
 ```
-$ sudo yum install postgresql postgresql-server postgresql-devel postgresql-libs
-$ sudo postgresql-setup initdb
-$ sudo systemctl enable postgresql
-$ sudo sed -ri 's/(host    all.*)ident/\1password/' /var/lib/pgsql/data/pg_hba.conf
-$ sudo systemctl start postgresql
-$ sudo gem install pg
-$ sudo -u postgres psql postgres
-postgres=# CREATE ROLE myplaceonline WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
-# http://stackoverflow.com/a/28515064/5657303
-postgres=# ALTER ROLE myplaceonline WITH SUPERUSER;
-postgres=# \q
+sudo dnf install postgresql postgresql-server postgresql-devel postgresql-libs
+sudo postgresql-setup --initdb --unit postgresql
+sudo sed -ri 's/(host    all.*)ident/\1password/' /var/lib/pgsql/data/pg_hba.conf
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+sudo gem install pg
+sudo -u postgres psql postgres
+  postgres=# CREATE ROLE myplaceonline WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
+  postgres=# ALTER ROLE myplaceonline WITH SUPERUSER;
+  postgres=# \q
+```
+
+ElasticSearch is not required but highly recommended:
+
+```
+sudo tee /etc/yum.repos.d/elasticsearch.repo > /dev/null <<'HERE'
+[elasticsearch-5.x]
+name=Elasticsearch repository for 5.x packages
+baseurl=https://artifacts.elastic.co/packages/5.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+HERE
+sudo dnf install elasticsearch
+sudo systemctl start elasticsearch
+sudo systemctl enable elasticsearch
 ```
 
 ### <a name="prepsrc"></a>Download and prepare the source code
 
 ```
-$ git clone --recursive https://github.com/myplaceonline/myplaceonline.git
-$ cd myplaceonline/src/myplaceonline_rails/
-$ cp config/database.yml.example config/database.yml
-# Replace 'letmein' with your database user password:
-$ sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
-$ bin/bundle install
-$ bin/rake db:drop db:create db:schema:load db:seed
+git clone --recursive https://github.com/myplaceonline/myplaceonline.git
+cd myplaceonline/src/myplaceonline_rails/
+cp config/database.yml.example config/database.yml
+
+# Replace 'letmein' with your database user password created above if you've used something other than 'letmein':
+sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
+
+bin/bundle install
+
+# If you want to skip importing some large quantities of unnecessary data like a list of all museums in the U.S., first run:
+export SKIP_LARGE_UNNEEDED_IMPORTS=true
+
+# Now to install everything:
+bin/rake db:drop db:create db:schema:load db:seed
 ```
 
 ### <a name="run"></a>Run the Rails server
 
 ```
-$ bin/rails server
+bin/rails server
 ```
 
 Open [http://localhost:3000/](http://localhost:3000/)
@@ -98,7 +122,8 @@ $ git submodule foreach "git config --replace-all user.name \"${NAME}\""
 $ git submodule foreach "git config --replace-all user.email \"${EMAIL}\""
 $ git submodule foreach git checkout master
 # Optional if using SSH Keys
-$ git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+$ git config url.ssh://git@github.com/.insteadOf https://github.com/
+$ git submodule foreach "git config url.ssh://git@github.com/.insteadOf https://github.com/"
 ```
 
 ## <a name="theory"></a>Theory
