@@ -285,7 +285,7 @@ https://github.com/berzerk0/Probable-Wordlists
         systemctl stop nginx
 
 * Rails
-  * Most things rsyslog'd to db2 (/var/log/messages); however, Rails app logging doesn't support syslog, so it goes to /var/log/messages
+  * Most things rsyslog'd to db6 (/var/log/messages); however, Rails app logging doesn't support syslog, so it goes to /var/log/messages
 
           grep rails /var/log/messages
           cat /var/www/html/myplaceonline/log/passenger.log
