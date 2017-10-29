@@ -628,7 +628,7 @@ $ X=...
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see test_objects.yml)
 # cp test/controllers/test_objects_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=development bin/rake myp:dump
-$ RAILS_ENV=test SKIP_LARGE_IMPORTS=true FTS_TARGET=localhost:9200 bin/rake db:drop db:create db:schema:load db:seed myp:reinitialize test
+$ RAILS_ENV=test SKIP_LARGE_IMPORTS=true bin/rake db:drop db:create db:schema:load db:seed myp:reinitialize test
 ```
 
 #### Add encrypted column(s)
