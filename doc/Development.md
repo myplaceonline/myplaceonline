@@ -534,6 +534,8 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
 12. Logging
         Rails.logger.debug{"test"}
         Rails.logger.info{"test"}
+        Rails.logger.warn{"test"}
+        Rails.logger.error{"test"}
 13. Rebuild index
         $ bin/rails generate migration RebuildIndex005
         UserIndex.reset!
@@ -629,7 +631,9 @@ $ X=...
 # cp test/controllers/test_objects_controller_test.rb test/controllers/${X}_controller_test.rb
 $ RAILS_ENV=development bin/rake myp:dump
 # If changing the following, update .travis.yml
-$ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true bin/rake db:drop db:create db:schema:load db:seed myp:reinitialize test
+$ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true bin/rake db:test:prepare test
+
+# To run a particular test, add to the end: TEST=test/controllers/[...]
 ```
 
 #### Add encrypted column(s)
