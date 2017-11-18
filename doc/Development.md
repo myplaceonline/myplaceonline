@@ -504,12 +504,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         }
       %>
     show
-      <%=
-        render partial: "myplaceonline/pictures", locals: {
-          pics: obj.quest_files,
-          placeholder: "myplaceonline.identity_files.file"
-        }
-      %>
+      <%= data_row(heading: t("myplaceonline.identity_files.file"), content: obj.test_object_files) %>
 9.  Add model initialization code
         def self.build(params = nil)
           result = self.dobuild(params)
