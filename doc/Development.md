@@ -607,7 +607,7 @@ $ bin/rails generate migration AddCategory${X}
     category:
       ${X}: "${X}"
 # ${X} is non-plural, lower-case and underscores instead of camel case:
-$ bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer identity:references:index
+$ bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer is_public:boolean identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
 # Example:
 # bin/rails generate scaffold wisdom name:string wisdom:text identity:references:index
