@@ -855,9 +855,10 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 
 * DNS
   * Set A records to main floating IP
-  * Create SPF TXT record . with v=spf1 mx include:sendgrid.net ~all
-  * Create DKIM TXT record selectormyplaceonline._domainkey with ${cubevar_app_dkim_key_public}
+  * Create SPF TXT record @ with v=spf1 mx include:sendgrid.net ~all
+  * Create DKIM TXT record selectormyplaceonline._domainkey with k=rsa; t=s; p=${cubevar_app_dkim_key_public}
   * Create DMARC TXT record _dmarc with v=DMARC1; p=reject; pct=100; rua=mailto:postmaster@${HOST}
+  * Create MX record @ with db5.myplaceonline.com
 * Email hosting:
   * Add to cubevar_app_email_domains
   * Follow insturctions in email_server.sh to add domain & users
