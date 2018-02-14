@@ -472,7 +472,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
             end
           end
 8.  List of Files/Pictures
-    $ bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer
+    $ bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer is_public:boolean
     $ bin/rails db:migrate
     $ cp app/models/test_object_file.rb app/models/${X}
       And then update the parent
@@ -609,8 +609,6 @@ $ bin/rails generate migration AddCategory${X}
 # ${X} is non-plural, lower-case and underscores instead of camel case:
 $ bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer is_public:boolean identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
-# Example:
-# bin/rails generate scaffold wisdom name:string wisdom:text identity:references:index
 $ bin/rails db:migrate
 # Edit app/models/identity.rb
   has_many :${X}, :dependent => :destroy
