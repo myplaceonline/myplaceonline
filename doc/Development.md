@@ -270,6 +270,9 @@ https://github.com/berzerk0/Probable-Wordlists
 
         curl http://db6-internal.myplaceonline.com:9200/
         curl http://db6-internal.myplaceonline.com:9200/_stats?pretty=1
+        
+        # Print field mapping:
+        ssh root@db6.myplaceonline.com curl -s http://db6-internal.myplaceonline.com:9200/user/wisdom/_mapping | jq .
 
 * Cleanup elasticsearch
 
@@ -495,7 +498,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
           f: f,
           obj: obj,
           position_field: :position,
-          pictures_field: :quest_files,
+          pictures_field: :test_object_files,
           item_placeholder: "myplaceonline.identity_files.file",
           heading: "myplaceonline.identity_files.files",
           addbutton: "myplaceonline.identity_files.add_file",
