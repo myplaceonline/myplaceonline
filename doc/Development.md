@@ -871,3 +871,34 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 * Update cubevar_app_letsencrypt_tls_domains and cubevar_app_tls_domains in envars_production.sh and run posixcube.sh -z frontend
 * Set homepage to public if particular object
 * Log into frontend and run the commands in /etc/cron.d/letsencrypt
+
+# iOS Certificate
+
+1.  Connect iPhone to Mac
+2.  Mac: XCode > Windows > Devices
+    1.  Select "Identifier" and Copy
+    2.  Ctrl+Click the UDID and click Copy
+3.  Log in to [https://developer.apple.com/account/](https://developer.apple.com/account/)
+    1.  Click "Certificates, Identifiers & Profiles"
+4.  Create development and distribution certificates
+    1.  Follow the instructions, download the .cer file and double click it to install into Keychain Access into the "login" keychain
+    2.  Although these show up on the main screen, do not export from here. On the left, click My Certificates > Expand iPhone Developer > Right click on the private key and export
+    3.  Export the certificate (cer)
+    4.  Repeat for iOS distribution certificate (uses the same p12/pem keys)
+5.  Add device UDID to provisioning profile
+    1.  Click Devices > All
+    2.  Click Plus icon in the top right and follow the steps
+    3.  Provisioning Profiles > All
+    4.  Click the Plus icon
+    5.  Create one for iOS App Development
+    6.  Select wildcard App ID
+    7.  Download .mobileprovision file
+6.  Phonegap Build
+    1.  Edit account > signing keys
+    2.  Add p12 and .mobileprovision file and use the password created when exporting the p12 file
+    3.  Build iOS app and download the IPA file
+7.  Mac: XCode > Window > Devices > Select Device > Click Plus under "Installed Apps" and select .ipa
+8.  iPhone: Settings > Safari > Advanced > Web Inspector = On
+9.  Mac: Safari > Preferences... > Advanced > Check "Show Develop menu in menu bar"
+10.  iPhone: Launch app
+11.  Mac: Safari > Develop > iPhone Name > Select app
