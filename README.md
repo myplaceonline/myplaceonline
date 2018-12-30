@@ -2,7 +2,7 @@
 
 ## Summary
 
-myplaceonline is your online helper.
+Myplaceonline is your digital home.
 
 Do you feel overwhelmed by information? "When was the last time I had a dentist appointment?" "Where did I put that link?" Myplaceonline helps you organize your thoughts, documents, files, etc.
 
@@ -93,10 +93,13 @@ cp config/database.yml.example config/database.yml
 # Replace 'letmein' with your database user password created above if you've used something other than 'letmein':
 sed -i 's/password: DBPASSWORD/password: letmein/g' config/database.yml
 
-bin/bundle install
+sudo bin/bundle install
 
-# If you want to skip importing some large quantities of unnecessary data like a list of all museums in the U.S., first run:
+# If you want to skip importing some large quantities of unnecessary data like a list of all museums in the U.S., run the following:
 export SKIP_LARGE_UNNEEDED_IMPORTS=true
+
+# If you want to skip importing U.S. zip codes (used for location lookups), run the following (not recommended):
+#export SKIP_ZIP_CODE_IMPORTS=true
 
 # Now to install everything:
 bin/rake db:drop db:create db:schema:load db:seed
