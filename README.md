@@ -103,6 +103,10 @@ export SKIP_LARGE_UNNEEDED_IMPORTS=true
 
 # Now to install everything:
 bin/rake db:drop db:create db:schema:load db:seed
+
+# If you plan to do development such as creating new categories, run these two commands one time (https://stackoverflow.com/a/15108735):
+#bin/rails console
+#ActiveRecord::Base.connection.tables.each { |t| ActiveRecord::Base.connection.reset_pk_sequence!(t) }
 ```
 
 ### <a name="run"></a>Run the Rails server
