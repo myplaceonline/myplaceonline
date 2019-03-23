@@ -44,8 +44,16 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 #### Fedora, CentOS, RHEL
 
 ```
-$ sudo dnf install git ruby ruby-devel rubygem-bundler zlib-devel patch nodejs redhat-rpm-config libcurl-devel libxml2-devel ImageMagick-devel magic file-devel
-$ sudo dnf groupinstall "C Development Tools and Libraries"
+sudo dnf install git ruby ruby-devel rubygem-bundler zlib-devel patch nodejs redhat-rpm-config libcurl-devel libxml2-devel ImageMagick-devel magic file-devel
+sudo dnf groupinstall "C Development Tools and Libraries"
+```
+
+#### macOS
+
+* Install Homebrew: https://brew.sh/
+
+```
+sudo gem install bundler
 ```
 
 ### <a name="prepdb"></a>Prepare Database (e.g. PostgreSQL)
@@ -81,6 +89,21 @@ HERE
 sudo dnf install elasticsearch
 sudo systemctl start elasticsearch
 sudo systemctl enable elasticsearch
+```
+
+#### macOS
+
+```
+brew install postgresql imagemagick@6 libmagic
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+brew link --force imagemagick@6
+sudo gem install rmagick
+brew services start postgresql
+gem install libxml-ruby -v '3.1.0' -- --with-xml2-include=`xcrun --show-sdk-path`/usr/include/libxml2
+psql postgres
+  postgres=# CREATE ROLE myplaceonline WITH LOGIN ENCRYPTED PASSWORD 'letmein' CREATEDB;
+  postgres=# ALTER ROLE myplaceonline WITH SUPERUSER;
+  postgres=# \q
 ```
 
 ### <a name="prepsrc"></a>Download and prepare the source code
