@@ -53,6 +53,7 @@ sudo dnf groupinstall "C Development Tools and Libraries"
 * Install Homebrew: https://brew.sh/
 
 ```
+brew install gpg
 sudo gem install bundler
 ```
 
