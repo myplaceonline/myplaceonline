@@ -880,6 +880,11 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
     1. Download APK to lib/android/builds
     1. Test with adb install -r myplaceonline*.apk
     1. Update APK at https://play.google.com/apps/publish/
+    1. Click on the app
+    1. Click Release Management
+    1. Click App releases
+    1. Click Production: Manage
+    1. Click Create Release
 1. iOS:
     1. Set Key=Production
     1. Download IPA to lib/ios/builds
