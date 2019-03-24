@@ -865,8 +865,12 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 ## Building New Version
 
 1. Bump version and versionCode in config.xml
-1. For Android, set widget id="com.myplaceonline" in config.xml; for iOS, set widget id="com.myplaceonline.main"
-1. For Android, set static_ios: false in index.js; for iOS, set static_ios: true
+1. Android:
+    1. Set widget id="com.myplaceonline" in config.xml
+    1. Set static_ios: false in index.js
+1. iOS
+    1. Set widget id="com.myplaceonline.main" in config.xml
+    1. Set static_ios: true in index.js
 1. Commit any changes in src/myplaceonline_phonegap
 1. Go to https://build.phonegap.com/
 1. Login with Adobe ID
