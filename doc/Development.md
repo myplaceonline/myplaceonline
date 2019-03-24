@@ -811,18 +811,6 @@ $ RAILS_ENV=test bin/bundle exec rake db:setup
 $ bin/rake
 ```
 
-# PhoneGap
-
-## Building New Version
-
-1. Bump version and versionCode in config.xml
-1. Commit any changes in src/myplaceonline_phonegap
-1. Go to https://build.phonegap.com/
-1. Login with Adobe ID
-1. Click Update Code > Pull Latest
-1. Download APKs to lib/android/builds
-1. Update APK at https://play.google.com/apps/publish/
-
 # Server Administration
 
 ## Reboot
@@ -872,7 +860,28 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 * Set homepage to public if particular object
 * Log into frontend and run the commands in /etc/cron.d/letsencrypt
 
-# iOS Certificate
+# PhoneGap
+
+## Building New Version
+
+1. Bump version and versionCode in config.xml
+1. For Android, set widget id="com.myplaceonline" in config.xml; for iOS, set widget id="com.myplaceonline.main"
+1. For Android, set static_ios: false in index.js; for iOS, set static_ios: true
+1. Commit any changes in src/myplaceonline_phonegap
+1. Go to https://build.phonegap.com/
+1. Login with Adobe ID
+1. Click Update Code > Pull Latest
+1. Android:
+    1. Set Key=Android
+    1. Download APK to lib/android/builds
+    1. Test with adb install -r myplaceonline*.apk
+    1. Update APK at https://play.google.com/apps/publish/
+1. iOS:
+    1. Set Key=Production
+    1. Download IPA to lib/ios/builds
+    1. Test with XCode
+
+## iOS Certificate
 
 1.  Connect iPhone to Mac
 2.  Mac: XCode > Windows > Devices
