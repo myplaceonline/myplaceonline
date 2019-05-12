@@ -850,11 +850,8 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
   * Create MX record @ with db5.myplaceonline.com
 * Email hosting:
   * Add to cubevar_app_email_domains
-  * Follow insturctions in email_server.sh to add domain & users
-* SendGrid > Settings > Whitelabels > Add Domain
-  * Subdomain = email
-  * Domain = Add new domain
-  * Create DNS domain keys
+  * Follow instructions in email_server.sh to add domain & users
+* SendGrid > Settings > Sender Authentication > Authenticate Your Domain
 * Create WebsiteDomain with all of the hosting details filled out and update verified = true on it
 * Update cubevar_app_letsencrypt_tls_domains and cubevar_app_tls_domains in envars_production.sh and run posixcube.sh -z frontend
 * Set homepage to public if particular object
@@ -920,3 +917,26 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 9.  Mac: Safari > Preferences... > Advanced > Check "Show Develop menu in menu bar"
 10.  iPhone: Launch app
 11.  Mac: Safari > Develop > iPhone Name > Select app
+
+# OAuth/OpenID Connect
+
+Test:
+
+```
+client = OAuth2::Client.new('Application UID', 'Secret', site: 'http://localhost:3000/')
+access_token = client.password.get_token('user@example.com', 'password')
+Myp.http_get(url: "http://localhost:3000/test_api/hello_world", try_https: false, bearer_token: access_token.token)
+```
+
+Create client:
+```
+Doorkeeper::Application.create!(
+  name: "Internal",
+  uid: SecureRandom.hex(22),
+  secret: SecureRandom.hex(22),
+  redirect_uri: "",
+  confidential: true,
+)
+```
+
+Applications at /oauth/applications
