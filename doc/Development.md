@@ -628,7 +628,6 @@ $ X=...
 $ RAILS_ENV=development bin/rake myp:dump
 # If changing the following, update .travis.yml
 $ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true bin/rake db:drop db:test:prepare test
-
 # To run a particular test, add to the end: TEST=test/controllers/[...]
 ```
 
