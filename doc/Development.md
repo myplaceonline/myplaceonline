@@ -939,3 +939,10 @@ Doorkeeper::Application.create!(
 ```
 
 Applications at /oauth/applications
+
+## Gemfiles
+
+```
+sudo BUNDLE_GEMFILE=Gemfile_engines bin/bundle install
+BUNDLE_GEMFILE=Gemfile_engines bin/rails
+```
