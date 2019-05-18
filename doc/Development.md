@@ -944,5 +944,6 @@ Applications at /oauth/applications
 
 ```
 sudo BUNDLE_GEMFILE=Gemfile_engines bin/bundle install
-BUNDLE_GEMFILE=Gemfile_engines bin/rails
+BUNDLE_GEMFILE=Gemfile_engines bin/rails server
+BUNDLE_GEMFILE=Gemfile_engines bin/rails console
 ```
