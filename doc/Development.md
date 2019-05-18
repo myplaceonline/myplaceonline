@@ -947,3 +947,10 @@ sudo BUNDLE_GEMFILE=Gemfile_engines bin/bundle install
 BUNDLE_GEMFILE=Gemfile_engines bin/rails server
 BUNDLE_GEMFILE=Gemfile_engines bin/rails console
 ```
+
+## Engines
+
+```
+BUNDLE_GEMFILE=Gemfile_engines bin/rails engine:install:migrations
+BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
+```
