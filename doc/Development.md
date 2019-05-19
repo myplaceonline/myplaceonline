@@ -927,6 +927,12 @@ access_token = client.password.get_token('user@example.com', 'password')
 Myp.http_get(url: "http://localhost:3000/test_api/hello_world", try_https: false, bearer_token: access_token.token)
 ```
 
+```
+RestClient::Request.execute(method: :post, url: "http://localhost:3000/api/login_or_register", headers: {"Content-Type" => "application/json"}, payload: { email: "testapi@myplaceonline.com", password: "letmein" }.to_json).body
+
+RestClient::Request.execute(method: :post, url: "http://localhost:3000/api/refresh_token", headers: {"Content-Type" => "application/json"}, payload: { refresh_token: access_token.refresh_token }.to_json).body
+```
+
 Create client:
 ```
 Doorkeeper::Application.create!(
