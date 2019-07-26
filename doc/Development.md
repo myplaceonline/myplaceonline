@@ -515,9 +515,14 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
           result
         end
 10. Add category filter text
-        $ bin/rails generate migration AddCategoryFiltertext
+        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddCategoryFiltertextTODO
         Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
-11. Transaction
+11. Add column
+        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsTODOToModel newcol:text
+        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsFavoriteFoodsToIdentities favorite_foods:text
+        
+        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
+12. Transaction
 
         # See http://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html
         
@@ -529,15 +534,15 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         ActiveRecord::Base.transaction(requires_new: true) do
         end
 
-12. Logging
+13. Logging
         Rails.logger.debug{"test"}
         Rails.logger.info{"test"}
         Rails.logger.warn{"test"}
         Rails.logger.error{"test"}
-13. Rebuild index
+14. Rebuild index
         $ bin/rails generate migration RebuildIndex005
         UserIndex.reset!
-14. Error: ArgumentError: Index name '...' on table '...' is too long; the limit is 63 characters
+15. Error: ArgumentError: Index name '...' on table '...' is too long; the limit is 63 characters
     Modify migration to set index: false, and:
     add_index :table_name, :column_id, name: "table_shortname_on_column_shortname"
 
