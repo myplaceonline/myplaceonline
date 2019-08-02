@@ -475,8 +475,8 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
             end
           end
 8.  List of Files/Pictures
-    $ bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer is_public:boolean
-    $ bin/rails db:migrate
+    $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer is_public:boolean
+    $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
     $ cp app/models/test_object_file.rb app/models/${X}
       And then update the parent
 
@@ -605,7 +605,7 @@ $ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed myp:reinitial
 ```
 # ${X} is usually plural here in capital camel case:
 # Create a migration:
-$ bin/rails generate migration AddCategory${X}
+$ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddCategory${X}
 # Edit the new migration (${X} is all lowercase here and usually plural and underscores):
   def change
     Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"), icon: "FatCow_Icons16x16/check_box_uncheck.png")
@@ -615,9 +615,9 @@ $ bin/rails generate migration AddCategory${X}
     category:
       ${X}: "${X}"
 # ${X} is non-plural, lower-case and underscores instead of camel case:
-$ bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer is_public:boolean identity:references:index
+$ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer is_public:boolean identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
-$ bin/rails db:migrate
+$ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
 # Edit app/models/identity.rb
   has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
@@ -630,9 +630,9 @@ $ X=...
 # Replace ${X} with singular version: cp app/models/test_object.rb app/models/${X}.rb
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see test_objects.yml)
 # cp test/controllers/test_objects_controller_test.rb test/controllers/${X}_controller_test.rb
-$ RAILS_ENV=development bin/rake myp:dump
+$ RAILS_ENV=development BUNDLE_GEMFILE=Gemfile_engines bin/rake myp:dump
 # If changing the following, update .travis.yml
-$ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true bin/rake db:drop db:test:prepare test
+$ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines bin/rake db:drop db:test:prepare test
 # To run a particular test, add to the end: TEST=test/controllers/[...]
 ```
 
