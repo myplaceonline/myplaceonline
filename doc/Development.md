@@ -778,6 +778,7 @@ $ psql -U myplaceonline -h localhost -d myplaceonline_development
 # Restore:
 $ gpg --output tmp.sql --decrypt file.sql.pgp
 $ dropdb -U myplaceonline -h localhost  myplaceonline_development; createdb -U myplaceonline -h localhost myplaceonline_development; pg_restore -U myplaceonline -h localhost -d myplaceonline_development -n public *.sql
+$ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate:status 2>&1 | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
 $ bin/rails c
 # UserIndex.reset!
 ```
