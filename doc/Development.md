@@ -567,7 +567,7 @@ $ bin/rails generate model ${MODEL}
 $ bin/rake db:migrate
 $ bin/rake db:reset
 $ bin/bundle show # Show gem versions
-$ bin/bundle update # Update gems
+$ BUNDLE_GEMFILE=Gemfile_engines bin/bundle update # Update gems
 $ bin/rails generate migration AddPointsToIdentities points:integer
 $ RAILS_ENV=test bin/rake db:reset test
 ```
