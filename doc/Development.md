@@ -892,6 +892,19 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
     1. Download IPA to lib/ios/builds
     1. Test with XCode
 
+## Debugging Using Chrome Developer ToolsController
+
+1. Go to https://build.phonegap.com/apps/1133885/settings
+1. Check "Enable debugging"
+1. Go to https://build.phonegap.com/apps/1133885/builds
+1. Click Update code > Pull latest
+1. Select "No key selected" to build the APK
+1. Uninstall the app on the phone
+1. Install from https://build.phonegap.com/apps/1133885/share
+1. Open the app
+1. Open Chrome to chrome://inspect/
+1. Click inspect on the WebView
+
 ## iOS Certificate
 
 1.  Connect iPhone to Mac
