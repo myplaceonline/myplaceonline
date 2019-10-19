@@ -518,7 +518,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddCategoryFiltertextTODO
         Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
 11. Add column
-        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsTODOToModel newcol:text
+        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsTODOToModel (Model Plural) newcol:text
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsFavoriteFoodsToIdentities favorite_foods:text
         
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
@@ -869,10 +869,10 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 1. Bump version and versionCode in config.xml
 1. Android:
     1. Set widget id="com.myplaceonline" in config.xml
-    1. Set static_ios: false in index.js
+    1. Set suppressPushState: false in index.js
 1. iOS
     1. Set widget id="com.myplaceonline.main" in config.xml
-    1. Set static_ios: true in index.js
+    1. Set suppressPushState: true in index.js
 1. Commit any changes in src/myplaceonline_phonegap
 1. Go to https://build.phonegap.com/
 1. Login with Adobe ID
