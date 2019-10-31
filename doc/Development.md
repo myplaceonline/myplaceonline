@@ -317,6 +317,12 @@ Common issues:
 * PostgreSQL archive files in 
 ** pg_archivecleanup /var/lib/pgsql/data/pg_xlog/
 
+* InfluxDB/Telegraf
+
+* influx -host db6-internal.myplaceonline.com -database telegraf
+  * Show the "tables": show measurements
+    * Everything before the first comma is the measurement name. Everything after the first comma is either a tag key or a tag value
+
 ## Design Goals
 
 * Mobile/tablet first design. Single Page Application (SPA): http://docs.phonegap.com/en/3.5.0/guide_next_index.md.html
@@ -861,6 +867,7 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
 * Update cubevar_app_letsencrypt_tls_domains and cubevar_app_tls_domains in envars_production.sh and run posixcube.sh -z frontend
 * Set homepage to public if particular object
 * Log into frontend and run the commands in /etc/cron.d/letsencrypt
+* Update local/maintenance*.sh
 
 # PhoneGap
 
