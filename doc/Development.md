@@ -137,6 +137,7 @@ https://github.com/berzerk0/Probable-Wordlists
   * To remove maintenance mode, check all web* servers and apply "Set state to READY"
 
 * Grafana: https://grafana.myplaceonline.com/
+  * Use admin and cubevar_app_passwords_grafana_admin
 
 * Frontend HTTP requests:
 
