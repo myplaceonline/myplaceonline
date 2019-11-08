@@ -321,8 +321,12 @@ Common issues:
 * InfluxDB/Telegraf
 
 * influx -host db6-internal.myplaceonline.com -database telegraf
-  * Show the "tables": show measurements
-    * Everything before the first comma is the measurement name. Everything after the first comma is either a tag key or a tag value
+  * show diagnostics
+  * show stats
+  * show measurements
+  * show series
+    * drop series from "system" where "host" = 'web11'
+  * drop old data: DELETE WHERE time < '2019-01-01'
 
 ## Design Goals
 
