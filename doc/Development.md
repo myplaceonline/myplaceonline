@@ -559,7 +559,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
 
 ### Jobs
 
-bin/delayed_job run --exit-on-complete
+BUNDLE_GEMFILE=Gemfile_engines PERMDIR=/var/lib/remotenfs/ bin/rails jobs:work
 
 ### Rails Tips
 
