@@ -559,7 +559,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
 
 ### Jobs
 
-BUNDLE_GEMFILE=Gemfile_engines PERMDIR=/var/lib/remotenfs/ bin/rails jobs:work
+BUNDLE_GEMFILE=Gemfile_engines PERMDIR=/var/lib/remotenfs/ FILES_PREFIX=/work/myplaceonline/backups/ bin/rails jobs:work
 
 ### Rails Tips
 
