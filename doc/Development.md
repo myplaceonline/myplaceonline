@@ -130,6 +130,11 @@ https://github.com/berzerk0/Probable-Wordlists
 
         multitail -l "ssh root@web4.myplaceonline.com tail -50f /var/log/messages | grep rails" -l "ssh root@web4.myplaceonline.com tail -50f /var/www/html/myplaceonline/log/passenger.log" -l "ssh root@web12.myplaceonline.com tail -50f /var/log/messages | grep rails" -l "ssh root@web12.myplaceonline.com tail -50f /var/www/html/myplaceonline/log/passenger.log"
 
+* Passenger thread dumps
+
+        kill -3 $PID
+        less /var/www/html/myplaceonline/log/passenger.log
+
 * HAProxy statistics (admin/cubevar_app_passwords_haproxy_stats)
   * posixcube.sh show | grep cubevar_app_passwords_haproxy_stats
   * https://myplaceonline.com:9443/
