@@ -583,9 +583,19 @@ $ bin/rails generate model ${MODEL}
 $ bin/rake db:migrate
 $ bin/rake db:reset
 $ bin/bundle show # Show gem versions
-$ BUNDLE_GEMFILE=Gemfile_engines bin/bundle update # Update gems
 $ bin/rails generate migration AddPointsToIdentities points:integer
 $ RAILS_ENV=test bin/rake db:reset test
+```
+
+Update gems:
+
+```
+$ sudo bin/bundle update
+$ sudo BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
+$ # Test app
+$ git commit; git push
+$ cd engines_config/*/
+$ git commit; git push
 ```
 
 * GC: https://github.com/ruby/ruby/blob/trunk/gc.c#L7373
