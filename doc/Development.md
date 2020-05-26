@@ -122,9 +122,9 @@ https://github.com/berzerk0/Probable-Wordlists
 
 ### Administration
 
-* Central syslog server: db2.myplaceonline.com
+* Central syslog server: db6.myplaceonline.com
 
-        ssh root@db2.myplaceonline.com tail -50f /var/log/messages
+        ssh root@db6.myplaceonline.com tail -50f /var/log/messages
 
 * Rails logs
 
