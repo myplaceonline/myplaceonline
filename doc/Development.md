@@ -535,10 +535,14 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         Myp.migration_add_filtertext("$CATEGORY", "$SPACE_DELIMITED_ADDITIONS")
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
 11. Add column
+
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsTODOToModel (Model Plural) newcol:text
+        
+        Example:
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsFavoriteFoodsToIdentities favorite_foods:text
         
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
+
 12. Transaction
 
         # See http://api.rubyonrails.org/classes/ActiveRecord/Transactions/ClassMethods.html
