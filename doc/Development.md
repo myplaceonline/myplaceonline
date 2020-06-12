@@ -569,7 +569,15 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
 
 ### Jobs
 
+Run with delay:
+
 BUNDLE_GEMFILE=Gemfile_engines PERMDIR=/var/lib/remotenfs/ FILES_PREFIX=/work/myplaceonline/backups/ bin/rails jobs:work
+
+Run once:
+
+BUNDLE_GEMFILE=Gemfile_engines PERMDIR=/var/lib/remotenfs/ FILES_PREFIX=/work/myplaceonline/backups/ bin/rails jobs:workoff
+
+(Also called delayed_jobs)
 
 ### Rails Tips
 
@@ -816,6 +824,14 @@ $ bin/rails c
 
 * Log in as root: sudo -u postgres psql postgres
 * List advisory locks: SELECT * FROM pg_locks where locktype = 'advisory';
+
+### Full Backup
+
+PGPASSWORD=password pg_dumpall -U myplaceonline -h localhost --clean --if-exists > dumpall.sql
+
+### Full Restore
+
+PGPASSWORD=password psql -U myplaceonline -h localhost -f dumpall.sql --single-transaction postgres
 
 ## Git Tips
 
