@@ -321,7 +321,7 @@ Common issues:
 * Clear: journalctl --vacuum-size=1M
 
 * PostgreSQL archive files in 
-** pg_archivecleanup /var/lib/pgsql/data/pg_xlog/
+** pg_archivecleanup /var/lib/pgsql/data/pg_xlog/ ${MOST_RECENT_FILE_IN_pg_xlog}
 
 * InfluxDB/Telegraf
 
