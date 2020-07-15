@@ -853,14 +853,15 @@ $ cd ../..
 
 ## Notes
 
+* https://guides.rubyonrails.org/testing.html
 * Test data in test/fixtures/*.yml
-* Devise user logged in for ever test in test/test_helper.rb setup
+* Devise user logged in for every test in test/test_helper.rb setup
 
 ## Running Tests
 
 ```
-$ RAILS_ENV=test bin/bundle exec rake db:setup
-$ bin/rake
+$ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines time bin/rake db:drop db:test:prepare test -- --fail-fast --backtrace
+# To run particular tests, add files or directories to the end, e.g. test/controllers/[...]
 ```
 
 # Server Administration
