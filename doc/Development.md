@@ -860,8 +860,13 @@ $ cd ../..
 ## Running Tests
 
 ```
-$ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines time bin/rake db:drop db:test:prepare test -- --fail-fast --backtrace
-# To run particular tests, add files or directories to the end, e.g. test/controllers/[...]
+RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines time bin/rails test --fail-fast --verbose
+```
+
+To run particular tests, add files or directories to the end, e.g.:
+
+```
+RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines time bin/rails test --fail-fast --verbose test/controllers/test_objects_controller_test.rb
 ```
 
 # Server Administration
