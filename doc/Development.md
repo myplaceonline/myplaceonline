@@ -907,7 +907,7 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
   * Create DMARC TXT record _dmarc with v=DMARC1; p=reject; pct=100; rua=mailto:postmaster@${HOST}
   * Create MX record @ with db5.myplaceonline.com
 * Email hosting:
-  * Add to cubevar_app_email_domains
+  * Add to cubevar_app_email_domains and cubevar_app_email_dkim_domains
   * Follow instructions in email_server.sh to add domain & users
 * SendGrid > Settings > Sender Authentication > Authenticate Your Domain
 * Create WebsiteDomain with all of the hosting details filled out and update verified = true on it
