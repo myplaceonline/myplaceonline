@@ -44,7 +44,7 @@ myplaceonline is licensed with the open source [AGPL (Affero GPL) v3 license](LI
 #### Fedora, CentOS, RHEL
 
 ```
-sudo dnf install git ruby ruby-devel rubygem-bundler zlib-devel patch nodejs redhat-rpm-config libcurl-devel libxml2-devel ImageMagick-devel magic file-devel
+sudo dnf install git ruby ruby-devel rubygem-bundler zlib-devel patch nodejs redhat-rpm-config libcurl-devel libxml2-devel ImageMagick-devel magic file-devel sqlite-devel
 sudo dnf groupinstall "C Development Tools and Libraries"
 ```
 
