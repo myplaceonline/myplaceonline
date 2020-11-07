@@ -133,6 +133,11 @@ bin/rake db:drop db:create db:schema:load db:seed
 #ActiveRecord::Base.connection.tables.each { |t| ActiveRecord::Base.connection.reset_pk_sequence!(t) }
 ```
 
+If using any engines:
+
+* Clone into `engines/`
+* `ln -s engines_config/$ENGINE/Gemfile_engines.lock Gemfile_engines.lock`
+
 ### <a name="run"></a>Run the Rails server
 
 ```
