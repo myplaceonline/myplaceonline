@@ -120,6 +120,14 @@ https://github.com/berzerk0/Probable-Wordlists
   read/write over NFS. This NFS share is rsync'ed nightly to the backup
   database server.
 
+### Get Logs
+
+```
+for i in frontend1; do scp root@${i}.myplaceonline.com:/var/log/haproxy.log ${i}_haproxy.log; done
+for i in web24 web32 db5 db6; do scp root@${i}.myplaceonline.com:/var/log/messages ${i}_messages.log; done
+for i in web24 web32; do scp root@${i}.myplaceonline.com:/var/www/html/myplaceonline/log/passenger.log ${i}_passenger.log; done
+```
+
 ### Administration
 
 * Central syslog server: db6.myplaceonline.com
