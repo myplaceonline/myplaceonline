@@ -686,10 +686,10 @@ $ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUN
 #### Add encrypted column(s)
 
 ```
-$ bin/rails generate migration AddEncryptionTo${MODEL} ${COLUMN}_encrypted:references:index
+$ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddEncryptionTo${MODEL} ${COLUMN}_encrypted:references:index
     add_reference :ssh_keys, :ssh_private_key_encrypted_id, index: true, foreign_key: false
     add_foreign_key :ssh_keys, :encrypted_values, column: :ssh_private_key_encrypted_id
-$ bin/rake db:migrate
+$ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
 # Add to model:
   include EncryptedConcern
   belongs_to :${COLUMN}_encrypted, class_name: "EncryptedValue", dependent: :destroy, :autosave => true
