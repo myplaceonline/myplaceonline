@@ -612,6 +612,7 @@ Update gems:
 
 ```
 $ sudo bin/bundle update
+# Gemfile_engines.lock must be symlinked, e.g. ln -s engines_config/drom-production/Gemfile_engines.lock
 $ sudo BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
 $ # Test app
 $ git commit; git push
@@ -825,8 +826,9 @@ $ psql -U myplaceonline -h localhost -d myplaceonline_development
 # Restore:
 $ gpg --output tmp.sql --decrypt file.sql.pgp
 $ dropdb -U myplaceonline -h localhost  myplaceonline_development; createdb -U myplaceonline -h localhost myplaceonline_development; pg_restore -U myplaceonline -h localhost -d myplaceonline_development -n public *.sql
-$ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate:status 2>&1 | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
-$ BUNDLE_GEMFILE=Gemfile_engines bin/rails c
+$ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails db:migrate:status 2>&1 | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
+$ sudo reindexdb -U myplaceonline -h localhost -d myplaceonline_development
+$ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails c
 # UserIndex.reset!
 ```
 
@@ -918,7 +920,7 @@ http://averageradical.github.io/Linux_Core_Dumps.pdf
   * Follow instructions in email_server.sh to add domain & users
 * Create WebsiteDomain with all of the hosting details filled out and update verified = true on it
 * Update cubevar_app_letsencrypt_tls_domains and cubevar_app_tls_domains in envars_production.sh and run posixcube.sh -z frontend
-* Set homepage to public if particular object
+* Set homepage to public if it's a particular object (e.g. /model/N)
 * Log into frontend and run the commands in /etc/cron.d/letsencrypt
 * Update local/maintenance*.sh
 
