@@ -611,13 +611,19 @@ $ RAILS_ENV=test bin/rake db:reset test
 Update gems:
 
 ```
-$ sudo bin/bundle update
+$ BUNDLE_PATH=vendor/bundle/ bin/bundle update
 # Gemfile_engines.lock must be symlinked, e.g. ln -s engines_config/drom-production/Gemfile_engines.lock
-$ sudo BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
+$ BUNDLE_PATH=vendor/bundle/ BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
 $ # Test app
 $ git commit; git push
 $ cd engines_config/*/
 $ git commit; git push
+```
+
+Running:
+
+```
+alias ms='sudo systemctl start postgresql; sudo systemctl start elasticsearch; cd ...; BUNDLE_PATH=vendor/bundle/ PERMDIR=... FILES_PREFIX=... GOOGLE_MAPS_API_SERVER_KEY=... GOOGLE_MAPS_API_KEY=... SKIP_NOTIFICATIONS=true GOOGLE_PLACES_KEY=... BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails server -b 127.0.0.1'
 ```
 
 * GC: https://github.com/ruby/ruby/blob/trunk/gc.c#L7373
