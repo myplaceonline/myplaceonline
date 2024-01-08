@@ -570,7 +570,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         Rails.logger.error{"test"}
 14. Rebuild index
         $ bin/rails generate migration RebuildIndex005
-        UserIndex.reset!
+        UserIndex.reset!(timeout: "3600000ms")
 15. Error: ArgumentError: Index name '...' on table '...' is too long; the limit is 63 characters
     Modify migration to set index: false, and:
     add_index :table_name, :column_id, name: "table_shortname_on_column_shortname"
@@ -835,7 +835,7 @@ $ dropdb -U myplaceonline -h localhost  myplaceonline_development; createdb -U m
 $ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails db:migrate:status 2>&1 | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
 $ sudo reindexdb -U myplaceonline -h localhost -d myplaceonline_development
 $ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails c
-# UserIndex.reset!
+# UserIndex.reset!(timeout: "3600000ms")
 ```
 
 * Log in as root: sudo -u postgres psql postgres
