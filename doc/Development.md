@@ -267,8 +267,8 @@ for i in web24 web32; do scp root@${i}.myplaceonline.com:/var/www/html/myplaceon
         Sep 19 04:40:53 web12 rails[18477]: Completed 200 OK in 79ms (Views: 28.3ms | ActiveRecord: 2.4ms)
         Sep 19 04:40:53 web12 rails[18477]: MyplaceonlineRack.call response time in milliseconds = 85.72 context: {:uri=>"/", :request_id=>"c8757166-0f21-4ebe-8d7c-14e80f77c907", :user_id=>-1}
         
-        PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-status
-        PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-memory-stats
+        watch -n 30 PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-status
+        watch -n 30 PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ /usr/local/bin/passenger-memory-stats
 
 * Database:
 
@@ -499,10 +499,10 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
             end
           end
 8.  List of Files/Pictures
-    $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer is_public:boolean
-    $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
+    $ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer is_public:boolean
+    $ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
     $ cp app/models/test_object_file.rb app/models/${X}
-      And then update the parent
+      Then update the class name and :parent field
 
     controller:
 
@@ -544,12 +544,12 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
 11. Add column
 
-        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsTODOToModel (Model Plural) newcol:text
+        $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsTODOToModel (Model Plural) newcol:text
         
         Example:
-        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddColumnsFavoriteFoodsToIdentities favorite_foods:text
+        $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsFavoriteFoodsToIdentities favorite_foods:text
         
-        $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
+        $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails db:migrate
 
 12. Transaction
 
@@ -568,9 +568,6 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         Rails.logger.info{"test"}
         Rails.logger.warn{"test"}
         Rails.logger.error{"test"}
-14. Rebuild index
-        $ bin/rails generate migration RebuildIndex005
-        UserIndex.reset!(timeout: "3600000ms")
 15. Error: ArgumentError: Index name '...' on table '...' is too long; the limit is 63 characters
     Modify migration to set index: false, and:
     add_index :table_name, :column_id, name: "table_shortname_on_column_shortname"
@@ -611,19 +608,41 @@ $ RAILS_ENV=test bin/rake db:reset test
 Update gems:
 
 ```
-$ BUNDLE_PATH=vendor/bundle/ bin/bundle update
+$ bin/bundle update
 # Gemfile_engines.lock must be symlinked, e.g. ln -s engines_config/drom-production/Gemfile_engines.lock
-$ BUNDLE_PATH=vendor/bundle/ BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
+$ BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
 $ # Test app
 $ git commit; git push
 $ cd engines_config/*/
 $ git commit; git push
 ```
 
+Using rbenv:
+
+```
+# Install rbenv
+$(rbenv init)
+git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+rbenv install -l
+rbenv install 3.2.2
+rbenv local 3.2.2
+gem install bundler
+bundle install
+BUNDLE_GEMFILE=Gemfile_engines bundle install
+alias ms..
+ms
+```
+
 Running:
 
 ```
-alias ms='sudo systemctl start postgresql; sudo systemctl start elasticsearch; cd ...; BUNDLE_PATH=vendor/bundle/ PERMDIR=... FILES_PREFIX=... GOOGLE_MAPS_API_SERVER_KEY=... GOOGLE_MAPS_API_KEY=... SKIP_NOTIFICATIONS=true GOOGLE_PLACES_KEY=... BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails server -b 127.0.0.1'
+alias ms='eval "$(rbenv init - bash)"; sudo systemctl start postgresql; sudo systemctl start elasticsearch; cd /work/myplaceonline/src/myplaceonline/src/myplaceonline_rails/; PERMDIR=/var/lib/remotenfs/ FILES_PREFIX=/work/myplaceonline/backup/ GOOGLE_MAPS_API_SERVER_KEY=... GOOGLE_MAPS_API_KEY=... SKIP_NOTIFICATIONS=true GOOGLE_PLACES_KEY=... SECONDARY_GOOGLE_API_KEY=... GEOLOCATE_KEY=DXMY8FPHT55M5AYEPBLLWM BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails server -b 127.0.0.1'
+```
+
+Console:
+
+```
+alias ms='eval "$(rbenv init - bash)"; sudo systemctl start postgresql; sudo systemctl start elasticsearch; cd /work/myplaceonline/src/myplaceonline/src/myplaceonline_rails/; PERMDIR=/var/lib/remotenfs/ FILES_PREFIX=/work/myplaceonline/backup/ GOOGLE_MAPS_API_SERVER_KEY=... GOOGLE_MAPS_API_KEY=... SKIP_NOTIFICATIONS=true GOOGLE_PLACES_KEY=... SECONDARY_GOOGLE_API_KEY=... GEOLOCATE_KEY=DXMY8FPHT55M5AYEPBLLWM BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails console'
 ```
 
 * GC: https://github.com/ruby/ruby/blob/trunk/gc.c#L7373
@@ -659,7 +678,7 @@ $ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed myp:reinitial
 ```
 # ${X} is usually plural here in capital camel case:
 # Create a migration:
-$ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddCategory${X}
+$ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddCategory${X}
 # Edit the new migration (${X} is all lowercase here and usually plural and underscores):
   def change
     Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"), icon: "FatCow_Icons16x16/check_box_uncheck.png")
@@ -669,9 +688,9 @@ $ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddCategory${X}
     category:
       ${X}: "${X}"
 # ${X} is non-plural, lower-case and underscores instead of camel case:
-$ BUNDLE_GEMFILE=Gemfile_engines bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer is_public:boolean identity:references:index
+$ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer is_public:boolean identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
-$ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
+$ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
 # Edit app/models/identity.rb
   has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
@@ -684,9 +703,9 @@ $ X=...
 # Replace ${X} with singular version: cp app/models/test_object.rb app/models/${X}.rb
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see test_objects.yml)
 # cp test/controllers/test_objects_controller_test.rb test/controllers/${X}_controller_test.rb
-$ RAILS_ENV=development BUNDLE_GEMFILE=Gemfile_engines bin/rake myp:dump
+$ MINCACHE=true RAILS_ENV=development BUNDLE_GEMFILE=Gemfile_engines bin/rake myp:dump
 # If changing the following, update .travis.yml
-$ RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines bin/rake db:drop db:test:prepare test
+$ MINCACHE=true RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines bin/rake db:drop db:test:prepare test
 # To run a particular test, add to the end: TEST=test/controllers/[...]
 ```
 
@@ -832,10 +851,12 @@ $ psql -U myplaceonline -h localhost -d myplaceonline_development
 # Restore:
 $ gpg --output tmp.sql --decrypt file.sql.pgp
 $ dropdb -U myplaceonline -h localhost  myplaceonline_development; createdb -U myplaceonline -h localhost myplaceonline_development; pg_restore -U myplaceonline -h localhost -d myplaceonline_development -n public *.sql
+$ eval "$(rbenv init - bash)"
 $ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails db:migrate:status 2>&1 | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
 $ sudo reindexdb -U myplaceonline -h localhost -d myplaceonline_development
 $ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails c
-# UserIndex.reset!(timeout: "3600000ms")
+
+# ElasticWrapper.reset()
 ```
 
 * Log in as root: sudo -u postgres psql postgres
@@ -1036,9 +1057,16 @@ Applications at /oauth/applications
 ## Gemfiles
 
 ```
-sudo BUNDLE_GEMFILE=Gemfile_engines bin/bundle install
+eval "$(rbenv init - bash)"
+
+BUNDLE_GEMFILE=Gemfile_engines bin/bundle install
+
+BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
+bin/bundle update
+
 BUNDLE_GEMFILE=Gemfile_engines bin/rails server
-BUNDLE_GEMFILE=Gemfile_engines bin/rails console
+
+MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails console
 ```
 
 ## Engines
