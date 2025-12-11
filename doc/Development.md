@@ -138,6 +138,10 @@ for i in web24 web32; do scp root@${i}.myplaceonline.com:/var/www/html/myplaceon
 
         multitail -l "ssh root@web4.myplaceonline.com tail -50f /var/log/messages | grep rails" -l "ssh root@web4.myplaceonline.com tail -50f /var/www/html/myplaceonline/log/passenger.log" -l "ssh root@web12.myplaceonline.com tail -50f /var/log/messages | grep rails" -l "ssh root@web12.myplaceonline.com tail -50f /var/www/html/myplaceonline/log/passenger.log"
 
+* Local ruby thread dumps
+
+        kill -USR2 $PID
+
 * Passenger thread dumps
 
         kill -3 $PID
