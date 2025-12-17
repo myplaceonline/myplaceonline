@@ -548,7 +548,7 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
 11. Add column
 
-        $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsTODOToModel (Model Plural) newcol:text
+        $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsTODOToModel (Where "Model" in the previous token is the model in upper case one word plural [e.g. HealthInsurances) newcol:text
         
         Example:
         $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsFavoriteFoodsToIdentities favorite_foods:text
