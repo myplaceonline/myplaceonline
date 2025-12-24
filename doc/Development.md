@@ -856,7 +856,7 @@ $ psql -U myplaceonline -h localhost -d myplaceonline_development
 $ gpg --output tmp.sql --decrypt file.sql.pgp
 $ dropdb -U myplaceonline -h localhost  myplaceonline_development; createdb -U myplaceonline -h localhost myplaceonline_development; pg_restore -U myplaceonline -h localhost -d myplaceonline_development -n public *.sql
 $ eval "$(rbenv init - bash)"
-$ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails db:migrate:status 2>&1 | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
+$ MIGRATING=true BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails db:migrate:status 2>&1 | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
 $ sudo reindexdb -U myplaceonline -h localhost -d myplaceonline_development
 $ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails c
 
