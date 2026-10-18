@@ -4,3 +4,6 @@
 [submodule "src/myplaceonline_posixcubes"]
 	path = src/myplaceonline_posixcubes
 	url = https://github.com/myplaceonline/myplaceonline_posixcubes.git
+[submodule "src/myplaceonline_expo"]
+	path = src/myplaceonline_expo
+	url = https://github.com/myplaceonline/myplaceonline_expo
