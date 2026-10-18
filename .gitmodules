@@ -1,9 +1,6 @@
 [submodule "src/myplaceonline_rails"]
 	path = src/myplaceonline_rails
 	url = https://github.com/myplaceonline/myplaceonline_rails.git
-[submodule "src/myplaceonline_phonegap"]
-	path = src/myplaceonline_phonegap
-	url = https://github.com/myplaceonline/myplaceonline_phonegap.git
 [submodule "src/myplaceonline_posixcubes"]
 	path = src/myplaceonline_posixcubes
 	url = https://github.com/myplaceonline/myplaceonline_posixcubes.git
