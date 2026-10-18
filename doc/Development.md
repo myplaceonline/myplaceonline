@@ -503,8 +503,8 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
             end
           end
 8.  List of Files/Pictures
-    $ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer is_public:boolean
-    $ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
+    $ MIGRATING=true MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate model test_object_file test_object:references:index identity_file:references:index identity:references:index position:integer is_public:boolean
+    $ MIGRATING=true MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
     $ cp app/models/test_object_file.rb app/models/${X}
       Then update the class name and :parent field
 
@@ -548,12 +548,12 @@ TODO: [Password requirements](https://github.com/usnistgov/800-63-3/blob/nist-pa
         $ BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
 11. Add column
 
-        $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsTODOToModel (Where "Model" in the previous token is the model in upper case one word plural [e.g. HealthInsurances) newcol:text
+        $ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsTODOToModel (Where "Model" in the previous token is the model in upper case one word plural [e.g. HealthInsurances) newcol:text
         
         Example:
-        $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsFavoriteFoodsToIdentities favorite_foods:text
+        $ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails generate migration AddColumnsFavoriteFoodsToIdentities favorite_foods:text
         
-        $ BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails db:migrate
+        $ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines MIGRATING=true bin/rails db:migrate
 
 12. Transaction
 
@@ -612,24 +612,55 @@ $ RAILS_ENV=test bin/rake db:reset test
 Update gems:
 
 ```
-$ bin/bundle update
+$ bin/bundle update --all
 # Gemfile_engines.lock must be symlinked, e.g. ln -s engines_config/drom-production/Gemfile_engines.lock
-$ BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
+$ BUNDLE_GEMFILE=Gemfile_engines bin/bundle update --all
 $ # Test app
 $ git commit; git push
 $ cd engines_config/*/
+ssh-add ~/.ssh/gitlab_id_ed25519
 $ git commit; git push
 ```
 
 Using rbenv:
 
+* Install rbenv: <https://github.com/rbenv/rbenv>
+* Initialize a shell to use rbenv:
+  ```
+  eval "$(rbenv init - bash)"
+  ```
+* List available stable Ruby versions that can be installed:
+  ```
+  rbenv install -l
+  ```
+    * To list unstable versions:
+       ```
+       rbenv install -L
+       ```
+* Install a Ruby version:
+  ```
+  rbenv install VERSION
+  ```
+* Write the local Ruby version to the current directory's .ruby-version file:
+  ```
+  rbenv local VERSION
+  ```
+* Write the global Ruby version to ~/.rbenv/version:
+  ```
+  rbenv global VERSION
+  ```
+* Initialize:
+  ```
+  gem install bundler
+  ```
+
 ```
-# Install rbenv
-$(rbenv init)
+# Install rbenv: https://github.com/rbenv/rbenv
+eval "$(rbenv init - bash)"
 git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 rbenv install -l
-rbenv install 3.2.2
-rbenv local 3.2.2
+rbenv install 3.3.12
+rbenv local 3.3.12
 gem install bundler
 bundle install
 BUNDLE_GEMFILE=Gemfile_engines bundle install
@@ -682,7 +713,7 @@ $ RAILS_ENV=test bin/rake db:drop db:create db:schema:load db:seed myp:reinitial
 ```
 # ${X} is usually plural here in capital camel case:
 # Create a migration:
-$ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddCategory${X}
+$ MIGRATING=true MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddCategory${X}
 # Edit the new migration (${X} is all lowercase here and usually plural and underscores):
   def change
     Category.create(name: "${X}", link: "${X}", position: 0, parent: Category.find_by_name("${Y}"), icon: "FatCow_Icons16x16/check_box_uncheck.png")
@@ -692,9 +723,9 @@ $ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate migration AddC
     category:
       ${X}: "${X}"
 # ${X} is non-plural, lower-case and underscores instead of camel case:
-$ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer is_public:boolean identity:references:index
+$ MIGRATING=true MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails generate scaffold ${X} ${COLUMNS} notes:text visit_count:integer archived:datetime rating:integer is_public:boolean identity:references:index
 # x:string x:text 'x:decimal{10,2}' x:integer x:decimal x:float x:boolean x:binary x:date x:time x:datetime
-$ MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
+$ MIGRATING=true MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails db:migrate
 # Edit app/models/identity.rb
   has_many :${X}, :dependent => :destroy
       :${X} => ${X}.to_a.sort{ |a,b| a.name.downcase <=> b.name.downcase }.map{|x| x.as_json},
@@ -707,9 +738,9 @@ $ X=...
 # Replace ${X} with singular version: cp app/models/test_object.rb app/models/${X}.rb
 # Edit tests/fixtures/${X}.yml and create a fixture with a name of ${X} (see test_objects.yml)
 # cp test/controllers/test_objects_controller_test.rb test/controllers/${X}_controller_test.rb
-$ MINCACHE=true RAILS_ENV=development BUNDLE_GEMFILE=Gemfile_engines bin/rake myp:dump
+$ MIGRATING=true MINCACHE=true RAILS_ENV=development BUNDLE_GEMFILE=Gemfile_engines bin/rake myp:dump
 # If changing the following, update .travis.yml
-$ MINCACHE=true RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines bin/rake db:drop db:test:prepare test
+$ MIGRATING=true MINCACHE=true RAILS_ENV=test SKIP_LARGE_UNNEEDED_IMPORTS=true SKIP_ZIP_CODE_IMPORTS=true BUNDLE_GEMFILE=Gemfile_engines bin/rake db:drop db:test:prepare test
 # To run a particular test, add to the end: TEST=test/controllers/[...]
 ```
 
@@ -856,7 +887,7 @@ $ psql -U myplaceonline -h localhost -d myplaceonline_development
 $ gpg --output tmp.sql --decrypt file.sql.pgp
 $ dropdb -U myplaceonline -h localhost  myplaceonline_development; createdb -U myplaceonline -h localhost myplaceonline_development; pg_restore -U myplaceonline -h localhost -d myplaceonline_development -n public *.sql
 $ eval "$(rbenv init - bash)"
-$ MIGRATING=true BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails db:migrate:status 2>&1 | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
+$ MIGRATING=true BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails db:migrate:status | grep down | while read line; do pending="$(echo "${line}" | awk '{print $2}')"; echo "INSERT INTO schema_migrations (version) values ('${pending}');"; done | psql -U myplaceonline -h localhost -d myplaceonline_development
 $ sudo reindexdb -U myplaceonline -h localhost -d myplaceonline_development
 $ BUNDLE_GEMFILE=Gemfile_engines MINCACHE=true bin/rails c
 
@@ -1062,15 +1093,6 @@ Applications at /oauth/applications
 
 ```
 eval "$(rbenv init - bash)"
-
-BUNDLE_GEMFILE=Gemfile_engines bin/bundle install
-
-BUNDLE_GEMFILE=Gemfile_engines bin/bundle update
-bin/bundle update
-
-BUNDLE_GEMFILE=Gemfile_engines bin/rails server
-
-MINCACHE=true BUNDLE_GEMFILE=Gemfile_engines bin/rails console
 ```
 
 ## Engines
